@@ -43,7 +43,7 @@ Every response has the same **envelope**:
 | `source_mode` | `live`, `cache` or `fixture`. **Always shown as a badge.** |
 | `is_mock` | `true` only in `web/mock/` files. When true, the website shows "MOCK DATA". |
 | `narration` | Text written by the agent (or the template fallback), already checked by the provenance gate. **Display only; never parse numbers out of it.** It is `null` for `/districts` and for error responses. |
-| `provenance` | The list of sources. Every number in `data` points to one or more of these by `id`. |
+| `provenance` | The list of sources. Every number in `data` points to one or more of these by `id`. `url` is the dataset's official page; it is `""` (with a "Link pending" `note`) when a research source has no web address yet. Optional `view_url` (NASA datasets): a page that shows the data as satellite images for our area, e.g. NASA Worldview. Show `url` as "Dataset page ↗" and `view_url` as "See the satellite data ↗". |
 | `notices` | Honest caveats, e.g. "area-level data", "Feni and Noakhali share one weather cell". |
 | `errors` | Empty when OK. See section 3. |
 
