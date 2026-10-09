@@ -600,6 +600,105 @@ def check_lang(lang):
     return lang
 
 
+WATER_LEVELS = ("rain_only", "limited", "regular", "plenty")
+LIMITED_MAX_WATERINGS = 2     # "limited" = 1-2 irrigations a season (the farmer's own answer)
+
+WATER_SAME_NOTICE = {"level": "info",
+                     "en": "'Regular' and 'plenty' are treated the same: there is no sourced "
+                           "pump-capacity number to tell them apart.",
+                     "bn": "'নিয়মিত' ও 'প্রচুর' একইভাবে ধরা হয়েছে: দুটির পার্থক্য করার মতো "
+                           "উৎসসহ পাম্প-ক্ষমতার সংখ্যা নেই।"}
+WATERING_DEFINITION = {"level": "info",
+                       "en": "A watering is one day the FAO-56 water balance refills the root "
+                             "zone (for boro rice: land preparation plus each pond top-up). "
+                             "Pump capacity is not modelled.",
+                       "bn": "একবার সেচ মানে FAO-56 পানি-হিসাবে একটি দিন যেদিন শিকড়-অঞ্চল আবার "
+                             "ভরতে হয় (বোরো ধানে: জমি তৈরি ও প্রতিবার পানি ভরা)। পাম্পের ক্ষমতা "
+                             "হিসাবে নেই।"}
+
+
+WATER_NARRATION = {
+    "limited_none": {"en": "You said one or two irrigations, but every crop needs more than two "
+                           "waterings in the worst 20% of years; see the reason under each crop.",
+                     "bn": "আপনি এক বা দুইবার সেচের কথা বলেছেন, কিন্তু সবচেয়ে খারাপ ২০% বছরে "
+                           "প্রতিটি ফসলে দুইবারের বেশি সেচ লাগে; প্রতিটি ফসলের নিচের কারণ দেখুন।"},
+    "rain_only": {"en": "You said rain only, so crops are ranked by days of dry soil in the "
+                        "worst 20% of years.",
+                  "bn": "আপনি শুধু বৃষ্টির কথা বলেছেন, তাই সবচেয়ে খারাপ ২০% বছরের শুকনো মাটির "
+                        "দিন দিয়ে ফসল সাজানো হয়েছে।"},
+    "limited": {"en": "You said one or two irrigations, so crops needing more than two "
+                      "waterings are left out.",
+                "bn": "আপনি এক বা দুইবার সেচের কথা বলেছেন, তাই দুইবারের বেশি সেচ লাগে এমন "
+                      "ফসল বাদ দেওয়া হয়েছে।"},
+}
+# (old, new) ending of data["method"] for rain_only
+WATER_METHOD_TAIL = {
+    "en": ("then by irrigation need in the worst 20% of years.",
+           "then by days of dry soil without irrigation in the worst 20% of years."),
+    "bn": ("বছরের সেচ দিয়ে সাজানো।", "বছরের সেচ ছাড়া শুকনো মাটির দিন দিয়ে সাজানো।"),
+}
+
+
+def check_water(water):
+    if water is not None and water not in WATER_LEVELS:
+        raise ApiError("BAD_PARAMETER",
+                       "water must be one of: " + ", ".join(WATER_LEVELS) + ".", "water")
+    return water
+
+
+def _value(m):
+    return None if m is None else m["value"]
+
+
+def apply_water(ranked, filtered, water):
+    """Applies the farmer's water answer to the ranked options.
+    Returns (ranked, filtered, notices). None / 'regular' / 'plenty' leave the
+    ranking untouched; 'rain_only' re-ranks by rainfed stress days in the worst
+    20% of years; 'limited' moves crops needing more than 2 waterings (worst
+    20% of years) to filtered_out as NEEDS_MORE_WATER."""
+    notices = []
+    if water in ("regular", "plenty"):
+        return ranked, filtered, [WATER_SAME_NOTICE]
+    if water == "rain_only":
+        def stress(o):
+            v = _value(o["water_stress_days_worst20"])
+            return float("inf") if v is None else v
+        ranked = sorted(ranked, key=lambda o: (_value(o["problem_years"]) or 0, stress(o)))
+        for i, o in enumerate(ranked, 1):
+            o["rank"] = i
+            o["why"] = {"en": "Ranked by problem years first, then by days of dry soil without "
+                              "irrigation in the worst 20% of years.",
+                        "bn": "প্রথমে সমস্যার বছরের সংখ্যা, তারপর সেচ ছাড়া সবচেয়ে খারাপ ২০% "
+                              "বছরের শুকনো মাটির দিন দিয়ে সাজানো।"}
+            days, events = _value(o["water_stress_days_worst20"]), _value(o["irrigation_events_worst20"])
+            if (days or 0) > 0 or (days is None and (events or 0) > 0):
+                o["water_note"] = {"code": "NEEDS_IRRIGATION",
+                                   "en": "Needs irrigation: with rain only, the soil was too dry "
+                                         "in the worst 20% of years.",
+                                   "bn": "সেচ লাগবে: শুধু বৃষ্টিতে সবচেয়ে খারাপ ২০% বছরে মাটি "
+                                         "খুব শুকনো ছিল।"}
+        return ranked, filtered, [WATERING_DEFINITION]
+    if water == "limited":
+        kept, dropped = [], []
+        for o in ranked:
+            events = _value(o["irrigation_events_worst20"])
+            (dropped if events is not None and events > LIMITED_MAX_WATERINGS else kept).append(o)
+        for o in dropped:
+            n = round(_value(o["irrigation_events_worst20"]))
+            o.update({"rank": None, "feasible": False, "why": None,
+                      "reason_code": "NEEDS_MORE_WATER",
+                      "reason": {"en": f"Needs more water than you can give: about {n} waterings "
+                                       f"in the worst 20% of years, and you can give "
+                                       f"{LIMITED_MAX_WATERINGS}.",
+                                 "bn": f"আপনার দেওয়া সেচের চেয়ে বেশি লাগে: সবচেয়ে খারাপ ২০% বছরে "
+                                       f"প্রায় {bn_digits(n)} বার সেচ, আপনি দিতে পারবেন "
+                                       f"{bn_digits(LIMITED_MAX_WATERINGS)} বার।"}})
+        for i, o in enumerate(kept, 1):
+            o["rank"] = i
+        return kept, filtered + dropped, [WATERING_DEFINITION]
+    return ranked, filtered, notices
+
+
 def district_notices(district):
     notices = [AREA_NOTICE]
     if district in POWER_CELL_SHARED:
@@ -733,6 +832,12 @@ def crop_option(district, option, season):
         "irrigation_need_worst20": measure(option["irrigation_mm_worst20"], "mm", wsrc),
         "water_stress_days_avg": measure(option["stress_days_mean"], "days", wsrc),
         "water_stress_days_worst20": measure(stress_w20, "days", wsrc),
+        "irrigation_events_avg": measure(None if row is None else row.get("irrigation_events_mean"),
+                                         "waterings", wsrc, decimals=1),
+        "irrigation_events_worst20": measure(
+            None if row is None else row.get("irrigation_events_worst20"),
+            "waterings", wsrc, decimals=1),
+        "water_note": None,
         "maturity_date": {"date": maturity, "src": csrc} if maturity else None,
         "why": ({"en": "Ranked by problem years first, then by irrigation need in the worst "
                        "20% of years.",
@@ -883,18 +988,20 @@ def districts():
 
 @app.get("/api/v1/advisory")
 def advisory(district: str = None, prev_harvest: str = None, flood_ready: str = None,
-             lang: str = "en", lat: str = None, lon: str = None):
+             lang: str = "en", lat: str = None, lon: str = None, water: str = None):
     endpoint = "/api/v1/advisory"
     request = {"district": district, "prev_harvest": prev_harvest, "flood_ready": flood_ready,
-               "lang": lang, "lat": lat, "lon": lon}
+               "lang": lang, "lat": lat, "lon": lon, "water": water}
 
     def build():
         did, location = resolve_location(district, lat, lon)
         harvest = check_date("prev_harvest", prev_harvest)
         ready = check_date("flood_ready", flood_ready, required=False)
         check_lang(lang)
+        check_water(water)
         result = rc.rotation_options(did, harvest, ready, calendar=calendar_table())
         ranked, filtered = split_options(did, result)
+        ranked, filtered, water_notices = apply_water(ranked, filtered, water)
         n = next((o["n_years"] for o in result["options"] if o["n_years"]), len(rc.SEASONS))
         data = {
             "district": did,
@@ -947,12 +1054,23 @@ def advisory(district: str = None, prev_harvest: str = None, flood_ready: str = 
                            f"ফসল র‍্যাঙ্ক করা যায়নি।",
                      "sms_en": f"{name['en']}: no crop can be ranked for {earliest}.",
                      "sms_bn": f"{name['bn']}: {bn_digits(earliest)} তারিখে কোনো ফসল র‍্যাঙ্ক করা যায়নি।"}
+        water_text = WATER_NARRATION.get(water)
+        if water == "limited" and not ranked and any(
+                o.get("reason_code") == "NEEDS_MORE_WATER" for o in filtered):
+            water_text = WATER_NARRATION["limited_none"]
+        if water_text:
+            texts["en"] += " " + water_text["en"]
+            texts["bn"] += " " + water_text["bn"]
+            if water == "rain_only":
+                data["method"] = {
+                    k: v.replace(WATER_METHOD_TAIL[k][0], WATER_METHOD_TAIL[k][1])
+                    for k, v in data["method"].items()}
         fallback = {"en": "See the ranked crop options below; each number shows its NASA source.",
                     "bn": "নিচে র‍্যাঙ্ক করা ফসলগুলো দেখুন; প্রতিটি সংখ্যার NASA উৎস দেওয়া আছে।",
                     "sms_en": "Survey Crops: see crop options (NASA data).",
                     "sms_bn": "সার্ভে ক্রপস: ফসলের তালিকা দেখুন (NASA তথ্য)।"}
         notices = (district_notices(did) + [PAST_NOT_FORECAST, WEATHER_RISKS_ONLY]
-                   + coverage_notices(ranked + filtered))
+                   + water_notices + coverage_notices(ranked + filtered))
         if not ranked and filtered and all(o["sowing_date"] is None for o in filtered):
             notices.append(ALL_WINDOWS_PASSED)
         return data, narrate(texts, fallback, data), notices

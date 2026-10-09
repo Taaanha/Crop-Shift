@@ -152,6 +152,16 @@ ASSUMPTIONS = {
         "why": "It keeps the paddy water layer at the cited ponding depth and "
                 "counts every top-up as irrigation, which is how a farmer "
                 "manages a boro field."},
+    "irrigation_event_count": {
+        "value": "one watering = one day the FAO-56 balance refills the root zone; "
+                 "paddy: land preparation + each pond top-up", "sensitivity": [],
+        "text": "Waterings per season are counted from the same FAO-56 balance that gives "
+                "irrigation_mm: each day it adds irrigation counts as one watering. For "
+                "boro paddy the land-preparation flooding counts as one watering and every "
+                "later pond top-up as one more.",
+        "why": "It turns the irrigation depth already computed into a number a farmer can "
+                "compare with how many times they can bring water. Pump capacity is not "
+                "modelled, so it is a count, not a volume per watering."},
     "paddy_percolation_class": {
         "value": "clay if clay_pct >= 40", "sensitivity": [],
         "text": "Percolation uses the cited clay rate when SoilGrids clay >= 40% (USDA clay "
@@ -520,13 +530,14 @@ def saturated_days(daily):
 
 def paddy_water_need(rain_mm, et0_mm, kc, land_prep_mm, percolation_mm_day, ponding_depth_mm):
     """Ponded-paddy water need (see the 'paddy_refill' assumption).
-    Returns land_prep_mm, season_irrigation_mm, total_mm, etc_mm,
+    Returns land_prep_mm, season_irrigation_mm, irrigation_events (land
+    preparation + pond top-ups), total_mm, etc_mm,
     percolation_mm, rain_mm, spill_mm."""
     rain = np.asarray(rain_mm, dtype=float)
     etc = np.asarray(kc, dtype=float) * np.asarray(et0_mm, dtype=float)
     if not len(rain) == len(etc):
         raise ValueError("rain_mm, et0_mm and kc must have the same length")
-    pond, irrigation, spill = float(ponding_depth_mm), 0.0, 0.0
+    pond, irrigation, spill, events = float(ponding_depth_mm), 0.0, 0.0, 0
     for r, e in zip(rain, etc):
         pond += r - e - percolation_mm_day
         if pond > ponding_depth_mm:
@@ -535,7 +546,9 @@ def paddy_water_need(rain_mm, et0_mm, kc, land_prep_mm, percolation_mm_day, pond
         if pond < 0:
             irrigation += ponding_depth_mm - pond
             pond = float(ponding_depth_mm)
+            events += 1
     return {"land_prep_mm": float(land_prep_mm), "season_irrigation_mm": irrigation,
+            "irrigation_events": events + (1 if land_prep_mm > 0 else 0),
             "total_mm": float(land_prep_mm) + irrigation, "etc_mm": float(etc.sum()),
             "percolation_mm": float(percolation_mm_day) * len(rain),
             "rain_mm": float(rain.sum()), "spill_mm": spill}
@@ -619,7 +632,8 @@ def summarise(rows, spec, params=DEFAULT_PARAMS, water=True):
         out["problem_years"], out["problem_share"] = None, float("nan")
     for name, flags in problems.items():
         out[f"problem_years_{name}"] = int(flags.sum())
-    for col, key in (("net_irrigation_mm", "irrigation_mm"), ("water_stress_days", "stress_days")):
+    for col, key in (("net_irrigation_mm", "irrigation_mm"), ("water_stress_days", "stress_days"),
+                     ("irrigation_events", "irrigation_events")):
         if col in rows and rows[col].notna().any():
             out[f"{key}_mean"] = round(float(rows[col].mean()), 1)
             out[f"{key}_worst20"] = round(worst_mean(rows[col]), 1)
@@ -715,6 +729,7 @@ def _add_water(row, spec, weather, sow, water, params):
                                 water["paddy"]["ponding_depth"]["value"])
         row["net_irrigation_mm"] = need["total_mm"]
         row["water_stress_days"] = float("nan")
+        row["irrigation_events"] = need["irrigation_events"]
         return True
     try:
         result = crop_season(spec["crop"], sow, weather, water["kc_table"],
@@ -725,6 +740,7 @@ def _add_water(row, spec, weather, sow, water, params):
         raise
     row["net_irrigation_mm"] = result["net_irrigation_mm"]
     row["water_stress_days"] = result["water_stress_days"]
+    row["irrigation_events"] = result["irrigation_events"]
     first = saturated_days(result["daily"]).to_numpy()[:params["waterlog_window_days"]]
     row["waterlog_run"] = max_run(first)
     return True

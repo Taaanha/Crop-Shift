@@ -9,7 +9,7 @@ import pandas as pd
 import pytest
 
 from reference import load_file, ReferenceData
-from risk_calendar import (build_crop_spec, calibrate, count_days, crop_calendar, days_to_target,
+from risk_calendar import (RISK_CALENDAR_PATH, build_crop_spec, calibrate, count_days, crop_calendar, days_to_target,
                            district_area, evaluate_season, gdd_target, max_run, mean_climate,
                            mmdd_at_offset, paddy_percolation, paddy_water_need, resolve_range,
                            resolve_window, rotation_options, saturated_days, season_date,
@@ -219,6 +219,21 @@ def test_summarise_problem_years_and_hot_day_sensitivity(tmp_path):
     assert s3["maturity_days_median"] == 103
 
 
+def test_summarise_irrigation_events_mean_and_worst20(tmp_path):
+    spec = build_crop_spec(make_ref(tmp_path, WHEAT_LINES), "wheat")
+    rows = [{"heat_anthesis_days_onset": 0, "heat_anthesis_days_severe": 0,
+             "flowering_days": 58, "maturity_days": 103,
+             "net_irrigation_mm": 100, "water_stress_days": 10, "irrigation_events": n}
+            for n in (2, 3, 3, 4, 8)]
+    s = summarise(rows, spec, DEFAULT_PARAMS)
+    assert s["irrigation_events_mean"] == 4.0
+    assert s["irrigation_events_worst20"] == 8.0          # worst 1 of 5 years
+    no_water = summarise([{k: v for k, v in rows[0].items() if k != "irrigation_events"}],
+                         spec, DEFAULT_PARAMS)
+    assert np.isnan(no_water["irrigation_events_mean"])
+    assert np.isnan(no_water["irrigation_events_worst20"])
+
+
 def test_summarise_with_no_live_hazard_is_not_zero_risk():
     spec = {"hazards": []}
     s = summarise([{"flowering_days": None, "maturity_days": None}], spec, DEFAULT_PARAMS)
@@ -244,6 +259,14 @@ def test_crop_calendar_flags_outside_window(tmp_path):
         assert col in by_date["11-22"]
 
 
+def test_committed_calendar_has_sane_irrigation_events():
+    cal = pd.read_csv(RISK_CALENDAR_PATH)
+    assert {"irrigation_events_mean", "irrigation_events_worst20"} <= set(cal.columns)
+    assert cal["irrigation_events_mean"].notna().all()
+    assert (cal["irrigation_events_mean"] >= 0).all()
+    assert (cal["irrigation_events_worst20"] >= cal["irrigation_events_mean"] - 1e-6).all()
+
+
 # ---------------- paddy ----------------
 
 def test_paddy_water_need_dry_season():
@@ -253,6 +276,15 @@ def test_paddy_water_need_dry_season():
     assert need["season_irrigation_mm"] == pytest.approx(210.0)
     assert need["total_mm"] == pytest.approx(410.0)
     assert need["etc_mm"] == 150.0 and need["percolation_mm"] == 60.0
+
+
+def test_paddy_counts_land_prep_and_each_top_up_as_waterings():
+    need = paddy_water_need(np.zeros(30), np.full(30, 5.0), np.ones(30), 200, 2, 100)
+    assert need["irrigation_events"] == 3                  # land prep + 2 refills
+    wet = paddy_water_need(np.full(30, 20.0), np.full(30, 5.0), np.ones(30), 200, 2, 100)
+    assert wet["irrigation_events"] == 1                   # land prep only
+    assert paddy_water_need(np.full(10, 20.0), np.ones(10), np.ones(10), 0, 2,
+                            100)["irrigation_events"] == 0
 
 
 def test_paddy_rain_fills_layer_and_spills():

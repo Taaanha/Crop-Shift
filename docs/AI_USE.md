@@ -533,3 +533,20 @@ with `python -m pytest src -q`.
 conflict with main (kept both entries). Made
 `src/api/test_assumptions_doc.py` read `docs/assumptions.md` with universal
 newlines, so the stale-doc check does not fail on Windows CRLF checkouts.
+
+**Claude Code (water question)** — made "How much water can you give?" real.
+`src/compute/risk_calendar.py` now counts waterings per season from the same
+FAO-56 balance as `irrigation_mm` (new `irrigation_events_mean` and
+`irrigation_events_worst20` in `data/processed/risk_calendar.csv`; for boro
+rice, land preparation counts as one watering plus each pond top-up; new
+`irrigation_event_count` assumption, `docs/assumptions.md` regenerated).
+`app.py` `/api/v1/advisory` takes an optional `water` (`rain_only`, `limited`,
+`regular`, `plenty`; absent = today's result), documented in
+`docs/api_contract.md`. `web/app/index.html` sends `water` once the farmer
+answers and drops the "coming soon" pill from that question only. The two
+new calendar columns were merged into the committed CSV; a full rebuild
+would also change mustard and boro rows because newer reference data exists,
+so that refresh is left for its own PR. The `limited` cut-off (at most 2
+waterings in the worst 20% of years) is the user's rule, not a sourced value.
+Checked with `python -m pytest src -q` and by driving the page against a
+local API.

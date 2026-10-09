@@ -64,13 +64,23 @@ Every response has the same **envelope**:
 | Method and path | Purpose | Mock file |
 |---|---|---|
 | `GET /api/v1/districts` | Supported districts, their coverage, and caveats | `districts.json` |
-| `GET /api/v1/advisory?district=&decision_date=&irrigation=yes\|no&lang=` | **Main screen:** ranked crop options with sowing windows, risks and reasons | `advisory.json` |
+| `GET /api/v1/advisory?district=&prev_harvest=&flood_ready=&lat=&lon=&water=rain_only\|limited\|regular\|plenty&lang=` | **Main screen:** ranked crop options with sowing windows, risks and reasons | `advisory.json` |
 | `GET /api/v1/risk-calendar?district=&crop=` | Crop × sowing-date × hazard grid over all years | `risk_calendar.json` |
 | `GET /api/v1/field-twin?district=&year=&crop=&sow_date=` | Week-by-week replay of one past year (an explanation, not a forecast) | `field_twin.json` |
 | `GET /api/v1/post-flood?district=&flood_date=&sand=yes\|no` | Water persistence, days until soil is back to normal, earliest sowing date, crops still possible | `post_flood.json` |
 | `GET /api/v1/warnings?district=` | Short-range forecast warnings with actions (rule table) | `warnings.json` |
 | `GET /api/v1/enso-lens?district=&crop=` | **PENDING confirmation.** El Niño years vs all years | `enso_lens.json` |
 | `POST /api/v1/ask` body `{ "question": "…", "district": "…", "lang": "bn" }` | Free-text question → agent answer, tools used, provenance check | `ask.json` |
+
+**The water question (`water` on `/advisory`, optional).** The farmer's answer to "How much water can you give?". Absent = `regular` = the ranking everything else documents here (no notice added). The request echo carries `water` when it was sent; any other value is `BAD_PARAMETER`.
+
+| `water` | What changes |
+|---|---|
+| `rain_only` | Options are ranked by problem years, then by `water_stress_days_worst20` (rainfed dry-soil days) instead of irrigation need. An option with dry-soil days in the worst 20% of years gets `water_note: { code: "NEEDS_IRRIGATION", en, bn }` (otherwise `null`). |
+| `limited` (1–2 irrigations) | A crop stays ranked only if `irrigation_events_worst20 <= 2`. The others move to `filtered_out` with `reason_code: "NEEDS_MORE_WATER"` and a `reason` `{en, bn}` saying how many waterings it needed. Ranks of the rest are renumbered. All crops can end up filtered. |
+| `regular`, `plenty` | Same ranking as today. A `notices` entry says the two are treated the same because there is no sourced pump-capacity number. |
+
+Every option now also carries `irrigation_events_avg` and `irrigation_events_worst20` (measures, unit `waterings`, `src` FAO-56 + IMERG + POWER + the cited soil and crop rows) and `water_note` (`null` unless `rain_only` sets it). A watering is one day the FAO-56 balance refills the root zone; for boro rice, land preparation plus each pond top-up.
 
 **Errors** use the same envelope, with `data: null` and for example:
 `"errors": [{ "code": "DISTRICT_NOT_COVERED", "en": "…", "bn": "…" }]` (see `error.json`).

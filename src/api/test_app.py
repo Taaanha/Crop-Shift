@@ -478,3 +478,98 @@ def test_unbuilt_endpoints_serve_the_mock(method, url, name):
 def test_cors_allows_any_origin():
     r = client.get("/api/v1/districts", headers={"Origin": "https://example.org"})
     assert r.headers["access-control-allow-origin"] == "*"
+
+
+# ---------------- advisory: the "how much water can you give?" answer ----------------
+
+ADVISORY = "/api/v1/advisory?district=cumilla&prev_harvest=2024-11-10"
+
+
+def advisory_with(water=None, url=ADVISORY):
+    r = client.get(url + (f"&water={water}" if water else ""))
+    assert r.status_code == 200, r.text[:300]
+    return r.json()
+
+
+def test_advisory_water_absent_equals_regular_without_the_notice():
+    base, regular = advisory_with(), advisory_with("regular")
+    assert base["data"] == regular["data"]
+    assert "water" not in base["request"] and regular["request"]["water"] == "regular"
+    assert not any("pump-capacity" in n["en"] for n in base["notices"])
+
+
+@pytest.mark.parametrize("level", ["regular", "plenty"])
+def test_advisory_regular_and_plenty_are_the_same_and_say_so(level):
+    body = advisory_with(level)
+    assert body["data"] == advisory_with()["data"]
+    assert any("treated the same" in n["en"] and "pump-capacity" in n["en"]
+               for n in body["notices"])
+    assert any(n["bn"] for n in body["notices"] if "treated the same" in n["en"])
+
+
+def test_advisory_rain_only_ranks_by_rainfed_stress_days():
+    body = advisory_with("rain_only")
+    opts = body["data"]["options"]
+    assert body["request"]["water"] == "rain_only"
+    assert [o["rank"] for o in opts] == list(range(1, len(opts) + 1))
+    keys = [(o["problem_years"]["value"], o["water_stress_days_worst20"]["value"]) for o in opts]
+    assert keys == sorted(keys)
+    for o in opts:     # every crop here has dry-soil days in the worst 20% of years
+        assert o["water_stress_days_worst20"]["value"] > 0
+        assert o["water_note"]["code"] == "NEEDS_IRRIGATION"
+        assert o["water_note"]["en"] and o["water_note"]["bn"]
+    assert {o["crop"] for o in opts} == {o["crop"] for o in advisory_with()["data"]["options"]}
+    assert body["narration"]["provenance_check"] == "passed"
+    assert "rain only" in body["narration"]["en"]
+
+
+def test_advisory_limited_filters_crops_needing_more_than_two_waterings():
+    body = advisory_with("limited")
+    data = body["data"]
+    base = advisory_with()["data"]
+    dropped = [o for o in data["filtered_out"] if o["reason_code"] == "NEEDS_MORE_WATER"]
+    assert dropped
+    for o in dropped:
+        assert o["irrigation_events_worst20"]["value"] > 2
+        assert o["rank"] is None and o["feasible"] is False
+        n = round(o["irrigation_events_worst20"]["value"])
+        assert f"about {n} waterings" in o["reason"]["en"] and o["reason"]["bn"]
+    for o in data["options"]:
+        assert o["irrigation_events_worst20"]["value"] <= 2
+    assert [o["rank"] for o in data["options"]] == list(range(1, len(data["options"]) + 1))
+    assert ({o["crop"] for o in data["options"]} | {o["crop"] for o in dropped}
+            == {o["crop"] for o in base["options"]})
+    # other filtered_out reasons are kept as they were
+    assert [o for o in data["filtered_out"] if o["reason_code"] != "NEEDS_MORE_WATER"] \
+        == base["filtered_out"]
+    assert body["narration"]["provenance_check"] == "passed"
+
+
+def test_apply_water_limited_boundary():
+    def opt(events):
+        return {"irrigation_events_worst20": {"value": events}, "rank": 1, "feasible": True,
+                "why": None}
+    ranked, filtered, _ = api.apply_water([opt(2.0), opt(2.4), opt(None)], [], "limited")
+    assert [o["irrigation_events_worst20"]["value"] for o in ranked] == [2.0, None]
+    assert [o["irrigation_events_worst20"]["value"] for o in filtered] == [2.4]
+    assert filtered[0]["reason_code"] == "NEEDS_MORE_WATER"
+    assert "about 2 waterings" in filtered[0]["reason"]["en"]
+
+
+def test_advisory_water_contract_shape(responses):
+    body = advisory_with("limited")
+    assert set(body["data"]) == set(responses["advisory"]["data"])
+    for name in ("irrigation_events_avg", "irrigation_events_worst20"):
+        for o in body["data"]["options"] + body["data"]["filtered_out"]:
+            assert set(o[name]) == {"value", "unit", "src"}
+            assert o[name]["unit"] == "waterings"
+            assert {"imerg", "power", "fao56"} <= set(o[name]["src"])
+    assert set(advisory_with("rain_only")) == set(responses["advisory"])
+    bn = client.get(ADVISORY + "&water=limited&lang=bn").json()
+    assert any(o["reason"]["bn"] for o in bn["data"]["filtered_out"]
+               if o["reason_code"] == "NEEDS_MORE_WATER")
+
+
+def test_advisory_rejects_unknown_water_level():
+    r = client.get(ADVISORY + "&water=lots")
+    assert r.status_code == 400 and r.json()["errors"][0]["code"] == "BAD_PARAMETER"
