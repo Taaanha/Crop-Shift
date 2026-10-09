@@ -25,10 +25,12 @@ button:focus-visible,input:focus-visible{outline:3px solid var(--gold);outline-o
 .top{flex:0 0 auto;z-index:20;display:flex;align-items:center;gap:6px;padding:12px 12px 8px;background:linear-gradient(180deg,rgba(6,16,27,.92),rgba(6,16,27,.6) 80%,transparent)}
 .logo{display:flex;align-items:center;gap:6px;font:700 17px var(--display);margin-right:auto;cursor:pointer;white-space:nowrap}
 @media (max-width:380px){.logo{font-size:14px;gap:4px}}
+@media (max-width:460px){.top.hasback .logo .ltxt{display:none}}
 .logo i{width:18px;height:18px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--leaf));display:block}
 .seg{display:flex;padding:3px;border-radius:99px;background:var(--panel);border:1px solid var(--line)}
 .seg button{padding:5px 10px;border-radius:99px;font-weight:700;font-size:12px;opacity:.7;min-height:30px}
 .seg button[aria-pressed="true"]{background:var(--gold);color:#10202A;opacity:1}
+.backbtn{flex:0 0 auto;min-width:44px;min-height:44px;padding:0 12px;border-radius:99px;background:var(--panel);border:1px solid var(--line);font-weight:700;font-size:13px;white-space:nowrap}
 .iconbtn{width:36px;height:36px;flex:0 0 36px;border-radius:50%;display:grid;place-items:center;background:var(--panel);border:1px solid var(--line)}
 .iconbtn[aria-pressed="true"]{background:rgba(123,211,137,.2);border-color:var(--leaf);color:var(--leaf)}
 .iconbtn.speak{background:var(--gold);color:#10202A;border-color:transparent}
@@ -285,7 +287,8 @@ h2.q{font:700 17px var(--display);margin:18px 0 8px}.lang-bn h2.q{font-family:va
 
 <div class="app" id="app">
   <header class="top">
-    <div class="logo"><i></i>Survey Crops</div>
+    <button class="backbtn" id="backBtn" hidden data-t="back"></button>
+    <div class="logo"><i></i><span class="ltxt">Survey Crops</span></div>
     <div class="seg" role="group" aria-label="Language">
       <button id="lang-en" aria-pressed="true">EN</button>
       <button id="lang-bn" aria-pressed="false">বাংলা</button>
@@ -525,7 +528,7 @@ const T={
  floodH:{en:'After the flood',bn:'বন্যার পর',s_en:'After the flood',s_bn:'বন্যার পর'},
  floodSub:{en:'What NASA satellites saw in August 2024, and when the soil was ready again.',bn:'২০২৪ সালের আগস্টে NASA-র উপগ্রহ কী দেখেছে, আর মাটি কবে আবার তৈরি হয়েছে।'},
  srcEy:{en:'Where every number comes from',bn:'প্রতিটি সংখ্যা কোথা থেকে'},
- srcH:{en:'Data sources',bn:'তথ্যের উৎস'},
+ srcH:{en:'Data sources',bn:'তথ্যের উৎস'},back:{en:'‹ Back',bn:'‹ ফিরে যান'},
  srcSub:{en:'Every number in CropShift links to one of these sources. This list comes from the server with each answer.',bn:'CropShift-এর প্রতিটি সংখ্যা এর কোনো একটি উৎসের সাথে যুক্ত। এই তালিকা প্রতিটি উত্তরের সাথে সার্ভার থেকে আসে।'},
  soon:{en:'COMING SOON',bn:'শীঘ্রই আসছে'},
  soonNote:{en:'Coming soon: water access, priorities and soil do not change the results yet.',bn:'শীঘ্রই আসছে: সেচের সুযোগ, পছন্দ ও মাটি এখনও ফলাফল বদলায় না।'},
@@ -1217,8 +1220,15 @@ function bindPick(f){const i=$('rfPick');if(!i)return;i.onchange=()=>{const file
   const nv=$('rfVid').querySelector('video');nv.onerror=()=>toast(L()==='bn'?'এই প্রিভিউ ভিডিও আটকে দিয়েছে। অ্যাপটি নিজের ওয়েবসাইটে চালালে কাজ করবে।':'This preview blocked the video. It works when the app runs on its own website.')}}
 /* ---------- navigation ---------- */
 const NAVI=['field','now','crop','twin','flood','pics'];
-function go(s){S.screen=s;if(s!=='twin')setPlay(false);stopSpeak();document.querySelectorAll('.screen').forEach(el=>el.classList.toggle('on',el.id==='s-'+s));document.querySelectorAll('nav button').forEach(b=>b.setAttribute('aria-current',b.dataset.go===s?'page':'false'));
-  if(s==='field'){renderRfField();setTimeout(initMap,60)}if(s==='prev'){renderPrev();renderFarmExtras()}if(s==='crop')renderPlans(false);if(s==='twin'){renderTwin();renderRfTwin();setTimeout(initMini,80)}if(s==='flood')renderFlood();if(s==='sources')renderSources();if(s==='help')renderHelp();$('main').scrollTop=0}
+function go(s,opt={}){if(!opt.fromHistory&&s!==S.screen)history.pushState({screen:s,depth:navDepth()+1},'','#'+s);S.screen=s;if(s!=='twin')setPlay(false);stopSpeak();document.querySelectorAll('.screen').forEach(el=>el.classList.toggle('on',el.id==='s-'+s));document.querySelectorAll('nav button').forEach(b=>b.setAttribute('aria-current',b.dataset.go===s?'page':'false'));
+  if(s==='field'){renderRfField();setTimeout(initMap,60)}if(s==='prev'){renderPrev();renderFarmExtras()}if(s==='crop')renderPlans(false);if(s==='twin'){renderTwin();renderRfTwin();setTimeout(initMini,80)}if(s==='flood')renderFlood();if(s==='sources')renderSources();if(s==='help')renderHelp();$('main').scrollTop=0;backVis()}
+/* back navigation: each screen change is a browser-history entry (state.depth = steps inside the site) */
+const SCREENS=['start','field','prev','crop','twin','flood','sources','help'],HASH_ALIAS={plans:'crop',farm:'prev'};
+function navDepth(){return(history.state&&history.state.depth)||0}
+function backVis(){const hide=S.screen==='start'||navDepth()<1;$('backBtn').hidden=hide;document.querySelector('.top').classList.toggle('hasback',!hide)}
+function hashScreen(){const h=decodeURIComponent(location.hash.slice(1));const s=HASH_ALIAS[h]||h;return SCREENS.includes(s)?s:null}
+$('backBtn').onclick=()=>history.back();
+window.addEventListener('popstate',e=>{closeModal();stopSpeak();const s=(e.state&&e.state.screen)||hashScreen()||'start';go(s,{fromHistory:true})});
 document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>go(b.dataset.go));
 $('confirmField').onclick=()=>go('prev');
 $('toCrop').onclick=()=>{S.optCrop=null;TWD=null;go('crop');renderPlans(true)};
@@ -1256,6 +1266,7 @@ function render(){
   document.querySelectorAll('nav button').forEach(b=>b.setAttribute('aria-current',b.dataset.go===S.screen?'page':'false'));
 }
 render();
+{const s=hashScreen()||'start';history.replaceState({screen:s,depth:0},'',s==='start'&&!location.hash?location.href:'#'+s);if(s!==S.screen)go(s,{fromHistory:true});backVis()}
 /* wake the free server early, and take the district list from the API */
 load('/api/v1/districts',{}).then(res=>{const ds=res.env&&res.env.data&&res.env.data.districts;if(Array.isArray(ds)&&ds.length&&ds[0].name){DIST.length=0;ds.forEach(d=>DIST.push([d.id,d.name.en,d.name.bn,d.lat,d.lon]));if(S.screen==='start'||S.screen==='flood')render()}});
 })();

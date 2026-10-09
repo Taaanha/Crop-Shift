@@ -459,3 +459,19 @@ and copied the images into the Docker image. Checked with
 mock files and the live API. Bangla strings were written with AI help and
 need a review by a Bangla speaker.
 
+
+**Claude Code (task 14, back button)** — navigation only, in
+`web/app/index.html`: every screen change in `go()` is now a browser-history
+entry (`history.pushState({screen, depth}, "", "#" + screen)`, not pushed
+when the screen did not change); a "‹ Back" / "‹ ফিরে যান" button (44 px)
+at the left of the header calls `history.back()` and is hidden on the start
+screen and when there is nothing to go back to; the phone/browser back
+button (`popstate`) closes any modal, stops speech and shows the saved
+screen via `go(s, {fromHistory: true})`; opening the site with a hash
+(`#flood`, also `#plans` → crop, `#farm` → prev) opens that screen as the
+first entry (`history.replaceState`). On phones up to 460 px wide the
+"Survey Crops" words are hidden while Back shows so the header fits. No
+data, API calls or numbers changed. Checked in a browser against a local
+uvicorn: start → field → farm → plans → twin, then Back ×4 with the button
+and with the browser back button, a reload on `#plans`, and the header at
+375 px in Bangla. The Bangla label needs a review by a Bangla speaker.
