@@ -362,10 +362,9 @@ h2.q{font:700 17px var(--display);margin:18px 0 8px}.lang-bn h2.q{font-family:va
       <div class="water" id="water"></div>
       <h2 class="q" data-t="prioQ"></h2>
       <div class="prio" id="prio"></div>
-      <h2 class="q"><span data-t="soilQ"></span> <span class="pill sample" data-t="soon"></span></h2>
+      <h2 class="q" data-t="soilQ"></h2>
       <div class="soil" id="soil"></div>
       <p class="sub" style="margin:6px 0 0;font-size:11px" id="soilNote"></p>
-      <p class="mock" style="margin-top:8px" data-t="soonNote"></p>
       <button class="btn gold" id="toCrop" style="margin-top:16px"><span data-t="findBest"></span></button>
     </section>
 
@@ -530,8 +529,6 @@ const T={
  srcEy:{en:'Where every number comes from',bn:'প্রতিটি সংখ্যা কোথা থেকে'},
  srcH:{en:'Data sources',bn:'তথ্যের উৎস'},back:{en:'‹ Back',bn:'‹ ফিরে যান'},
  srcSub:{en:'Every number in Survey Crops links to one of these sources. This list comes from the server with each answer.',bn:'সার্ভে ক্রপস-এর প্রতিটি সংখ্যা এর কোনো একটি উৎসের সাথে যুক্ত। এই তালিকা প্রতিটি উত্তরের সাথে সার্ভার থেকে আসে।'},
- soon:{en:'COMING SOON',bn:'শীঘ্রই আসছে'},
- soonNote:{en:'Coming soon: soil type does not change the results yet.',bn:'শীঘ্রই আসছে: মাটির ধরন এখনও ফলাফল বদলায় না।'},
  waking:{en:'Waking up the server (up to 1 minute)…',bn:'সার্ভার চালু হচ্ছে (১ মিনিট পর্যন্ত লাগতে পারে)…'},
  netDown:{en:'Cannot reach the server. Saved offline copies are shown where we have them.',bn:'সার্ভারে পৌঁছানো যাচ্ছে না। যেখানে আছে, সংরক্ষিত অফলাইন কপি দেখানো হচ্ছে।'},
  retry:{en:'Retry',bn:'আবার চেষ্টা করুন'},
@@ -604,7 +601,7 @@ function yearStrip(id){
 const CNAME={aman:['Aman rice','আমন'],aman_rice:['Aman rice','আমন ধান'],mustard:['Mustard','সরিষা'],boro:['Boro rice','বোরো'],boro_rice:['Boro rice','বোরো ধান'],lentil:['Lentil','মসুর'],aus:['Aus rice','আউশ'],wheat:['Wheat','গম'],jute:['Jute','পাট'],mung:['Mung bean','মুগ'],fallow:['Nothing / fallow','খালি জমি'],veg:['Vegetables','সবজি'],potato:['Potato','আলু'],maize:['Maize','ভুট্টা'],flood:['Flood','বন্যা']};
 const CCOL={aman:'#C9A36A',aman_rice:'#C9A36A',mustard:'#F7D23E',boro:'#9BE3A6',boro_rice:'#9BE3A6',lentil:'#C9B8F2',aus:'#E8C15A',wheat:'#E8C15A',jute:'#7BD389',mung:'#8FD8A6',fallow:'#6B5A48',veg:'#7BD389',potato:'#D9B38C',maize:'#F2C14E',flood:'#4FC3F7'};
 const CN=k=>CNAME[k]?CNAME[k][L()==='bn'?1:0]:String(k);
-/* WATER is sent to the API as `water` (k); PRIO as `priority` (tap order). The soil-type question below is "coming soon": shown, never sent */
+/* WATER is sent to the API as `water` (k); PRIO as `priority` (tap order). The soil box below is read from /api/v1/soil (shown only; it does not change the ranking) */
 const WATER=[{en:'Rain only',bn:'শুধু বৃষ্টি',d:0,k:'rain_only'},{en:'1–2 irrigations',bn:'১–২ বার সেচ',d:1,k:'limited'},{en:'Regular (pump/canal)',bn:'নিয়মিত (পাম্প/খাল)',d:2,k:'regular'},{en:'Plenty (deep tube well)',bn:'প্রচুর (গভীর নলকূপ)',d:3,k:'plenty'}];
 const PRIO=[['water',{en:'Save water',bn:'পানি বাঁচানো'}],['soil',{en:'Healthier soil',bn:'মাটির স্বাস্থ্য'}],['risk',{en:'Lowest risk',bn:'সবচেয়ে কম ঝুঁকি'}],['more',{en:'More crops a year',bn:'বছরে বেশি ফসল'}]];
 const FLOOD_EVENT={sylhet:'2022-06-17'};const floodEventDate=k=>FLOOD_EVENT[k]||'2024-08-21';
@@ -612,7 +609,7 @@ const FLOOD_EVENT={sylhet:'2022-06-17'};const floodEventDate=k=>FLOOD_EVENT[k]||
 /* ---------- API: the only place the website gets numbers from ---------- */
 const API_BASE=String(window.API_BASE||'mock').trim();
 const MOCK=API_BASE==='mock';
-const MOCKFILE={'/api/v1/districts':'districts','/api/v1/advisory':'advisory','/api/v1/post-flood':'post_flood','/api/v1/field-twin':'field_twin'};
+const MOCKFILE={'/api/v1/districts':'districts','/api/v1/advisory':'advisory','/api/v1/post-flood':'post_flood','/api/v1/field-twin':'field_twin','/api/v1/soil':'soil'};
 const apiRoot=()=>API_BASE.replace(/\/+$/,'');
 function apiUrl(path,params){if(MOCK)return `../mock/${MOCKFILE[path]}.json`;
   const q=new URLSearchParams();Object.entries(params||{}).forEach(([k,v])=>{if(v!==undefined&&v!==null&&v!=='')q.set(k,v)});const s=q.toString();return apiRoot()+path+(s?'?'+s:'')}
@@ -924,7 +921,7 @@ function srcCard(p){const bn=L()==='bn';const meta=[p.agency,p.period&&((bn?'স
 function showSrc(ids){const bn=L()==='bn';modal(`<span class="eyebrow">${bn?'তথ্যের উৎস':'Data source'}</span><div class="stack" style="gap:8px">${ids.map(id=>PROV[id]?srcCard(PROV[id]):`<div class="src"><p>${esc(id)}: ${bn?'উৎসের বিবরণ এখনও আসেনি':'source details not loaded yet'}</p></div>`).join('')}</div><button class="btn ghost" style="margin-top:12px" onclick="this.closest('.modal').remove()">${bn?'বন্ধ করুন':'Close'}</button>`)}
 const MAPCREDITS=[{id:'esri',dataset:'Esri World Imagery (map picture only, not data)',agency:'Esri, Maxar, Earthstar Geographics',url:'https://www.arcgis.com/home/item.html?id=10df2279f9684e4a9f6a7f08febac2a9'},
  {id:'eox',dataset:'Sentinel-2 cloudless 2023 by EOX (map picture only, not data)',agency:'EOX IT Services, CC BY-NC-SA 4.0, modified Copernicus data',url:'https://s2maps.eu/'}];
-const PROV_ORDER=['imerg','power','smap','opera','fao56','calendar','post_flood','assumptions'];
+const PROV_ORDER=['imerg','power','smap','opera','soilgrids','fao56','calendar','post_flood','assumptions'];
 function renderSources(){const bn=L()==='bn';paint($('srcList'),()=>Object.keys(PROV).length?{env:{}}:load('/api/v1/districts',{}),()=>{
   const ids=Object.keys(PROV).sort((a,b)=>((PROV_ORDER.indexOf(a)+1)||99)-((PROV_ORDER.indexOf(b)+1)||99)||a.localeCompare(b));
   $('srcList').innerHTML=ids.map(i=>srcCard(PROV[i])).join('')+`<h2 class="q" style="font-size:15px">${bn?'ম্যাপের ছবি (তথ্য নয়)':'Map pictures (not data)'}</h2>`+MAPCREDITS.map(srcCard).join('')})}
@@ -934,10 +931,23 @@ function renderFarmExtras(){const bn=L()==='bn';
   document.querySelectorAll('[data-wl]').forEach(b=>b.onclick=()=>{S.waterLvl=+b.dataset.wl;S.waterSet=true;S.adv=null;TWD=null;renderFarmExtras();if(S.screen==='crop')renderPlans(false);speak(WATER[S.waterLvl][L()])});
   $('prio').innerHTML=PRIO.map(([k,t])=>`<button class="chip" data-pr="${k}" aria-pressed="${S.prio.has(k)}">${t[L()]}</button>`).join('');
   document.querySelectorAll('[data-pr]').forEach(b=>b.onclick=()=>{const k=b.dataset.pr;S.prio.has(k)?S.prio.delete(k):S.prio.add(k);S.adv=null;TWD=null;renderFarmExtras();if(S.screen==='crop')renderPlans(false)});
-  const rf=RF();const soil=[[bn?'মাটির ধরন':'Texture',rf?rf.soil[L()]:'—'],['pH','—'],[bn?'জৈব পদার্থ':'Organic matter','—']];
-  $('soil').innerHTML=soil.map(([a,b])=>`<div>${a}<b>${b}</b></div>`).join('');
-  $('soilNote').innerHTML=(rf?`<span class="pill sample">${bn?'মাঠের রেকর্ড':'FIELD RECORD'}</span> ${bn?`মাটির ধরন ${rf.id}-এর রেকর্ড থেকে, NASA তথ্য নয়।`:`Texture from the ${rf.id} field record, not NASA data.`}<br>`:'')+(bn?'শীঘ্রই: আপনার জমির মাটি SoilGrids থেকে। স্যাটেলাইট মাটির pH বা পুষ্টি মাপতে পারে না; উপজেলা কৃষি অফিসে মাটি পরীক্ষা করান।':'Coming soon: soil for your field from SoilGrids. Satellites cannot measure soil pH or nutrients; get a soil test at the Upazila Agriculture Office.');
+  renderSoil();
 }
+/* ---------- soil box: /api/v1/soil (ISRIC SoilGrids model estimate for the field point; district values if it fails) ---------- */
+function renderSoil(){const bn=L()==='bn',tok=renderSoil.t=(renderSoil.t||0)+1,rf=RF();
+  const advice=bn?'এগুলো মডেলের অনুমান, ল্যাব পরীক্ষা নয়। উপজেলা কৃষি অফিসে মাটি পরীক্ষা করান।':'These are model estimates, not a lab test. Get a soil test at the Upazila Agriculture Office.';
+  $('soil').innerHTML=`<div style="grid-column:1/-1">${loadingHTML()}</div>`;$('soilNote').innerHTML='';
+  load('/api/v1/soil',locP()).then(res=>{if(renderSoil.t!==tok)return;const e=res&&res.env,d=advOK(res)?e.data:null;
+    if(!d||!d.soil){$('soil').innerHTML=[bn?'মাটির ধরন':'Texture','pH',bn?'জৈব কার্বন':'Organic carbon'].map(a=>`<div>${a}<b>—</b></div>`).join('');
+      $('soilNote').innerHTML=(rf?`${bn?'মাঠের রেকর্ড':'Field record'}: ${esc(rf.soil[L()])}<br>`:'')+(res&&res.failed?(bn?'মাটির তথ্য এখন পাওয়া যায়নি। ':'Soil data is not available right now. '):'')+advice;return}
+    const so=d.soil,cell=m=>m&&m.value!=null?`${num(m.value)}${m.unit==='g/kg'?' g/kg':''} ${srcBtn(m.src)}`:'—';
+    const tex=so.texture?`${esc(tx(so.texture))} ${srcBtn(so.clay_pct.src)}`:'—';
+    $('soil').innerHTML=[[bn?'মাটির ধরন':'Texture',tex],['pH',cell(so.ph)],[bn?'জৈব কার্বন':'Organic carbon',cell(so.organic_carbon_g_kg)]].map(([a,b])=>`<div>${a}<b>${b}</b></div>`).join('');
+    const field=so.estimate==='field';
+    $('soilNote').innerHTML=`<span class="pill sample">${field?(bn?'SoilGrids অনুমান · ০–৩০ সেমি':'SOILGRIDS ESTIMATE · 0–30 cm'):(bn?'জেলার মান · ০–১০০ সেমি':'DISTRICT VALUE · 0–100 cm')}</span> ${field?(bn?'২৫০ মিটার গ্রিডে ISRIC SoilGrids-এর অনুমান (NASA নয়)।':'ISRIC SoilGrids estimate on a 250 m grid (not NASA).'):''}`
+      +(rf?`<br><span class="pill sample">${bn?'মাঠের রেকর্ড':'FIELD RECORD'}</span> ${bn?'রেকর্ড করা মাটি':'Recorded texture'}: <b style="color:var(--ink)">${esc(rf.soil[L()])}</b> (${esc(rf.id)}, ${bn?'NASA তথ্য নয়':'not NASA data'})`:'')
+      +noticesHTML(e)+`<div style="margin-top:6px">${esc(tx(d.test_advice))} ${bn?'এগুলো মডেলের অনুমান, ল্যাব পরীক্ষা নয়।':'These are model estimates, not a lab test.'}</div>`;
+    bindSrc($('soil'));bindSrc($('soilNote'))})}
 /* ---------- flood screen: /api/v1/post-flood ---------- */
 function lineChart(rows,series,marks,aria){rows=(rows||[]).filter(r=>pd(r.date));if(rows.length<2)return'';
   const W=360,H=170,x0=12,x1=W-12,ya=14,yb=H-22,bn=L()==='bn';
