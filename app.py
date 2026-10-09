@@ -197,7 +197,7 @@ def _src_ids(obj, out):
 class ApiError(Exception):
     STATUS = {"DISTRICT_NOT_COVERED": 400, "BAD_PARAMETER": 400,
               "NO_DATA_FOR_PERIOD": 404, "INTERNAL": 500}
-    BN = {"DISTRICT_NOT_COVERED": "CropShift এখন কুমিল্লা, ফেনী, ব্রাহ্মণবাড়িয়া, নোয়াখালী ও "
+    BN = {"DISTRICT_NOT_COVERED": "সার্ভে ক্রপস এখন কুমিল্লা, ফেনী, ব্রাহ্মণবাড়িয়া, নোয়াখালী ও "
                                   "সিলেট অঞ্চলে কাজ করে।",
           "BAD_PARAMETER": "অনুরোধের একটি তথ্য ঠিক নেই: {detail}",
           "NO_DATA_FOR_PERIOD": "এই সময়ের জন্য NASA তথ্য নেই: {detail}",
@@ -243,16 +243,16 @@ def fixed_provenance():
                              "ET0, crop coefficients, root-zone water balance",
                   "url": "https://www.fao.org/4/x0490e/x0490e00.htm", "agency": "FAO",
                   "period": "", "resolution": "", "note": "Method reference; Kc in data/processed/kc_table.csv."},
-        "calendar": {"dataset": "CropShift sowing-date risk calendar (data/processed/risk_calendar.csv)",
+        "calendar": {"dataset": "Survey Crops sowing-date risk calendar (data/processed/risk_calendar.csv)",
                      "url": f"{REPO_URL}/blob/main/docs/results/risk_calendar.md",
                      "agency": "Team Regolith analysis of NASA IMERG + POWER",
                      "period": f"seasons {rc.SEASONS[0]}-{rc.SEASONS[-1]}", "resolution": "",
                      "note": "Built by scripts/build_risk_calendar.py from the cited rows listed here."},
-        "post_flood": {"dataset": "CropShift post-flood recovery method (docs/results/post_flood.md)",
+        "post_flood": {"dataset": "Survey Crops post-flood recovery method (docs/results/post_flood.md)",
                        "url": f"{REPO_URL}/blob/main/docs/results/post_flood.md",
                        "agency": "Team Regolith analysis of NASA SMAP + OPERA DSWx-S1",
                        "period": "", "resolution": "", "note": ""},
-        "assumptions": {"dataset": "CropShift modelling assumptions (not from a source; listed so "
+        "assumptions": {"dataset": "Survey Crops modelling assumptions (not from a source; listed so "
                                    "they can be checked)",
                         "url": f"{REPO_URL}/blob/main/src/compute/risk_calendar.py",
                         "agency": "Team Regolith", "period": "", "resolution": "",
@@ -454,7 +454,7 @@ def check_district(district):
         raise ApiError("BAD_PARAMETER", "Missing parameter: district.", "district")
     if district.lower() not in DISTRICTS:
         raise ApiError("DISTRICT_NOT_COVERED",
-                       "CropShift covers Cumilla, Feni, Brahmanbaria, Noakhali and Sylhet for now.")
+                       "Survey Crops covers Cumilla, Feni, Brahmanbaria, Noakhali and Sylhet for now.")
     return district.lower()
 
 
@@ -497,14 +497,14 @@ def resolve_location(district, lat, lon):
     limit = API_ASSUMPTIONS["district_max_distance_km"]["value"]
     if km > limit:
         raise ApiError("DISTRICT_NOT_COVERED",
-                       f"This point is {km:.0f} km from the nearest CropShift district point "
-                       f"({DISTRICTS[did]['en']}). CropShift covers points within {limit} km of "
+                       f"This point is {km:.0f} km from the nearest Survey Crops district point "
+                       f"({DISTRICTS[did]['en']}). Survey Crops covers points within {limit} km of "
                        f"Cumilla, Feni, Brahmanbaria, Noakhali and Sylhet.")
     return did, {"lat": round(la, 5), "lon": round(lo, 5), "district": did,
                  "district_name": DISTRICTS[did],
                  "distance_km": measure(km, "km to the district point", ["assumptions"], 1),
-                 "method": {"en": f"Nearest of the 5 CropShift district points (within {limit} km).",
-                            "bn": f"CropShift-এর ৫টি জেলা-বিন্দুর মধ্যে সবচেয়ে কাছেরটি "
+                 "method": {"en": f"Nearest of the 5 Survey Crops district points (within {limit} km).",
+                            "bn": f"সার্ভে ক্রপস-এর ৫টি জেলা-বিন্দুর মধ্যে সবচেয়ে কাছেরটি "
                                   f"({bn_digits(limit)} কিমির মধ্যে)।"}}
 
 
@@ -725,8 +725,8 @@ def earliest_block(result, flood_ready_used):
         src = ["smap", "opera", "post_flood"]
     else:
         days = rc.TURNAROUND_DAYS
-        basis = {"en": f"Harvest date + {days} days to prepare the field (CropShift assumption).",
-                 "bn": f"ফসল কাটার তারিখ + জমি তৈরির {bn_digits(days)} দিন (CropShift অনুমান)।"}
+        basis = {"en": f"Harvest date + {days} days to prepare the field (Survey Crops assumption).",
+                 "bn": f"ফসল কাটার তারিখ + জমি তৈরির {bn_digits(days)} দিন (সার্ভে ক্রপস অনুমান)।"}
         src = ["assumptions"]
     return {"date": result["earliest_sowing_date"], "basis": basis, "src": src}
 
@@ -753,7 +753,7 @@ async def lifespan(_app):
     yield
 
 
-app = FastAPI(title="CropShift API", version=API_VERSION, lifespan=lifespan,
+app = FastAPI(title="Survey Crops API", version=API_VERSION, lifespan=lifespan,
               description="Which crop to plant and when, with NASA data as the evidence. "
                           "Every number carries its source. Records of past seasons, not forecasts.")
 app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["GET", "POST"],
@@ -886,8 +886,8 @@ def advisory(district: str = None, prev_harvest: str = None, flood_ready: str = 
                      "sms_bn": f"{name['bn']}: {bn_digits(earliest)} তারিখে কোনো ফসল র‍্যাঙ্ক করা যায়নি।"}
         fallback = {"en": "See the ranked crop options below; each number shows its NASA source.",
                     "bn": "নিচে র‍্যাঙ্ক করা ফসলগুলো দেখুন; প্রতিটি সংখ্যার NASA উৎস দেওয়া আছে।",
-                    "sms_en": "CropShift: see crop options (NASA data).",
-                    "sms_bn": "CropShift: ফসলের তালিকা দেখুন (NASA তথ্য)।"}
+                    "sms_en": "Survey Crops: see crop options (NASA data).",
+                    "sms_bn": "সার্ভে ক্রপস: ফসলের তালিকা দেখুন (NASA তথ্য)।"}
         notices = (district_notices(did) + [PAST_NOT_FORECAST, WEATHER_RISKS_ONLY]
                    + coverage_notices(ranked + filtered))
         if not ranked and filtered and all(o["sowing_date"] is None for o in filtered):
@@ -998,8 +998,8 @@ def risk_calendar(district: str = None, crop: str = None):
                      "sms_bn": f"{cname['bn']}: ঝুঁকি এখনও যাচাই হয়নি।"}
         fallback = {"en": "See the calendar below; each number shows its NASA source.",
                     "bn": "নিচের ক্যালেন্ডার দেখুন; প্রতিটি সংখ্যার NASA উৎস দেওয়া আছে।",
-                    "sms_en": "CropShift: see the sowing calendar (NASA data).",
-                    "sms_bn": "CropShift: বপন ক্যালেন্ডার দেখুন (NASA তথ্য)।"}
+                    "sms_en": "Survey Crops: see the sowing calendar (NASA data).",
+                    "sms_bn": "সার্ভে ক্রপস: বপন ক্যালেন্ডার দেখুন (NASA তথ্য)।"}
         notices = district_notices(did) + [PAST_NOT_FORECAST, WEATHER_RISKS_ONLY]
         if missing:
             notices.append({"level": "caution", **NOT_ALL_CHECKED})
@@ -1264,8 +1264,8 @@ def post_flood(district: str = None, flood_date: str = None, lang: str = "en",
                      "sms_bn": f"বন্যা {bn_digits(fd)}: তথ্যে মাটি স্বাভাবিক হয়নি।"}
         fallback = {"en": "See the recovery clock below; each number shows its NASA source.",
                     "bn": "নিচে পুনরুদ্ধারের হিসাব দেখুন; প্রতিটি সংখ্যার NASA উৎস দেওয়া আছে।",
-                    "sms_en": "CropShift: see flood recovery (NASA data).",
-                    "sms_bn": "CropShift: বন্যার পর জমির অবস্থা দেখুন (NASA)।"}
+                    "sms_en": "Survey Crops: see flood recovery (NASA data).",
+                    "sms_bn": "সার্ভে ক্রপস: বন্যার পর জমির অবস্থা দেখুন (NASA)।"}
         return data, narrate(texts, fallback, data), notices
 
     return respond(endpoint, request, build)
@@ -1456,8 +1456,8 @@ def field_twin(district: str = None, year: str = None, crop: str = None, sow_dat
         }
         fallback = {"en": "A past-year example, not a forecast. See the weekly table below.",
                     "bn": "অতীতের উদাহরণ, পূর্বাভাস নয়। নিচের সাপ্তাহিক তালিকা দেখুন।",
-                    "sms_en": "CropShift: past-year example (not a forecast).",
-                    "sms_bn": "CropShift: অতীতের উদাহরণ (পূর্বাভাস নয়)।"}
+                    "sms_en": "Survey Crops: past-year example (not a forecast).",
+                    "sms_bn": "সার্ভে ক্রপস: অতীতের উদাহরণ (পূর্বাভাস নয়)।"}
         notices = district_notices(did) + [{"level": "info",
                                             "en": "An example from a past year, never a forecast.",
                                             "bn": "অতীতের একটি উদাহরণ, কখনও পূর্বাভাস নয়।"}]

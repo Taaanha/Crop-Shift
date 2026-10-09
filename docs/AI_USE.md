@@ -459,3 +459,18 @@ and copied the images into the Docker image. Checked with
 mock files and the live API. Bangla strings were written with AI help and
 need a review by a Bangla speaker.
 
+
+**Claude Code (task 15, rename to Survey Crops)** — replaced "CropShift"
+with "Survey Crops" (Bangla: "সার্ভে ক্রপস") in every user-visible string
+in `web/app/index.html` and in the text `app.py` returns (error messages,
+notices, method/basis text, provenance dataset names, `sms_en`/`sms_bn`,
+the FastAPI title). Comments, file names, identifiers and URLs were not
+changed, and neither were the shared `web/mock/*.json` files (they need
+their own PR). The 6th bottom tab is now "My plan" / "আমার পরিকল্পনা" (the
+icon and "Pictures only" switch are unchanged). Compared the recorded
+Bangla sentences before and after with the page's own `__collectBn()`
+helper: none of the 61 recorded sentences changed, so no clip falls back
+to the phone voice. Added tests that no API response contains "CropShift"
+and that the error text and API title use the new name. Checked with
+`python -m pytest src -q` and in a browser (Bangla tab bar at 375 px).
+The Bangla wording needs a review by a Bangla speaker.

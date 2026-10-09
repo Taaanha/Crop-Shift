@@ -169,6 +169,21 @@ def test_narration_passes_guard(responses, name):
         assert guard(narration[key], cited)["passed"], (key, narration[key])
 
 
+@pytest.mark.parametrize("name", list(REAL) + list(EXTRA))
+def test_the_public_name_is_survey_crops(responses, name):
+    """The app is called Survey Crops (সার্ভে ক্রপস); the old name must not reach users."""
+    for key, value in walk(responses[name]):
+        if isinstance(value, str) and key != "url":
+            assert "CropShift" not in value, (name, key, value)
+
+
+def test_error_and_api_title_use_the_public_name():
+    assert api.app.title == "Survey Crops API"
+    body = client.get("/api/v1/advisory?district=dhaka&prev_harvest=2024-11-10").json()
+    assert "Survey Crops" in body["errors"][0]["en"]
+    assert "সার্ভে ক্রপস" in body["errors"][0]["bn"]
+
+
 def test_districts_narration_is_null(responses):
     assert responses["districts"]["narration"] is None
     assert [d["id"] for d in responses["districts"]["data"]["districts"]] == list(api.DISTRICTS)
