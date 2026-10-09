@@ -25,6 +25,7 @@ import os
 import re
 import sys
 from contextlib import asynccontextmanager
+from urllib.parse import urlsplit
 
 import numpy as np
 import pandas as pd
@@ -217,25 +218,45 @@ def _period(path, col="date"):
     return f"{dates.min()}/{dates.max()}"
 
 
+# "See the satellite data" links: NASA Worldview over the 5 districts. Each layer id
+# is listed in the GIBS WMTS GetCapabilities (checked 2026-10-10); each date has
+# data in that layer (IMERG: wettest day of the Aug-2024 flood in our IMERG files;
+# OPERA: a day with a DSWx-S1 scene over Feni in data/processed/dswx_area_feni.csv).
+AREA_BBOX = "90.8,22.7,92.4,25.3"   # lon/lat box around Cumilla, Feni, Brahmanbaria, Noakhali, Sylhet
+
+
+def worldview_url(layer, date):
+    layers = f"Reference_Labels_15m,Reference_Features_15m,Coastlines_15m,{layer}," \
+             "VIIRS_SNPP_CorrectedReflectance_TrueColor"
+    return f"https://worldview.earthdata.nasa.gov/?v={AREA_BBOX}&l={layers}&t={date}"
+
+
 @functools.lru_cache(maxsize=1)
 def fixed_provenance():
     smap = sorted(glob.glob(os.path.join(PROCESSED, "smap_*_2015_2026.csv")))
     dswx = sorted(glob.glob(os.path.join(PROCESSED, "dswx_area_*.csv")))
     return {
         "imerg": {"dataset": RAIN_CITATIONS["imerg"]["dataset"], "url": RAIN_CITATIONS["imerg"]["url"],
+                  "view_url": worldview_url("IMERG_Precipitation_Rate", "2024-08-21"),
                   "agency": "NASA", "period": _period(os.path.join(PROCESSED, "imerg_cumilla_daily.csv")),
                   "resolution": "0.1° grid", "note": "Rain. Area around the field, not the exact plot."},
         "power": {"dataset": "NASA POWER Daily Point API (AG community): temperature, humidity, "
                              "wind, solar radiation", "url": "https://power.larc.nasa.gov/",
+                  "view_url": "https://power.larc.nasa.gov/data-access-viewer/",
                   "agency": "NASA", "period": _period(os.path.join(PROCESSED, "power_cumilla_daily.csv")),
                   "resolution": "~0.5° grid",
                   "note": "Not used for rain. Feni and Noakhali share one cell."},
-        "smap": {"dataset": "NASA SMAP L4 root-zone soil moisture (SPL4SMGP), via AppEEARS",
-                 "url": "https://appeears.earthdatacloud.nasa.gov/", "agency": "NASA",
+        "smap": {"dataset": "NASA SMAP L4 root-zone soil moisture (SPL4SMGP version 8)",
+                 "url": "https://nsidc.org/data/spl4smgp/versions/8",
+                 "view_url": worldview_url("SMAP_L4_Analyzed_Root_Zone_Soil_Moisture", "2024-08-25"),
+                 "agency": "NASA (NSIDC DAAC)",
                  "period": _period(smap[0]) if smap else "", "resolution": "~9 km",
-                 "note": "Its rain forcing is corrected to IMERG, so it is not independent of IMERG."},
+                 "note": "Downloaded through NASA AppEEARS (appeears.earthdatacloud.nasa.gov). Its rain "
+                         "forcing is corrected to IMERG, so it is not independent of IMERG."},
         "opera": {"dataset": "NASA OPERA DSWx-S1 surface water (from Sentinel-1 radar)",
                   "url": "https://podaac.jpl.nasa.gov/dataset/OPERA_L3_DSWX-S1_V1",
+                  "view_url": worldview_url("OPERA_L3_Dynamic_Surface_Water_Extent-Sentinel-1",
+                                            "2024-08-28"),
                   "agency": "NASA JPL (Sentinel-1: ESA)",
                   "period": _period(dswx[0]) if dswx else "", "resolution": "30 m",
                   "note": "20 km x 20 km area around the district point; no scenes before 2024-08-21."},
@@ -280,6 +301,33 @@ def reference_rows():
     return rows
 
 
+BARE_DOMAIN_RE = re.compile(r"[A-Za-z0-9-]+(\.[A-Za-z0-9-]+)+(/\S*)?")
+FILE_EXTENSIONS = {"pdf", "doc", "docx", "xls", "xlsx", "csv", "txt", "htm", "html", "jpg", "png"}
+LINK_PENDING = "Link pending: printed BRRI handbook / team to add the official URL"
+
+
+def public_url(raw):
+    """The source_url as a clickable web address, or "" if it is not one.
+    A bare domain ("czis.cropzoning.gov.bd") gets https://, stray quotes are
+    dropped. Rejected: text with spaces, no http(s) scheme, or a host with no
+    dot or ending in a file name ("https://adhunikDhanerChash.pdf")."""
+    text = "" if pd.isna(raw) else str(raw).strip().strip("\"'")
+    if "://" not in text and BARE_DOMAIN_RE.fullmatch(text):
+        text = "https://" + text
+    if re.search(r"\s", text):
+        return ""
+    try:
+        parts = urlsplit(text)
+        host = parts.hostname or ""
+    except ValueError:
+        return ""
+    tld = host.rsplit(".", 1)[-1]
+    if parts.scheme not in ("http", "https") or "." not in host or not tld.isalpha() \
+            or tld.lower() in FILE_EXTENSIONS:
+        return ""
+    return text
+
+
 def ref_provenance(ref_id):
     rows = reference_rows()
     rows = rows[rows["ref_id"] == ref_id]
@@ -287,9 +335,11 @@ def ref_provenance(ref_id):
         raise KeyError(ref_id)
     first = rows.iloc[0]
     files = ", ".join(sorted(set(rows["file"])))
-    return {"dataset": first["source_title"], "url": first["source_url"],
+    url = public_url(first["source_url"])
+    note = f"Cited in data/reference/{files}" + ("" if url else f". {LINK_PENDING}")
+    return {"dataset": first["source_title"], "url": url,
             "agency": "", "period": "" if pd.isna(first.get("year")) else str(first["year"]),
-            "resolution": "", "note": f"Cited in data/reference/{files}"}
+            "resolution": "", "note": note}
 
 
 def ref_ids_for(citations):

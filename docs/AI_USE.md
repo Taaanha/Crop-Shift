@@ -459,3 +459,21 @@ and copied the images into the Docker image. Checked with
 mock files and the live API. Bangla strings were written with AI help and
 need a review by a Bangla speaker.
 
+
+**Claude Code (task 13, source links)** — made every "Source" card open a
+real page. In `app.py` the IMERG, POWER, SMAP and OPERA provenance entries
+got an optional `view_url` ("See the satellite data"): NASA Worldview over
+the 5 districts with GIBS layers it confirmed in the WMTS GetCapabilities
+(`IMERG_Precipitation_Rate` 2024-08-21, `SMAP_L4_Analyzed_Root_Zone_Soil_Moisture`
+2024-08-25, `OPERA_L3_Dynamic_Surface_Water_Extent-Sentinel-1` 2024-08-28),
+and the POWER Data Access Viewer. SMAP's `url` now points to the NSIDC page
+for SPL4SMGP version 8 (AppEEARS moved to the note). It added
+`public_url()`, so research rows whose `source_url` is not a web address
+are sent with `url: ""` and a "Link pending" note (no URLs were invented
+and the CSVs were not edited). It updated `srcCard` in
+`web/app/index.html` ("Dataset page ↗", "See the satellite data ↗", "Link
+pending"), wrote `scripts/check_links.py` (writes `docs/results/link_check.md`
+and `docs/results/broken_source_links.md`), and added tests in
+`src/api/test_app.py`. Checked with `python -m pytest src -q`, the link
+check, and in a browser against a local uvicorn. The Bangla link labels
+need a review by a Bangla speaker.
