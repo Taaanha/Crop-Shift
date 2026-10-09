@@ -1,281 +1,281 @@
-district,crop,sowing_mmdd,sow_offset,window_start,window_end,window_method,outside_window,stage_method,hazards_missing,n_years,hazards_assessed,problem_years,problem_share,problem_years_heat_anthesis,problem_years_heat_grainfill,irrigation_mm_mean,irrigation_mm_worst20,stress_days_mean,stress_days_worst20,flowering_days_median,maturity_days_median,problem_years_hot1,problem_years_hot5,problem_years_severe,problem_years_window15,problem_years_waterlog,problem_years_heat_flowering,problem_years_night_heat_tuber
-cumilla,wheat,11-01,92,11-15,11-30,cited,True,gdd,,24,heat_anthesis;heat_grainfill,0.000,0.000,0.000,0.000,231.500,313.100,64.400,83.400,51.000,104.000,0.000,0.000,0.000,0.000,,,
-cumilla,wheat,11-08,99,11-15,11-30,cited,True,gdd,,24,heat_anthesis;heat_grainfill,0.000,0.000,0.000,0.000,248.600,314.400,68.300,87.600,54.000,105.000,0.000,0.000,0.000,0.000,,,
-cumilla,wheat,11-15,106,11-15,11-30,cited,False,gdd,,24,heat_anthesis;heat_grainfill,0.000,0.000,0.000,0.000,274.200,331.100,72.500,92.200,56.000,105.500,0.000,0.000,0.000,0.000,,,
-cumilla,wheat,11-22,113,11-15,11-30,cited,False,gdd,,24,heat_anthesis;heat_grainfill,0.000,0.000,0.000,0.000,298.400,380.900,76.300,97.800,58.000,105.000,2.000,0.000,0.000,0.000,,,
-cumilla,wheat,11-29,120,11-15,11-30,cited,False,gdd,,24,heat_anthesis;heat_grainfill,1.000,0.042,0.000,1.000,327.000,403.100,80.500,102.600,60.000,104.000,8.000,0.000,1.000,1.000,,,
-cumilla,wheat,12-06,127,11-15,11-30,cited,True,gdd,,24,heat_anthesis;heat_grainfill,9.000,0.375,0.000,9.000,341.100,412.700,84.500,107.200,60.500,102.000,16.000,1.000,9.000,10.000,,,
-cumilla,wheat,12-13,134,11-15,11-30,cited,True,gdd,,24,heat_anthesis;heat_grainfill,13.000,0.542,1.000,13.000,355.000,436.400,88.300,112.200,60.500,100.000,18.000,8.000,13.000,13.000,,,
-cumilla,wheat,12-20,141,11-15,11-30,cited,True,gdd,,24,heat_anthesis;heat_grainfill,16.000,0.667,5.000,16.000,377.500,490.100,91.100,113.600,59.500,98.000,21.000,15.000,16.000,16.000,,,
-cumilla,wheat,12-27,148,11-15,11-30,cited,True,gdd,,24,heat_anthesis;heat_grainfill,17.000,0.708,9.000,16.000,403.300,505.100,93.700,117.800,58.500,95.000,21.000,15.000,17.000,18.000,,,
-cumilla,mustard,10-01,61,10-15,11-15,cited,True,gdd,heat_flowering,24,waterlog,2.000,0.083,,,152.700,172.000,34.000,50.000,,58.500,2.000,2.000,2.000,2.000,2.000,,
-cumilla,mustard,10-08,68,10-15,11-15,cited,True,gdd,heat_flowering,24,waterlog,0.000,0.000,,,153.000,172.100,35.200,50.600,,64.000,0.000,0.000,0.000,0.000,0.000,,
-cumilla,mustard,10-15,75,10-15,11-15,cited,False,gdd,heat_flowering,24,waterlog,0.000,0.000,,,152.700,171.800,36.700,51.000,,75.500,0.000,0.000,0.000,0.000,0.000,,
-cumilla,mustard,10-22,82,10-15,11-15,cited,False,gdd,heat_flowering,24,waterlog,0.000,0.000,,,156.300,172.400,38.800,51.600,,86.000,0.000,0.000,0.000,0.000,0.000,,
-cumilla,mustard,10-29,89,10-15,11-15,cited,False,gdd,heat_flowering,24,waterlog,0.000,0.000,,,170.800,238.600,41.200,52.800,,97.500,0.000,0.000,0.000,0.000,0.000,,
-cumilla,mustard,11-05,96,10-15,11-15,cited,False,gdd,heat_flowering,24,waterlog,0.000,0.000,,,185.200,256.400,43.500,54.400,,102.000,0.000,0.000,0.000,0.000,0.000,,
-cumilla,mustard,11-12,103,10-15,11-15,cited,False,gdd,heat_flowering,24,waterlog,0.000,0.000,,,210.300,257.700,45.900,56.400,,104.000,0.000,0.000,0.000,0.000,0.000,,
-cumilla,mustard,11-19,110,10-15,11-15,cited,True,gdd,heat_flowering,24,waterlog,0.000,0.000,,,235.100,259.500,48.100,59.000,,103.500,0.000,0.000,0.000,0.000,0.000,,
-cumilla,mustard,11-26,117,10-15,11-15,cited,True,gdd,heat_flowering,24,waterlog,0.000,0.000,,,242.700,292.700,50.400,61.600,,102.000,0.000,0.000,0.000,0.000,0.000,,
-cumilla,mustard,12-03,124,10-15,11-15,cited,True,gdd,heat_flowering,24,waterlog,0.000,0.000,,,261.500,343.900,51.900,64.400,,98.500,0.000,0.000,0.000,0.000,0.000,,
-cumilla,mustard,12-10,131,10-15,11-15,cited,True,gdd,heat_flowering,24,waterlog,0.000,0.000,,,272.200,344.900,53.000,67.600,,95.500,0.000,0.000,0.000,0.000,0.000,,
-cumilla,lentil,10-10,70,10-24,11-15,cited,True,gdd,,24,heat_flowering;waterlog,2.000,0.083,,,187.800,218.500,67.500,77.400,57.000,112.000,2.000,2.000,2.000,2.000,2.000,0.000,
-cumilla,lentil,10-17,77,10-24,11-15,cited,True,gdd,,24,heat_flowering;waterlog,0.000,0.000,,,198.200,234.400,70.200,80.200,60.500,116.500,0.000,0.000,0.000,0.000,0.000,0.000,
-cumilla,lentil,10-24,84,10-24,11-15,cited,False,gdd,,24,heat_flowering;waterlog,0.000,0.000,,,215.000,260.200,72.800,83.200,65.000,119.000,0.000,0.000,0.000,0.000,0.000,0.000,
-cumilla,lentil,10-31,91,10-24,11-15,cited,False,gdd,,24,heat_flowering;waterlog,0.000,0.000,,,223.800,269.400,74.800,86.800,69.000,119.500,0.000,0.000,0.000,0.000,0.000,0.000,
-cumilla,lentil,11-07,98,10-24,11-15,cited,False,gdd,,24,heat_flowering;waterlog,0.000,0.000,,,243.200,289.200,77.200,90.400,74.000,120.000,0.000,0.000,0.000,0.000,0.000,0.000,
-cumilla,lentil,11-14,105,10-24,11-15,cited,False,gdd,,24,heat_flowering;waterlog,0.000,0.000,,,260.000,309.100,79.800,95.600,77.500,119.000,0.000,0.000,0.000,0.000,0.000,0.000,
-cumilla,lentil,11-21,112,10-24,11-15,cited,True,gdd,,24,heat_flowering;waterlog,0.000,0.000,,,290.300,350.400,82.500,101.200,79.500,118.000,1.000,0.000,0.000,0.000,0.000,0.000,
-cumilla,lentil,11-28,119,10-24,11-15,cited,True,gdd,,24,heat_flowering;waterlog,1.000,0.042,,,305.300,356.300,85.500,107.000,80.000,115.500,3.000,0.000,1.000,3.000,0.000,1.000,
-cumilla,lentil,12-05,126,10-24,11-15,cited,True,gdd,,24,heat_flowering;waterlog,4.000,0.167,,,323.100,398.600,88.200,112.000,79.000,113.000,7.000,2.000,4.000,9.000,0.000,4.000,
-cumilla,lentil,12-12,133,10-24,11-15,cited,True,gdd,,24,heat_flowering;waterlog,11.000,0.458,,,335.500,415.200,90.000,117.000,77.000,111.000,16.000,7.000,11.000,15.000,0.000,11.000,
-cumilla,potato,10-18,78,11-01,11-30,"cited, merged",True,gdd,,24,night_heat_tuber,2.000,0.083,,,265.300,310.800,97.000,111.800,,,5.000,0.000,0.000,2.000,,,2.000
-cumilla,potato,10-25,85,11-01,11-30,"cited, merged",True,gdd,,24,night_heat_tuber,1.000,0.042,,,283.600,325.100,102.300,118.800,,,1.000,0.000,0.000,1.000,,,1.000
-cumilla,potato,11-01,92,11-01,11-30,"cited, merged",False,gdd,,24,night_heat_tuber,1.000,0.042,,,304.800,346.400,107.300,124.800,,,2.000,0.000,0.000,1.000,,,1.000
-cumilla,potato,11-08,99,11-01,11-30,"cited, merged",False,gdd,,24,night_heat_tuber,0.000,0.000,,,323.600,369.800,112.400,129.000,,,1.000,0.000,0.000,0.000,,,0.000
-cumilla,potato,11-15,106,11-01,11-30,"cited, merged",False,gdd,,24,night_heat_tuber,0.000,0.000,,,342.000,393.800,116.200,130.000,,,0.000,0.000,0.000,0.000,,,0.000
-cumilla,potato,11-22,113,11-01,11-30,"cited, merged",False,gdd,,24,night_heat_tuber,0.000,0.000,,,360.800,421.700,117.900,130.000,,,0.000,0.000,0.000,0.000,,,0.000
-cumilla,potato,11-29,120,11-01,11-30,"cited, merged",False,gdd,,24,night_heat_tuber,0.000,0.000,,,375.100,441.200,118.000,130.000,,,0.000,0.000,0.000,0.000,,,0.000
-cumilla,potato,12-06,127,11-01,11-30,"cited, merged",True,gdd,,24,night_heat_tuber,0.000,0.000,,,390.300,457.100,117.200,130.000,,,0.000,0.000,0.000,0.000,,,0.000
-cumilla,potato,12-13,134,11-01,11-30,"cited, merged",True,gdd,,24,night_heat_tuber,0.000,0.000,,,404.200,464.900,116.700,130.000,,,0.000,0.000,0.000,0.000,,,0.000
-cumilla,potato,12-20,141,11-01,11-30,"cited, merged",True,gdd,,24,night_heat_tuber,0.000,0.000,,,410.300,486.600,115.700,130.000,,,1.000,0.000,0.000,0.000,,,0.000
-cumilla,potato,12-27,148,11-01,11-30,"cited, merged",True,gdd,,24,night_heat_tuber,0.000,0.000,,,417.700,506.600,113.800,128.600,,,4.000,0.000,0.000,0.000,,,0.000
-cumilla,boro_rice,11-21,112,12-05,01-30,derived,True,none,heat_anthesis;cold_booting,24,,,,,,876.200,983.700,,,,,,,,,,,
-cumilla,boro_rice,11-28,119,12-05,01-30,derived,True,none,heat_anthesis;cold_booting,24,,,,,,870.200,1003.700,,,,,,,,,,,
-cumilla,boro_rice,12-05,126,12-05,01-30,derived,False,none,heat_anthesis;cold_booting,24,,,,,,875.700,1010.100,,,,,,,,,,,
-cumilla,boro_rice,12-12,133,12-05,01-30,derived,False,none,heat_anthesis;cold_booting,24,,,,,,862.600,987.900,,,,,,,,,,,
-cumilla,boro_rice,12-19,140,12-05,01-30,derived,False,none,heat_anthesis;cold_booting,24,,,,,,870.700,1008.600,,,,,,,,,,,
-cumilla,boro_rice,12-26,147,12-05,01-30,derived,False,none,heat_anthesis;cold_booting,24,,,,,,844.600,988.700,,,,,,,,,,,
-cumilla,boro_rice,01-02,154,12-05,01-30,derived,False,none,heat_anthesis;cold_booting,24,,,,,,813.200,948.400,,,,,,,,,,,
-cumilla,boro_rice,01-09,161,12-05,01-30,derived,False,none,heat_anthesis;cold_booting,24,,,,,,806.000,951.900,,,,,,,,,,,
-cumilla,boro_rice,01-16,168,12-05,01-30,derived,False,none,heat_anthesis;cold_booting,24,,,,,,781.100,944.300,,,,,,,,,,,
-cumilla,boro_rice,01-23,175,12-05,01-30,derived,False,none,heat_anthesis;cold_booting,24,,,,,,735.300,885.500,,,,,,,,,,,
-cumilla,boro_rice,01-30,182,12-05,01-30,derived,False,none,heat_anthesis;cold_booting,24,,,,,,714.400,867.000,,,,,,,,,,,
-cumilla,boro_rice,02-06,189,12-05,01-30,derived,True,none,heat_anthesis;cold_booting,23,,,,,,670.000,805.900,,,,,,,,,,,
-cumilla,boro_rice,02-13,196,12-05,01-30,derived,True,none,heat_anthesis;cold_booting,23,,,,,,625.100,783.200,,,,,,,,,,,
-cumilla,boro_rice,02-20,203,12-05,01-30,derived,True,none,heat_anthesis;cold_booting,23,,,,,,594.100,738.500,,,,,,,,,,,
-cumilla,boro_rice,02-27,210,12-05,01-30,derived,True,none,heat_anthesis;cold_booting,23,,,,,,542.900,677.700,,,,,,,,,,,
-noakhali,wheat,11-01,92,11-15,11-30,cited,True,gdd,,24,heat_anthesis;heat_grainfill,0.000,0.000,0.000,0.000,238.600,313.700,66.900,81.800,51.000,103.500,0.000,0.000,0.000,0.000,,,
-noakhali,wheat,11-08,99,11-15,11-30,cited,True,gdd,,24,heat_anthesis;heat_grainfill,0.000,0.000,0.000,0.000,264.500,314.400,70.500,86.000,54.000,105.000,0.000,0.000,0.000,0.000,,,
-noakhali,wheat,11-15,106,11-15,11-30,cited,False,gdd,,24,heat_anthesis;heat_grainfill,0.000,0.000,0.000,0.000,291.400,331.300,74.800,90.800,56.000,105.000,0.000,0.000,0.000,0.000,,,
-noakhali,wheat,11-22,113,11-15,11-30,cited,False,gdd,,24,heat_anthesis;heat_grainfill,0.000,0.000,0.000,0.000,310.600,377.400,78.400,95.600,58.000,105.000,0.000,0.000,0.000,0.000,,,
-noakhali,wheat,11-29,120,11-15,11-30,cited,False,gdd,,24,heat_anthesis;heat_grainfill,0.000,0.000,0.000,0.000,338.800,400.400,82.500,100.800,60.000,104.000,2.000,0.000,0.000,0.000,,,
-noakhali,wheat,12-06,127,11-15,11-30,cited,True,gdd,,24,heat_anthesis;heat_grainfill,1.000,0.042,0.000,1.000,349.600,407.400,87.600,106.200,61.000,102.000,6.000,0.000,1.000,1.000,,,
-noakhali,wheat,12-13,134,11-15,11-30,cited,True,gdd,,24,heat_anthesis;heat_grainfill,5.000,0.208,0.000,5.000,367.400,443.500,92.000,112.600,61.000,100.000,9.000,1.000,5.000,5.000,,,
-noakhali,wheat,12-20,141,11-15,11-30,cited,True,gdd,,24,heat_anthesis;heat_grainfill,10.000,0.417,2.000,9.000,394.100,499.000,96.500,114.600,60.000,98.000,13.000,4.000,10.000,11.000,,,
-noakhali,wheat,12-27,148,11-15,11-30,cited,True,gdd,,24,heat_anthesis;heat_grainfill,15.000,0.625,7.000,12.000,412.300,505.100,100.300,119.000,59.000,96.000,16.000,9.000,15.000,16.000,,,
-noakhali,mustard,10-01,61,10-15,11-15,cited,True,gdd,heat_flowering,24,waterlog,0.000,0.000,,,159.900,172.000,35.600,50.400,,57.000,0.000,0.000,0.000,0.000,0.000,,
-noakhali,mustard,10-08,68,10-15,11-15,cited,True,gdd,heat_flowering,24,waterlog,0.000,0.000,,,156.200,171.500,37.300,51.200,,63.000,0.000,0.000,0.000,0.000,0.000,,
-noakhali,mustard,10-15,75,10-15,11-15,cited,False,gdd,heat_flowering,24,waterlog,0.000,0.000,,,156.300,172.300,39.200,51.800,,74.500,0.000,0.000,0.000,0.000,0.000,,
-noakhali,mustard,10-22,82,10-15,11-15,cited,False,gdd,heat_flowering,24,waterlog,0.000,0.000,,,156.100,171.900,41.000,52.400,,86.000,0.000,0.000,0.000,0.000,0.000,,
-noakhali,mustard,10-29,89,10-15,11-15,cited,False,gdd,heat_flowering,24,waterlog,0.000,0.000,,,177.600,255.000,43.000,53.400,,95.500,0.000,0.000,0.000,0.000,0.000,,
-noakhali,mustard,11-05,96,10-15,11-15,cited,False,gdd,heat_flowering,24,waterlog,0.000,0.000,,,202.500,256.900,44.700,54.200,,102.000,0.000,0.000,0.000,0.000,0.000,,
-noakhali,mustard,11-12,103,10-15,11-15,cited,False,gdd,heat_flowering,24,waterlog,0.000,0.000,,,217.400,257.800,47.100,56.400,,103.500,0.000,0.000,0.000,0.000,0.000,,
-noakhali,mustard,11-19,110,10-15,11-15,cited,True,gdd,heat_flowering,24,waterlog,0.000,0.000,,,234.800,258.300,49.700,58.800,,103.000,0.000,0.000,0.000,0.000,0.000,,
-noakhali,mustard,11-26,117,10-15,11-15,cited,True,gdd,heat_flowering,24,waterlog,0.000,0.000,,,243.100,309.600,51.800,61.400,,102.000,0.000,0.000,0.000,0.000,0.000,,
-noakhali,mustard,12-03,124,10-15,11-15,cited,True,gdd,heat_flowering,24,waterlog,0.000,0.000,,,268.100,343.700,54.000,63.800,,100.000,0.000,0.000,0.000,0.000,0.000,,
-noakhali,mustard,12-10,131,10-15,11-15,cited,True,gdd,heat_flowering,24,waterlog,0.000,0.000,,,279.000,344.600,55.900,67.000,,96.500,0.000,0.000,0.000,0.000,0.000,,
-noakhali,lentil,10-10,70,10-24,11-15,cited,True,gdd,,24,heat_flowering;waterlog,5.000,0.208,,,193.300,218.100,68.500,77.200,57.000,110.000,5.000,5.000,5.000,5.000,5.000,0.000,
-noakhali,lentil,10-17,77,10-24,11-15,cited,True,gdd,,24,heat_flowering;waterlog,2.000,0.083,,,209.500,242.900,70.800,79.600,60.500,115.000,2.000,2.000,2.000,2.000,2.000,0.000,
-noakhali,lentil,10-24,84,10-24,11-15,cited,False,gdd,,24,heat_flowering;waterlog,2.000,0.083,,,220.500,261.400,72.600,82.400,65.000,118.000,2.000,2.000,2.000,2.000,2.000,0.000,
-noakhali,lentil,10-31,91,10-24,11-15,cited,False,gdd,,24,heat_flowering;waterlog,0.000,0.000,,,234.400,262.000,75.300,85.800,69.500,119.000,0.000,0.000,0.000,0.000,0.000,0.000,
-noakhali,lentil,11-07,98,10-24,11-15,cited,False,gdd,,24,heat_flowering;waterlog,0.000,0.000,,,255.600,305.000,77.500,89.600,74.000,119.500,0.000,0.000,0.000,0.000,0.000,0.000,
-noakhali,lentil,11-14,105,10-24,11-15,cited,False,gdd,,24,heat_flowering;waterlog,0.000,0.000,,,265.800,307.800,80.000,93.800,77.500,119.500,0.000,0.000,0.000,0.000,0.000,0.000,
-noakhali,lentil,11-21,112,10-24,11-15,cited,True,gdd,,24,heat_flowering;waterlog,0.000,0.000,,,293.600,343.800,83.000,99.600,80.000,118.000,0.000,0.000,0.000,0.000,0.000,0.000,
-noakhali,lentil,11-28,119,10-24,11-15,cited,True,gdd,,24,heat_flowering;waterlog,1.000,0.042,,,306.500,354.800,86.200,105.400,80.500,116.000,1.000,0.000,1.000,1.000,0.000,1.000,
-noakhali,lentil,12-05,126,10-24,11-15,cited,True,gdd,,24,heat_flowering;waterlog,1.000,0.042,,,323.600,380.200,89.900,110.800,79.500,114.000,4.000,1.000,1.000,4.000,0.000,1.000,
-noakhali,lentil,12-12,133,10-24,11-15,cited,True,gdd,,24,heat_flowering;waterlog,6.000,0.250,,,343.800,410.000,93.200,115.800,78.000,111.500,10.000,2.000,6.000,10.000,0.000,6.000,
-noakhali,potato,10-18,78,11-01,11-30,"cited, merged",True,gdd,,24,night_heat_tuber,3.000,0.125,,,276.700,314.000,97.600,108.800,,,8.000,0.000,0.000,3.000,,,3.000
-noakhali,potato,10-25,85,11-01,11-30,"cited, merged",True,gdd,,24,night_heat_tuber,1.000,0.042,,,288.800,327.700,102.500,115.600,,,5.000,0.000,0.000,1.000,,,1.000
-noakhali,potato,11-01,92,11-01,11-30,"cited, merged",False,gdd,,24,night_heat_tuber,1.000,0.042,,,309.700,350.000,108.200,122.600,,,5.000,0.000,0.000,1.000,,,1.000
-noakhali,potato,11-08,99,11-01,11-30,"cited, merged",False,gdd,,24,night_heat_tuber,0.000,0.000,,,327.400,368.800,113.800,128.400,,,2.000,0.000,0.000,0.000,,,0.000
-noakhali,potato,11-15,106,11-01,11-30,"cited, merged",False,gdd,,24,night_heat_tuber,0.000,0.000,,,347.700,392.600,117.400,130.000,,,0.000,0.000,0.000,0.000,,,0.000
-noakhali,potato,11-22,113,11-01,11-30,"cited, merged",False,gdd,,24,night_heat_tuber,0.000,0.000,,,364.400,416.800,119.800,130.000,,,0.000,0.000,0.000,0.000,,,0.000
-noakhali,potato,11-29,120,11-01,11-30,"cited, merged",False,gdd,,24,night_heat_tuber,0.000,0.000,,,383.300,435.900,120.700,130.000,,,0.000,0.000,0.000,0.000,,,0.000
-noakhali,potato,12-06,127,11-01,11-30,"cited, merged",True,gdd,,24,night_heat_tuber,0.000,0.000,,,400.500,462.100,120.100,130.000,,,0.000,0.000,0.000,0.000,,,0.000
-noakhali,potato,12-13,134,11-01,11-30,"cited, merged",True,gdd,,24,night_heat_tuber,0.000,0.000,,,412.400,478.600,119.700,130.000,,,0.000,0.000,0.000,0.000,,,0.000
-noakhali,potato,12-20,141,11-01,11-30,"cited, merged",True,gdd,,24,night_heat_tuber,0.000,0.000,,,428.500,499.300,119.800,130.000,,,2.000,0.000,0.000,0.000,,,0.000
-noakhali,potato,12-27,148,11-01,11-30,"cited, merged",True,gdd,,24,night_heat_tuber,1.000,0.042,,,433.200,505.300,118.400,129.400,,,4.000,0.000,0.000,1.000,,,1.000
-noakhali,boro_rice,11-21,112,12-05,01-30,derived,True,none,heat_anthesis;cold_booting,24,,,,,,899.700,1004.400,,,,,,,,,,,
-noakhali,boro_rice,11-28,119,12-05,01-30,derived,True,none,heat_anthesis;cold_booting,24,,,,,,906.300,1020.900,,,,,,,,,,,
-noakhali,boro_rice,12-05,126,12-05,01-30,derived,False,none,heat_anthesis;cold_booting,24,,,,,,909.100,1025.100,,,,,,,,,,,
-noakhali,boro_rice,12-12,133,12-05,01-30,derived,False,none,heat_anthesis;cold_booting,24,,,,,,905.200,1027.400,,,,,,,,,,,
-noakhali,boro_rice,12-19,140,12-05,01-30,derived,False,none,heat_anthesis;cold_booting,24,,,,,,893.800,1028.200,,,,,,,,,,,
-noakhali,boro_rice,12-26,147,12-05,01-30,derived,False,none,heat_anthesis;cold_booting,24,,,,,,890.100,1032.300,,,,,,,,,,,
-noakhali,boro_rice,01-02,154,12-05,01-30,derived,False,none,heat_anthesis;cold_booting,24,,,,,,864.200,987.600,,,,,,,,,,,
-noakhali,boro_rice,01-09,161,12-05,01-30,derived,False,none,heat_anthesis;cold_booting,24,,,,,,839.100,970.700,,,,,,,,,,,
-noakhali,boro_rice,01-16,168,12-05,01-30,derived,False,none,heat_anthesis;cold_booting,24,,,,,,817.300,950.700,,,,,,,,,,,
-noakhali,boro_rice,01-23,175,12-05,01-30,derived,False,none,heat_anthesis;cold_booting,24,,,,,,783.900,888.400,,,,,,,,,,,
-noakhali,boro_rice,01-30,182,12-05,01-30,derived,False,none,heat_anthesis;cold_booting,24,,,,,,750.200,869.400,,,,,,,,,,,
-noakhali,boro_rice,02-06,189,12-05,01-30,derived,True,none,heat_anthesis;cold_booting,23,,,,,,724.200,863.300,,,,,,,,,,,
-noakhali,boro_rice,02-13,196,12-05,01-30,derived,True,none,heat_anthesis;cold_booting,23,,,,,,676.200,798.800,,,,,,,,,,,
-noakhali,boro_rice,02-20,203,12-05,01-30,derived,True,none,heat_anthesis;cold_booting,23,,,,,,638.500,782.400,,,,,,,,,,,
-noakhali,boro_rice,02-27,210,12-05,01-30,derived,True,none,heat_anthesis;cold_booting,23,,,,,,597.900,722.600,,,,,,,,,,,
-feni,wheat,11-01,92,11-15,11-30,cited,True,gdd,,24,heat_anthesis;heat_grainfill,0.000,0.000,0.000,0.000,228.600,282.700,65.200,81.800,51.000,103.500,0.000,0.000,0.000,0.000,,,
-feni,wheat,11-08,99,11-15,11-30,cited,True,gdd,,24,heat_anthesis;heat_grainfill,0.000,0.000,0.000,0.000,248.400,315.100,68.800,85.600,54.000,105.000,0.000,0.000,0.000,0.000,,,
-feni,wheat,11-15,106,11-15,11-30,cited,False,gdd,,24,heat_anthesis;heat_grainfill,0.000,0.000,0.000,0.000,277.700,330.800,72.700,90.400,56.000,105.000,0.000,0.000,0.000,0.000,,,
-feni,wheat,11-22,113,11-15,11-30,cited,False,gdd,,24,heat_anthesis;heat_grainfill,0.000,0.000,0.000,0.000,294.300,348.600,76.800,95.400,58.000,105.000,0.000,0.000,0.000,0.000,,,
-feni,wheat,11-29,120,11-15,11-30,cited,False,gdd,,24,heat_anthesis;heat_grainfill,0.000,0.000,0.000,0.000,319.500,398.600,80.900,100.400,60.000,104.000,2.000,0.000,0.000,0.000,,,
-feni,wheat,12-06,127,11-15,11-30,cited,True,gdd,,24,heat_anthesis;heat_grainfill,1.000,0.042,0.000,1.000,332.700,405.300,85.300,104.600,61.000,102.000,6.000,0.000,1.000,1.000,,,
-feni,wheat,12-13,134,11-15,11-30,cited,True,gdd,,24,heat_anthesis;heat_grainfill,5.000,0.208,0.000,5.000,350.100,428.900,89.600,109.800,61.000,100.000,9.000,1.000,5.000,5.000,,,
-feni,wheat,12-20,141,11-15,11-30,cited,True,gdd,,24,heat_anthesis;heat_grainfill,10.000,0.417,2.000,9.000,369.100,450.000,93.000,113.000,60.000,98.000,13.000,4.000,10.000,11.000,,,
-feni,wheat,12-27,148,11-15,11-30,cited,True,gdd,,24,heat_anthesis;heat_grainfill,15.000,0.625,7.000,12.000,383.600,480.700,96.700,117.800,59.000,96.000,16.000,9.000,15.000,16.000,,,
-feni,mustard,10-01,61,10-15,11-15,cited,True,gdd,heat_flowering,24,waterlog,3.000,0.125,,,156.100,171.600,34.200,50.000,,57.000,3.000,3.000,3.000,3.000,3.000,,
-feni,mustard,10-08,68,10-15,11-15,cited,True,gdd,heat_flowering,24,waterlog,0.000,0.000,,,156.400,172.200,35.200,50.800,,63.000,0.000,0.000,0.000,0.000,0.000,,
-feni,mustard,10-15,75,10-15,11-15,cited,False,gdd,heat_flowering,24,waterlog,0.000,0.000,,,152.700,171.900,37.000,50.800,,74.500,0.000,0.000,0.000,0.000,0.000,,
-feni,mustard,10-22,82,10-15,11-15,cited,False,gdd,heat_flowering,24,waterlog,0.000,0.000,,,156.300,171.700,39.000,51.200,,86.000,0.000,0.000,0.000,0.000,0.000,,
-feni,mustard,10-29,89,10-15,11-15,cited,False,gdd,heat_flowering,24,waterlog,0.000,0.000,,,166.800,222.300,41.100,52.400,,95.500,0.000,0.000,0.000,0.000,0.000,,
-feni,mustard,11-05,96,10-15,11-15,cited,False,gdd,heat_flowering,24,waterlog,0.000,0.000,,,188.600,256.700,43.300,54.000,,102.000,0.000,0.000,0.000,0.000,0.000,,
-feni,mustard,11-12,103,10-15,11-15,cited,False,gdd,heat_flowering,24,waterlog,0.000,0.000,,,210.300,258.000,45.400,55.600,,103.500,0.000,0.000,0.000,0.000,0.000,,
-feni,mustard,11-19,110,10-15,11-15,cited,True,gdd,heat_flowering,24,waterlog,0.000,0.000,,,228.200,258.800,47.700,58.400,,103.000,0.000,0.000,0.000,0.000,0.000,,
-feni,mustard,11-26,117,10-15,11-15,cited,True,gdd,heat_flowering,24,waterlog,0.000,0.000,,,236.000,276.800,50.200,60.600,,102.000,0.000,0.000,0.000,0.000,0.000,,
-feni,mustard,12-03,124,10-15,11-15,cited,True,gdd,heat_flowering,24,waterlog,0.000,0.000,,,257.000,343.200,52.300,63.400,,100.000,0.000,0.000,0.000,0.000,0.000,,
-feni,mustard,12-10,131,10-15,11-15,cited,True,gdd,heat_flowering,24,waterlog,0.000,0.000,,,264.700,344.700,54.600,66.800,,96.500,0.000,0.000,0.000,0.000,0.000,,
-feni,lentil,10-10,70,10-24,11-15,cited,True,gdd,,24,heat_flowering;waterlog,3.000,0.125,,,190.600,217.100,67.300,77.400,57.000,110.000,3.000,3.000,3.000,3.000,3.000,0.000,
-feni,lentil,10-17,77,10-24,11-15,cited,True,gdd,,24,heat_flowering;waterlog,3.000,0.125,,,196.300,218.000,69.800,80.200,60.500,115.000,3.000,3.000,3.000,3.000,3.000,0.000,
-feni,lentil,10-24,84,10-24,11-15,cited,False,gdd,,24,heat_flowering;waterlog,2.000,0.083,,,209.400,252.400,72.100,83.200,65.000,118.000,2.000,2.000,2.000,2.000,2.000,0.000,
-feni,lentil,10-31,91,10-24,11-15,cited,False,gdd,,24,heat_flowering;waterlog,1.000,0.042,,,220.300,260.600,74.500,86.200,69.500,119.000,1.000,1.000,1.000,1.000,1.000,0.000,
-feni,lentil,11-07,98,10-24,11-15,cited,False,gdd,,24,heat_flowering;waterlog,0.000,0.000,,,244.100,287.600,76.600,90.000,74.000,119.500,0.000,0.000,0.000,0.000,0.000,0.000,
-feni,lentil,11-14,105,10-24,11-15,cited,False,gdd,,24,heat_flowering;waterlog,0.000,0.000,,,259.700,305.800,78.800,94.400,77.500,119.500,0.000,0.000,0.000,0.000,0.000,0.000,
-feni,lentil,11-21,112,10-24,11-15,cited,True,gdd,,24,heat_flowering;waterlog,0.000,0.000,,,274.000,324.600,81.800,100.400,80.000,118.000,0.000,0.000,0.000,0.000,0.000,0.000,
-feni,lentil,11-28,119,10-24,11-15,cited,True,gdd,,24,heat_flowering;waterlog,1.000,0.042,,,299.400,358.100,85.100,106.400,80.500,116.000,1.000,0.000,1.000,1.000,0.000,1.000,
-feni,lentil,12-05,126,10-24,11-15,cited,True,gdd,,24,heat_flowering;waterlog,1.000,0.042,,,309.300,372.300,88.400,111.200,79.500,114.000,4.000,1.000,1.000,4.000,0.000,1.000,
-feni,lentil,12-12,133,10-24,11-15,cited,True,gdd,,24,heat_flowering;waterlog,6.000,0.250,,,320.900,394.500,91.600,115.400,78.000,111.500,10.000,2.000,6.000,10.000,0.000,6.000,
-feni,potato,10-18,78,11-01,11-30,"cited, merged",True,gdd,,24,night_heat_tuber,3.000,0.125,,,267.700,304.200,97.100,109.800,,,8.000,0.000,0.000,3.000,,,3.000
-feni,potato,10-25,85,11-01,11-30,"cited, merged",True,gdd,,24,night_heat_tuber,1.000,0.042,,,283.100,315.700,102.200,116.800,,,5.000,0.000,0.000,1.000,,,1.000
-feni,potato,11-01,92,11-01,11-30,"cited, merged",False,gdd,,24,night_heat_tuber,1.000,0.042,,,298.300,344.500,107.500,123.600,,,5.000,0.000,0.000,1.000,,,1.000
-feni,potato,11-08,99,11-01,11-30,"cited, merged",False,gdd,,24,night_heat_tuber,0.000,0.000,,,320.300,362.600,112.300,128.200,,,2.000,0.000,0.000,0.000,,,0.000
-feni,potato,11-15,106,11-01,11-30,"cited, merged",False,gdd,,24,night_heat_tuber,0.000,0.000,,,335.300,380.900,116.000,130.000,,,0.000,0.000,0.000,0.000,,,0.000
-feni,potato,11-22,113,11-01,11-30,"cited, merged",False,gdd,,24,night_heat_tuber,0.000,0.000,,,350.900,409.600,118.800,130.000,,,0.000,0.000,0.000,0.000,,,0.000
-feni,potato,11-29,120,11-01,11-30,"cited, merged",False,gdd,,24,night_heat_tuber,0.000,0.000,,,366.600,427.300,119.500,130.000,,,0.000,0.000,0.000,0.000,,,0.000
-feni,potato,12-06,127,11-01,11-30,"cited, merged",True,gdd,,24,night_heat_tuber,0.000,0.000,,,381.300,443.400,119.300,130.000,,,0.000,0.000,0.000,0.000,,,0.000
-feni,potato,12-13,134,11-01,11-30,"cited, merged",True,gdd,,24,night_heat_tuber,0.000,0.000,,,394.600,460.100,118.500,130.000,,,0.000,0.000,0.000,0.000,,,0.000
-feni,potato,12-20,141,11-01,11-30,"cited, merged",True,gdd,,24,night_heat_tuber,0.000,0.000,,,407.900,481.200,117.200,130.000,,,2.000,0.000,0.000,0.000,,,0.000
-feni,potato,12-27,148,11-01,11-30,"cited, merged",True,gdd,,24,night_heat_tuber,1.000,0.042,,,410.700,487.100,115.200,129.400,,,4.000,0.000,0.000,1.000,,,1.000
-feni,boro_rice,11-21,112,12-05,01-30,derived,True,none,heat_anthesis;cold_booting,24,,,,,,865.000,963.500,,,,,,,,,,,
-feni,boro_rice,11-28,119,12-05,01-30,derived,True,none,heat_anthesis;cold_booting,24,,,,,,865.000,984.700,,,,,,,,,,,
-feni,boro_rice,12-05,126,12-05,01-30,derived,False,none,heat_anthesis;cold_booting,24,,,,,,883.100,1010.600,,,,,,,,,,,
-feni,boro_rice,12-12,133,12-05,01-30,derived,False,none,heat_anthesis;cold_booting,24,,,,,,869.300,1004.100,,,,,,,,,,,
-feni,boro_rice,12-19,140,12-05,01-30,derived,False,none,heat_anthesis;cold_booting,24,,,,,,841.200,967.000,,,,,,,,,,,
-feni,boro_rice,12-26,147,12-05,01-30,derived,False,none,heat_anthesis;cold_booting,24,,,,,,826.000,970.100,,,,,,,,,,,
-feni,boro_rice,01-02,154,12-05,01-30,derived,False,none,heat_anthesis;cold_booting,24,,,,,,834.400,987.600,,,,,,,,,,,
-feni,boro_rice,01-09,161,12-05,01-30,derived,False,none,heat_anthesis;cold_booting,24,,,,,,791.800,929.600,,,,,,,,,,,
-feni,boro_rice,01-16,168,12-05,01-30,derived,False,none,heat_anthesis;cold_booting,24,,,,,,767.700,889.400,,,,,,,,,,,
-feni,boro_rice,01-23,175,12-05,01-30,derived,False,none,heat_anthesis;cold_booting,24,,,,,,743.400,886.400,,,,,,,,,,,
-feni,boro_rice,01-30,182,12-05,01-30,derived,False,none,heat_anthesis;cold_booting,24,,,,,,708.400,844.700,,,,,,,,,,,
-feni,boro_rice,02-06,189,12-05,01-30,derived,True,none,heat_anthesis;cold_booting,23,,,,,,679.000,807.400,,,,,,,,,,,
-feni,boro_rice,02-13,196,12-05,01-30,derived,True,none,heat_anthesis;cold_booting,23,,,,,,637.300,784.300,,,,,,,,,,,
-feni,boro_rice,02-20,203,12-05,01-30,derived,True,none,heat_anthesis;cold_booting,23,,,,,,592.000,738.900,,,,,,,,,,,
-feni,boro_rice,02-27,210,12-05,01-30,derived,True,none,heat_anthesis;cold_booting,23,,,,,,542.500,700.300,,,,,,,,,,,
-brahmanbaria,wheat,11-01,92,11-15,11-30,cited,True,gdd,,24,heat_anthesis;heat_grainfill,0.000,0.000,0.000,0.000,242.100,315.500,64.200,80.000,51.500,104.500,0.000,0.000,0.000,0.000,,,
-brahmanbaria,wheat,11-08,99,11-15,11-30,cited,True,gdd,,24,heat_anthesis;heat_grainfill,0.000,0.000,0.000,0.000,252.000,314.400,68.300,84.200,55.000,105.000,0.000,0.000,0.000,0.000,,,
-brahmanbaria,wheat,11-15,106,11-15,11-30,cited,False,gdd,,24,heat_anthesis;heat_grainfill,0.000,0.000,0.000,0.000,284.700,363.000,72.600,88.600,57.000,105.000,1.000,0.000,0.000,0.000,,,
-brahmanbaria,wheat,11-22,113,11-15,11-30,cited,False,gdd,,24,heat_anthesis;heat_grainfill,1.000,0.042,0.000,1.000,312.400,395.800,77.200,93.600,59.000,105.000,3.000,0.000,1.000,1.000,,,
-brahmanbaria,wheat,11-29,120,11-15,11-30,cited,False,gdd,,24,heat_anthesis;heat_grainfill,3.000,0.125,0.000,3.000,328.000,396.900,81.800,99.400,60.000,104.000,11.000,1.000,3.000,4.000,,,
-brahmanbaria,wheat,12-06,127,11-15,11-30,cited,True,gdd,,24,heat_anthesis;heat_grainfill,9.000,0.375,1.000,8.000,364.200,451.600,85.600,105.200,61.000,101.500,19.000,6.000,9.000,9.000,,,
-brahmanbaria,wheat,12-13,134,11-15,11-30,cited,True,gdd,,24,heat_anthesis;heat_grainfill,15.000,0.625,2.000,15.000,366.300,458.600,89.500,111.400,60.500,100.000,22.000,10.000,15.000,15.000,,,
-brahmanbaria,wheat,12-20,141,11-15,11-30,cited,True,gdd,,24,heat_anthesis;heat_grainfill,19.000,0.792,7.000,19.000,379.200,480.000,91.800,112.800,59.500,98.000,23.000,18.000,19.000,20.000,,,
-brahmanbaria,wheat,12-27,148,11-15,11-30,cited,True,gdd,,24,heat_anthesis;heat_grainfill,21.000,0.875,11.000,19.000,384.800,500.500,93.200,115.400,58.000,95.000,23.000,19.000,21.000,23.000,,,
-brahmanbaria,mustard,10-01,61,10-15,11-15,cited,True,gdd,heat_flowering,24,waterlog,6.000,0.250,,,156.100,171.700,34.600,49.400,,61.500,6.000,6.000,6.000,6.000,6.000,,
-brahmanbaria,mustard,10-08,68,10-15,11-15,cited,True,gdd,heat_flowering,24,waterlog,0.000,0.000,,,152.900,172.200,36.500,50.600,,67.500,0.000,0.000,0.000,0.000,0.000,,
-brahmanbaria,mustard,10-15,75,10-15,11-15,cited,False,gdd,heat_flowering,24,waterlog,0.000,0.000,,,152.700,171.900,38.000,51.200,,78.000,0.000,0.000,0.000,0.000,0.000,,
-brahmanbaria,mustard,10-22,82,10-15,11-15,cited,False,gdd,heat_flowering,24,waterlog,0.000,0.000,,,166.800,205.300,40.300,51.600,,90.500,0.000,0.000,0.000,0.000,0.000,,
-brahmanbaria,mustard,10-29,89,10-15,11-15,cited,False,gdd,heat_flowering,24,waterlog,0.000,0.000,,,181.400,255.400,42.800,53.400,,99.000,0.000,0.000,0.000,0.000,0.000,,
-brahmanbaria,mustard,11-05,96,10-15,11-15,cited,False,gdd,heat_flowering,24,waterlog,0.000,0.000,,,192.000,257.200,44.800,54.400,,102.000,0.000,0.000,0.000,0.000,0.000,,
-brahmanbaria,mustard,11-12,103,10-15,11-15,cited,False,gdd,heat_flowering,24,waterlog,0.000,0.000,,,228.100,258.100,47.200,57.200,,103.000,0.000,0.000,0.000,0.000,0.000,,
-brahmanbaria,mustard,11-19,110,10-15,11-15,cited,True,gdd,heat_flowering,24,waterlog,0.000,0.000,,,246.100,308.000,49.800,59.600,,103.000,0.000,0.000,0.000,0.000,0.000,,
-brahmanbaria,mustard,11-26,117,10-15,11-15,cited,True,gdd,heat_flowering,24,waterlog,0.000,0.000,,,253.700,326.100,52.700,62.400,,101.000,0.000,0.000,0.000,0.000,0.000,,
-brahmanbaria,mustard,12-03,124,10-15,11-15,cited,True,gdd,heat_flowering,24,waterlog,0.000,0.000,,,268.400,345.400,55.000,65.400,,98.500,0.000,0.000,0.000,0.000,0.000,,
-brahmanbaria,mustard,12-10,131,10-15,11-15,cited,True,gdd,heat_flowering,24,waterlog,0.000,0.000,,,276.000,346.000,55.800,68.200,,95.000,0.000,0.000,0.000,0.000,0.000,,
-brahmanbaria,lentil,10-10,70,10-24,11-15,cited,True,gdd,,24,heat_flowering;waterlog,6.000,0.250,,,191.100,226.400,66.800,75.800,58.000,113.000,6.000,6.000,6.000,6.000,6.000,0.000,
-brahmanbaria,lentil,10-17,77,10-24,11-15,cited,True,gdd,,24,heat_flowering;waterlog,3.000,0.125,,,209.300,251.300,69.400,78.400,62.000,116.500,3.000,3.000,3.000,3.000,3.000,0.000,
-brahmanbaria,lentil,10-24,84,10-24,11-15,cited,False,gdd,,24,heat_flowering;waterlog,0.000,0.000,,,220.600,262.000,72.100,81.000,66.000,119.000,0.000,0.000,0.000,0.000,0.000,0.000,
-brahmanbaria,lentil,10-31,91,10-24,11-15,cited,False,gdd,,24,heat_flowering;waterlog,0.000,0.000,,,237.100,280.000,75.000,84.400,70.000,119.500,0.000,0.000,0.000,0.000,0.000,0.000,
-brahmanbaria,lentil,11-07,98,10-24,11-15,cited,False,gdd,,24,heat_flowering;waterlog,0.000,0.000,,,252.100,306.200,76.900,87.400,75.000,119.500,0.000,0.000,0.000,0.000,0.000,0.000,
-brahmanbaria,lentil,11-14,105,10-24,11-15,cited,False,gdd,,24,heat_flowering;waterlog,0.000,0.000,,,273.200,334.500,79.200,91.800,78.000,119.000,1.000,0.000,0.000,0.000,0.000,0.000,
-brahmanbaria,lentil,11-21,112,10-24,11-15,cited,True,gdd,,24,heat_flowering;waterlog,0.000,0.000,,,290.600,352.000,82.500,97.000,79.500,117.500,1.000,0.000,0.000,0.000,0.000,0.000,
-brahmanbaria,lentil,11-28,119,10-24,11-15,cited,True,gdd,,24,heat_flowering;waterlog,1.000,0.042,,,316.100,378.200,85.800,103.600,79.500,116.000,3.000,0.000,1.000,4.000,0.000,1.000,
-brahmanbaria,lentil,12-05,126,10-24,11-15,cited,True,gdd,,24,heat_flowering;waterlog,5.000,0.208,,,329.200,401.100,88.700,109.800,78.500,113.500,11.000,2.000,5.000,12.000,0.000,5.000,
-brahmanbaria,lentil,12-12,133,10-24,11-15,cited,True,gdd,,24,heat_flowering;waterlog,15.000,0.625,,,334.700,419.700,90.800,115.000,77.000,111.000,17.000,11.000,15.000,17.000,0.000,15.000,
-brahmanbaria,potato,10-18,78,11-01,11-30,"cited, merged",True,gdd,,24,night_heat_tuber,2.000,0.083,,,275.100,319.600,96.000,105.000,,,5.000,0.000,0.000,2.000,,,2.000
-brahmanbaria,potato,10-25,85,11-01,11-30,"cited, merged",True,gdd,,24,night_heat_tuber,0.000,0.000,,,293.400,331.700,101.100,112.000,,,1.000,0.000,0.000,0.000,,,0.000
-brahmanbaria,potato,11-01,92,11-01,11-30,"cited, merged",False,gdd,,24,night_heat_tuber,0.000,0.000,,,315.800,366.100,106.300,119.000,,,1.000,0.000,0.000,0.000,,,0.000
-brahmanbaria,potato,11-08,99,11-01,11-30,"cited, merged",False,gdd,,24,night_heat_tuber,0.000,0.000,,,335.600,388.000,112.100,126.000,,,0.000,0.000,0.000,0.000,,,0.000
-brahmanbaria,potato,11-15,106,11-01,11-30,"cited, merged",False,gdd,,24,night_heat_tuber,0.000,0.000,,,353.800,416.700,117.300,130.000,,,0.000,0.000,0.000,0.000,,,0.000
-brahmanbaria,potato,11-22,113,11-01,11-30,"cited, merged",False,gdd,,24,night_heat_tuber,0.000,0.000,,,369.000,438.100,119.600,130.000,,,0.000,0.000,0.000,0.000,,,0.000
-brahmanbaria,potato,11-29,120,11-01,11-30,"cited, merged",False,gdd,,24,night_heat_tuber,0.000,0.000,,,384.100,454.900,119.100,130.000,,,0.000,0.000,0.000,0.000,,,0.000
-brahmanbaria,potato,12-06,127,11-01,11-30,"cited, merged",True,gdd,,24,night_heat_tuber,0.000,0.000,,,393.800,472.900,117.700,130.000,,,0.000,0.000,0.000,0.000,,,0.000
-brahmanbaria,potato,12-13,134,11-01,11-30,"cited, merged",True,gdd,,24,night_heat_tuber,0.000,0.000,,,400.800,476.500,115.300,129.200,,,0.000,0.000,0.000,0.000,,,0.000
-brahmanbaria,potato,12-20,141,11-01,11-30,"cited, merged",True,gdd,,24,night_heat_tuber,0.000,0.000,,,409.900,498.500,113.200,129.200,,,0.000,0.000,0.000,0.000,,,0.000
-brahmanbaria,potato,12-27,148,11-01,11-30,"cited, merged",True,gdd,,24,night_heat_tuber,0.000,0.000,,,414.100,496.900,110.900,127.800,,,2.000,0.000,0.000,0.000,,,0.000
-brahmanbaria,boro_rice,11-21,112,12-05,01-30,derived,True,none,heat_anthesis;cold_booting,24,,,,,,1202.300,1326.300,,,,,,,,,,,
-brahmanbaria,boro_rice,11-28,119,12-05,01-30,derived,True,none,heat_anthesis;cold_booting,24,,,,,,1188.800,1347.200,,,,,,,,,,,
-brahmanbaria,boro_rice,12-05,126,12-05,01-30,derived,False,none,heat_anthesis;cold_booting,24,,,,,,1169.800,1309.400,,,,,,,,,,,
-brahmanbaria,boro_rice,12-12,133,12-05,01-30,derived,False,none,heat_anthesis;cold_booting,24,,,,,,1159.100,1348.400,,,,,,,,,,,
-brahmanbaria,boro_rice,12-19,140,12-05,01-30,derived,False,none,heat_anthesis;cold_booting,24,,,,,,1135.100,1269.500,,,,,,,,,,,
-brahmanbaria,boro_rice,12-26,147,12-05,01-30,derived,False,none,heat_anthesis;cold_booting,24,,,,,,1096.700,1249.500,,,,,,,,,,,
-brahmanbaria,boro_rice,01-02,154,12-05,01-30,derived,False,none,heat_anthesis;cold_booting,24,,,,,,1066.400,1227.300,,,,,,,,,,,
-brahmanbaria,boro_rice,01-09,161,12-05,01-30,derived,False,none,heat_anthesis;cold_booting,24,,,,,,1018.800,1164.800,,,,,,,,,,,
-brahmanbaria,boro_rice,01-16,168,12-05,01-30,derived,False,none,heat_anthesis;cold_booting,24,,,,,,992.900,1151.400,,,,,,,,,,,
-brahmanbaria,boro_rice,01-23,175,12-05,01-30,derived,False,none,heat_anthesis;cold_booting,24,,,,,,933.700,1106.800,,,,,,,,,,,
-brahmanbaria,boro_rice,01-30,182,12-05,01-30,derived,False,none,heat_anthesis;cold_booting,24,,,,,,897.500,1083.100,,,,,,,,,,,
-brahmanbaria,boro_rice,02-06,189,12-05,01-30,derived,True,none,heat_anthesis;cold_booting,23,,,,,,840.000,1002.800,,,,,,,,,,,
-brahmanbaria,boro_rice,02-13,196,12-05,01-30,derived,True,none,heat_anthesis;cold_booting,23,,,,,,788.600,979.600,,,,,,,,,,,
-brahmanbaria,boro_rice,02-20,203,12-05,01-30,derived,True,none,heat_anthesis;cold_booting,23,,,,,,710.800,875.300,,,,,,,,,,,
-brahmanbaria,boro_rice,02-27,210,12-05,01-30,derived,True,none,heat_anthesis;cold_booting,23,,,,,,682.200,868.900,,,,,,,,,,,
-sylhet,wheat,11-01,92,11-15,11-30,cited,True,gdd,,24,heat_anthesis;heat_grainfill,0.000,0.000,0.000,0.000,227.000,290.400,71.000,91.000,52.000,103.000,0.000,0.000,0.000,0.000,,,
-sylhet,wheat,11-08,99,11-15,11-30,cited,True,gdd,,24,heat_anthesis;heat_grainfill,0.000,0.000,0.000,0.000,239.500,292.000,74.600,96.400,55.000,104.000,0.000,0.000,0.000,0.000,,,
-sylhet,wheat,11-15,106,11-15,11-30,cited,False,gdd,,24,heat_anthesis;heat_grainfill,0.000,0.000,0.000,0.000,255.800,311.600,78.700,102.200,57.000,104.000,0.000,0.000,0.000,0.000,,,
-sylhet,wheat,11-22,113,11-15,11-30,cited,False,gdd,,24,heat_anthesis;heat_grainfill,0.000,0.000,0.000,0.000,276.000,344.500,82.600,108.200,59.000,105.000,0.000,0.000,0.000,0.000,,,
-sylhet,wheat,11-29,120,11-15,11-30,cited,False,gdd,,24,heat_anthesis;heat_grainfill,0.000,0.000,0.000,0.000,284.400,361.200,85.400,113.400,60.000,104.000,0.000,0.000,0.000,0.000,,,
-sylhet,wheat,12-06,127,11-15,11-30,cited,True,gdd,,24,heat_anthesis;heat_grainfill,0.000,0.000,0.000,0.000,291.500,382.800,87.100,114.800,61.000,103.000,1.000,0.000,0.000,0.000,,,
-sylhet,wheat,12-13,134,11-15,11-30,cited,True,gdd,,24,heat_anthesis;heat_grainfill,1.000,0.042,0.000,1.000,308.700,393.800,87.500,111.600,61.000,101.000,1.000,0.000,1.000,1.000,,,
-sylhet,wheat,12-20,141,11-15,11-30,cited,True,gdd,,24,heat_anthesis;heat_grainfill,1.000,0.042,0.000,1.000,310.500,410.100,87.100,111.400,61.000,99.000,5.000,0.000,1.000,1.000,,,
-sylhet,wheat,12-27,148,11-15,11-30,cited,True,gdd,,24,heat_anthesis;heat_grainfill,3.000,0.125,0.000,3.000,312.100,417.400,85.300,113.600,60.000,97.000,8.000,1.000,3.000,3.000,,,
-sylhet,mustard,10-01,61,10-15,11-15,cited,True,gdd,heat_flowering,24,waterlog,4.000,0.167,,,151.800,159.100,40.200,53.800,,59.000,4.000,4.000,4.000,4.000,4.000,,
-sylhet,mustard,10-08,68,10-15,11-15,cited,True,gdd,heat_flowering,24,waterlog,0.000,0.000,,,148.600,160.000,41.800,54.400,,66.000,0.000,0.000,0.000,0.000,0.000,,
-sylhet,mustard,10-15,75,10-15,11-15,cited,False,gdd,heat_flowering,24,waterlog,0.000,0.000,,,148.400,159.700,42.300,55.000,,76.000,0.000,0.000,0.000,0.000,0.000,,
-sylhet,mustard,10-22,82,10-15,11-15,cited,False,gdd,heat_flowering,24,waterlog,0.000,0.000,,,158.500,206.200,43.700,55.800,,88.500,0.000,0.000,0.000,0.000,0.000,,
-sylhet,mustard,10-29,89,10-15,11-15,cited,False,gdd,heat_flowering,24,waterlog,0.000,0.000,,,171.000,237.000,45.200,57.000,,98.500,0.000,0.000,0.000,0.000,0.000,,
-sylhet,mustard,11-05,96,10-15,11-15,cited,False,gdd,heat_flowering,24,waterlog,0.000,0.000,,,171.600,237.300,46.500,58.000,,103.500,0.000,0.000,0.000,0.000,0.000,,
-sylhet,mustard,11-12,103,10-15,11-15,cited,False,gdd,heat_flowering,24,waterlog,0.000,0.000,,,182.000,238.900,48.400,59.800,,105.000,0.000,0.000,0.000,0.000,0.000,,
-sylhet,mustard,11-19,110,10-15,11-15,cited,True,gdd,heat_flowering,24,waterlog,0.000,0.000,,,198.600,239.500,49.900,61.800,,106.000,0.000,0.000,0.000,0.000,0.000,,
-sylhet,mustard,11-26,117,10-15,11-15,cited,True,gdd,heat_flowering,24,waterlog,0.000,0.000,,,215.400,287.000,50.300,62.800,,105.000,0.000,0.000,0.000,0.000,0.000,,
-sylhet,mustard,12-03,124,10-15,11-15,cited,True,gdd,heat_flowering,24,waterlog,0.000,0.000,,,222.200,302.600,50.000,64.400,,103.500,0.000,0.000,0.000,0.000,0.000,,
-sylhet,mustard,12-10,131,10-15,11-15,cited,True,gdd,heat_flowering,24,waterlog,0.000,0.000,,,225.800,318.400,48.800,64.600,,101.000,0.000,0.000,0.000,0.000,0.000,,
-sylhet,lentil,10-10,70,10-24,11-15,cited,True,gdd,,24,heat_flowering;waterlog,2.000,0.083,,,193.800,210.500,71.000,80.600,58.000,110.000,2.000,2.000,2.000,2.000,2.000,0.000,
-sylhet,lentil,10-17,77,10-24,11-15,cited,True,gdd,,24,heat_flowering;waterlog,1.000,0.042,,,199.000,240.500,73.200,83.200,62.500,114.500,1.000,1.000,1.000,1.000,1.000,0.000,
-sylhet,lentil,10-24,84,10-24,11-15,cited,False,gdd,,24,heat_flowering;waterlog,0.000,0.000,,,206.500,242.300,75.200,86.000,66.500,117.000,0.000,0.000,0.000,0.000,0.000,0.000,
-sylhet,lentil,10-31,91,10-24,11-15,cited,False,gdd,,24,heat_flowering;waterlog,0.000,0.000,,,211.200,243.300,77.800,90.600,71.000,119.000,0.000,0.000,0.000,0.000,0.000,0.000,
-sylhet,lentil,11-07,98,10-24,11-15,cited,False,gdd,,24,heat_flowering;waterlog,0.000,0.000,,,223.100,274.100,80.500,95.200,75.000,120.000,0.000,0.000,0.000,0.000,0.000,0.000,
-sylhet,lentil,11-14,105,10-24,11-15,cited,False,gdd,,24,heat_flowering;waterlog,0.000,0.000,,,237.900,284.800,83.200,101.000,77.500,120.000,0.000,0.000,0.000,0.000,0.000,0.000,
-sylhet,lentil,11-21,112,10-24,11-15,cited,True,gdd,,24,heat_flowering;waterlog,0.000,0.000,,,257.000,308.600,85.800,107.400,80.000,119.000,0.000,0.000,0.000,0.000,0.000,0.000,
-sylhet,lentil,11-28,119,10-24,11-15,cited,True,gdd,,24,heat_flowering;waterlog,0.000,0.000,,,271.600,328.500,88.200,112.600,81.000,117.500,0.000,0.000,0.000,0.000,0.000,0.000,
-sylhet,lentil,12-05,126,10-24,11-15,cited,True,gdd,,24,heat_flowering;waterlog,0.000,0.000,,,276.200,342.800,88.600,115.200,80.500,116.000,0.000,0.000,0.000,0.000,0.000,0.000,
-sylhet,lentil,12-12,133,10-24,11-15,cited,True,gdd,,24,heat_flowering;waterlog,0.000,0.000,,,273.100,357.800,87.600,113.600,79.500,113.500,1.000,0.000,0.000,0.000,0.000,0.000,
-sylhet,potato,10-18,78,11-01,11-30,"cited, merged",True,gdd,,24,night_heat_tuber,2.000,0.083,,,259.500,293.900,102.000,119.400,,,2.000,0.000,0.000,2.000,,,2.000
-sylhet,potato,10-25,85,11-01,11-30,"cited, merged",True,gdd,,24,night_heat_tuber,0.000,0.000,,,270.600,304.900,106.900,124.800,,,2.000,0.000,0.000,0.000,,,0.000
-sylhet,potato,11-01,92,11-01,11-30,"cited, merged",False,gdd,,24,night_heat_tuber,0.000,0.000,,,281.800,321.100,111.800,129.000,,,2.000,0.000,0.000,0.000,,,0.000
-sylhet,potato,11-08,99,11-01,11-30,"cited, merged",False,gdd,,24,night_heat_tuber,0.000,0.000,,,298.000,340.300,115.700,129.800,,,1.000,0.000,0.000,0.000,,,0.000
-sylhet,potato,11-15,106,11-01,11-30,"cited, merged",False,gdd,,24,night_heat_tuber,0.000,0.000,,,311.400,361.800,117.800,130.000,,,0.000,0.000,0.000,0.000,,,0.000
-sylhet,potato,11-22,113,11-01,11-30,"cited, merged",False,gdd,,24,night_heat_tuber,0.000,0.000,,,318.100,373.700,117.700,130.000,,,0.000,0.000,0.000,0.000,,,0.000
-sylhet,potato,11-29,120,11-01,11-30,"cited, merged",False,gdd,,24,night_heat_tuber,0.000,0.000,,,321.100,389.600,114.800,129.000,,,0.000,0.000,0.000,0.000,,,0.000
-sylhet,potato,12-06,127,11-01,11-30,"cited, merged",True,gdd,,24,night_heat_tuber,0.000,0.000,,,323.800,391.600,110.900,127.400,,,0.000,0.000,0.000,0.000,,,0.000
-sylhet,potato,12-13,134,11-01,11-30,"cited, merged",True,gdd,,24,night_heat_tuber,0.000,0.000,,,320.600,391.300,106.600,124.400,,,0.000,0.000,0.000,0.000,,,0.000
-sylhet,potato,12-20,141,11-01,11-30,"cited, merged",True,gdd,,24,night_heat_tuber,0.000,0.000,,,314.300,395.900,102.900,122.000,,,0.000,0.000,0.000,0.000,,,0.000
-sylhet,potato,12-27,148,11-01,11-30,"cited, merged",True,gdd,,24,night_heat_tuber,0.000,0.000,,,311.800,391.800,98.900,118.400,,,0.000,0.000,0.000,0.000,,,0.000
-sylhet,boro_rice,11-21,112,12-05,01-30,derived,True,none,heat_anthesis;cold_booting,24,,,,,,1074.400,1164.000,,,,,,,,,,,
-sylhet,boro_rice,11-28,119,12-05,01-30,derived,True,none,heat_anthesis;cold_booting,24,,,,,,1046.900,1196.200,,,,,,,,,,,
-sylhet,boro_rice,12-05,126,12-05,01-30,derived,False,none,heat_anthesis;cold_booting,24,,,,,,1014.200,1159.400,,,,,,,,,,,
-sylhet,boro_rice,12-12,133,12-05,01-30,derived,False,none,heat_anthesis;cold_booting,24,,,,,,981.700,1120.000,,,,,,,,,,,
-sylhet,boro_rice,12-19,140,12-05,01-30,derived,False,none,heat_anthesis;cold_booting,24,,,,,,951.700,1100.700,,,,,,,,,,,
-sylhet,boro_rice,12-26,147,12-05,01-30,derived,False,none,heat_anthesis;cold_booting,24,,,,,,917.600,1062.500,,,,,,,,,,,
-sylhet,boro_rice,01-02,154,12-05,01-30,derived,False,none,heat_anthesis;cold_booting,24,,,,,,874.400,1022.500,,,,,,,,,,,
-sylhet,boro_rice,01-09,161,12-05,01-30,derived,False,none,heat_anthesis;cold_booting,24,,,,,,838.600,994.700,,,,,,,,,,,
-sylhet,boro_rice,01-16,168,12-05,01-30,derived,False,none,heat_anthesis;cold_booting,24,,,,,,778.700,936.600,,,,,,,,,,,
-sylhet,boro_rice,01-23,175,12-05,01-30,derived,False,none,heat_anthesis;cold_booting,24,,,,,,747.000,914.100,,,,,,,,,,,
-sylhet,boro_rice,01-30,182,12-05,01-30,derived,False,none,heat_anthesis;cold_booting,24,,,,,,686.900,851.600,,,,,,,,,,,
-sylhet,boro_rice,02-06,189,12-05,01-30,derived,True,none,heat_anthesis;cold_booting,23,,,,,,643.200,830.200,,,,,,,,,,,
-sylhet,boro_rice,02-13,196,12-05,01-30,derived,True,none,heat_anthesis;cold_booting,23,,,,,,582.200,749.200,,,,,,,,,,,
-sylhet,boro_rice,02-20,203,12-05,01-30,derived,True,none,heat_anthesis;cold_booting,23,,,,,,546.500,727.500,,,,,,,,,,,
-sylhet,boro_rice,02-27,210,12-05,01-30,derived,True,none,heat_anthesis;cold_booting,23,,,,,,487.000,641.900,,,,,,,,,,,
+district,crop,sowing_mmdd,sow_offset,window_start,window_end,window_method,outside_window,stage_method,hazards_missing,n_years,hazards_assessed,problem_years,problem_share,problem_years_heat_anthesis,problem_years_heat_grainfill,irrigation_mm_mean,irrigation_mm_worst20,stress_days_mean,stress_days_worst20,irrigation_events_mean,irrigation_events_worst20,flowering_days_median,maturity_days_median,problem_years_hot1,problem_years_hot5,problem_years_severe,problem_years_window15,problem_years_heat_flowering,problem_years_waterlog,problem_years_night_heat_tuber
+cumilla,wheat,11-01,92,11-15,11-30,cited,True,gdd,,24,heat_anthesis;heat_grainfill,0.000,0.000,0.000,0.000,231.500,313.100,64.400,83.400,3.000,4.000,51.000,104.000,0.000,0.000,0.000,0.000,,,
+cumilla,wheat,11-08,99,11-15,11-30,cited,True,gdd,,24,heat_anthesis;heat_grainfill,0.000,0.000,0.000,0.000,248.600,314.400,68.300,87.600,3.200,4.000,54.000,105.000,0.000,0.000,0.000,0.000,,,
+cumilla,wheat,11-15,106,11-15,11-30,cited,False,gdd,,24,heat_anthesis;heat_grainfill,0.000,0.000,0.000,0.000,274.200,331.100,72.500,92.200,3.500,4.200,56.000,105.500,0.000,0.000,0.000,0.000,,,
+cumilla,wheat,11-22,113,11-15,11-30,cited,False,gdd,,24,heat_anthesis;heat_grainfill,0.000,0.000,0.000,0.000,298.400,380.900,76.300,97.800,3.800,4.800,58.000,105.000,2.000,0.000,0.000,0.000,,,
+cumilla,wheat,11-29,120,11-15,11-30,cited,False,gdd,,24,heat_anthesis;heat_grainfill,1.000,0.042,0.000,1.000,327.000,403.100,80.500,102.600,4.100,5.000,60.000,104.000,8.000,0.000,1.000,1.000,,,
+cumilla,wheat,12-06,127,11-15,11-30,cited,True,gdd,,24,heat_anthesis;heat_grainfill,9.000,0.375,0.000,9.000,341.100,412.700,84.500,107.200,4.200,5.000,60.500,102.000,16.000,1.000,9.000,10.000,,,
+cumilla,wheat,12-13,134,11-15,11-30,cited,True,gdd,,24,heat_anthesis;heat_grainfill,13.000,0.542,1.000,13.000,355.000,436.400,88.300,112.200,4.400,5.200,60.500,100.000,18.000,8.000,13.000,13.000,,,
+cumilla,wheat,12-20,141,11-15,11-30,cited,True,gdd,,24,heat_anthesis;heat_grainfill,16.000,0.667,5.000,16.000,377.500,490.100,91.100,113.600,4.600,6.000,59.500,98.000,21.000,15.000,16.000,16.000,,,
+cumilla,wheat,12-27,148,11-15,11-30,cited,True,gdd,,24,heat_anthesis;heat_grainfill,17.000,0.708,9.000,16.000,403.300,505.100,93.700,117.800,4.900,6.000,58.500,95.000,21.000,15.000,17.000,18.000,,,
+cumilla,mustard,10-01,61,10-15,11-15,cited,True,gdd,heat_flowering,24,waterlog,2.000,0.083,,,152.700,172.000,34.000,50.000,1.800,2.000,,58.500,2.000,2.000,2.000,2.000,,2.000,
+cumilla,mustard,10-08,68,10-15,11-15,cited,True,gdd,heat_flowering,24,waterlog,0.000,0.000,,,153.000,172.100,35.200,50.600,1.800,2.000,,64.000,0.000,0.000,0.000,0.000,,0.000,
+cumilla,mustard,10-15,75,10-15,11-15,cited,False,gdd,heat_flowering,24,waterlog,0.000,0.000,,,152.700,171.800,36.700,51.000,1.800,2.000,,75.500,0.000,0.000,0.000,0.000,,0.000,
+cumilla,mustard,10-22,82,10-15,11-15,cited,False,gdd,heat_flowering,24,waterlog,0.000,0.000,,,156.300,172.400,38.800,51.600,1.800,2.000,,86.000,0.000,0.000,0.000,0.000,,0.000,
+cumilla,mustard,10-29,89,10-15,11-15,cited,False,gdd,heat_flowering,24,waterlog,0.000,0.000,,,170.800,238.600,41.200,52.800,2.000,2.800,,97.500,0.000,0.000,0.000,0.000,,0.000,
+cumilla,mustard,11-05,96,10-15,11-15,cited,False,gdd,heat_flowering,24,waterlog,0.000,0.000,,,185.200,256.400,43.500,54.400,2.200,3.000,,102.000,0.000,0.000,0.000,0.000,,0.000,
+cumilla,mustard,11-12,103,10-15,11-15,cited,False,gdd,heat_flowering,24,waterlog,0.000,0.000,,,210.300,257.700,45.900,56.400,2.500,3.000,,104.000,0.000,0.000,0.000,0.000,,0.000,
+cumilla,mustard,11-19,110,10-15,11-15,cited,True,gdd,heat_flowering,24,waterlog,0.000,0.000,,,235.100,259.500,48.100,59.000,2.800,3.000,,103.500,0.000,0.000,0.000,0.000,,0.000,
+cumilla,mustard,11-26,117,10-15,11-15,cited,True,gdd,heat_flowering,24,waterlog,0.000,0.000,,,242.700,292.700,50.400,61.600,2.800,3.400,,102.000,0.000,0.000,0.000,0.000,,0.000,
+cumilla,mustard,12-03,124,10-15,11-15,cited,True,gdd,heat_flowering,24,waterlog,0.000,0.000,,,261.500,343.900,51.900,64.400,3.000,4.000,,98.500,0.000,0.000,0.000,0.000,,0.000,
+cumilla,mustard,12-10,131,10-15,11-15,cited,True,gdd,heat_flowering,24,waterlog,0.000,0.000,,,272.200,344.900,53.000,67.600,3.200,4.000,,95.500,0.000,0.000,0.000,0.000,,0.000,
+cumilla,lentil,10-10,70,10-24,11-15,cited,True,gdd,,24,heat_flowering;waterlog,2.000,0.083,,,187.800,218.500,67.500,77.400,4.300,5.000,57.000,112.000,2.000,2.000,2.000,2.000,0.000,2.000,
+cumilla,lentil,10-17,77,10-24,11-15,cited,True,gdd,,24,heat_flowering;waterlog,0.000,0.000,,,198.200,234.400,70.200,80.200,4.600,5.400,60.500,116.500,0.000,0.000,0.000,0.000,0.000,0.000,
+cumilla,lentil,10-24,84,10-24,11-15,cited,False,gdd,,24,heat_flowering;waterlog,0.000,0.000,,,215.000,260.200,72.800,83.200,5.000,6.000,65.000,119.000,0.000,0.000,0.000,0.000,0.000,0.000,
+cumilla,lentil,10-31,91,10-24,11-15,cited,False,gdd,,24,heat_flowering;waterlog,0.000,0.000,,,223.800,269.400,74.800,86.800,5.200,6.200,69.000,119.500,0.000,0.000,0.000,0.000,0.000,0.000,
+cumilla,lentil,11-07,98,10-24,11-15,cited,False,gdd,,24,heat_flowering;waterlog,0.000,0.000,,,243.200,289.200,77.200,90.400,5.600,6.600,74.000,120.000,0.000,0.000,0.000,0.000,0.000,0.000,
+cumilla,lentil,11-14,105,10-24,11-15,cited,False,gdd,,24,heat_flowering;waterlog,0.000,0.000,,,260.000,309.100,79.800,95.600,6.000,7.000,77.500,119.000,0.000,0.000,0.000,0.000,0.000,0.000,
+cumilla,lentil,11-21,112,10-24,11-15,cited,True,gdd,,24,heat_flowering;waterlog,0.000,0.000,,,290.300,350.400,82.500,101.200,6.700,8.000,79.500,118.000,1.000,0.000,0.000,0.000,0.000,0.000,
+cumilla,lentil,11-28,119,10-24,11-15,cited,True,gdd,,24,heat_flowering;waterlog,1.000,0.042,,,305.300,356.300,85.500,107.000,7.000,8.000,80.000,115.500,3.000,0.000,1.000,3.000,1.000,0.000,
+cumilla,lentil,12-05,126,10-24,11-15,cited,True,gdd,,24,heat_flowering;waterlog,4.000,0.167,,,323.100,398.600,88.200,112.000,7.300,9.000,79.000,113.000,7.000,2.000,4.000,9.000,4.000,0.000,
+cumilla,lentil,12-12,133,10-24,11-15,cited,True,gdd,,24,heat_flowering;waterlog,11.000,0.458,,,335.500,415.200,90.000,117.000,7.500,9.200,77.000,111.000,16.000,7.000,11.000,15.000,11.000,0.000,
+cumilla,potato,10-18,78,11-01,11-30,"cited, merged",True,gdd,,24,night_heat_tuber,2.000,0.083,,,265.300,310.800,97.000,111.800,12.700,14.800,,,5.000,0.000,0.000,2.000,,,2.000
+cumilla,potato,10-25,85,11-01,11-30,"cited, merged",True,gdd,,24,night_heat_tuber,1.000,0.042,,,283.600,325.100,102.300,118.800,13.500,15.400,,,1.000,0.000,0.000,1.000,,,1.000
+cumilla,potato,11-01,92,11-01,11-30,"cited, merged",False,gdd,,24,night_heat_tuber,1.000,0.042,,,304.800,346.400,107.300,124.800,14.400,16.200,,,2.000,0.000,0.000,1.000,,,1.000
+cumilla,potato,11-08,99,11-01,11-30,"cited, merged",False,gdd,,24,night_heat_tuber,0.000,0.000,,,323.600,369.800,112.400,129.000,15.000,17.200,,,1.000,0.000,0.000,0.000,,,0.000
+cumilla,potato,11-15,106,11-01,11-30,"cited, merged",False,gdd,,24,night_heat_tuber,0.000,0.000,,,342.000,393.800,116.200,130.000,15.800,17.800,,,0.000,0.000,0.000,0.000,,,0.000
+cumilla,potato,11-22,113,11-01,11-30,"cited, merged",False,gdd,,24,night_heat_tuber,0.000,0.000,,,360.800,421.700,117.900,130.000,16.400,19.000,,,0.000,0.000,0.000,0.000,,,0.000
+cumilla,potato,11-29,120,11-01,11-30,"cited, merged",False,gdd,,24,night_heat_tuber,0.000,0.000,,,375.100,441.200,118.000,130.000,16.800,19.600,,,0.000,0.000,0.000,0.000,,,0.000
+cumilla,potato,12-06,127,11-01,11-30,"cited, merged",True,gdd,,24,night_heat_tuber,0.000,0.000,,,390.300,457.100,117.200,130.000,17.200,20.000,,,0.000,0.000,0.000,0.000,,,0.000
+cumilla,potato,12-13,134,11-01,11-30,"cited, merged",True,gdd,,24,night_heat_tuber,0.000,0.000,,,404.200,464.900,116.700,130.000,17.700,20.200,,,0.000,0.000,0.000,0.000,,,0.000
+cumilla,potato,12-20,141,11-01,11-30,"cited, merged",True,gdd,,24,night_heat_tuber,0.000,0.000,,,410.300,486.600,115.700,130.000,17.800,21.000,,,1.000,0.000,0.000,0.000,,,0.000
+cumilla,potato,12-27,148,11-01,11-30,"cited, merged",True,gdd,,24,night_heat_tuber,0.000,0.000,,,417.700,506.600,113.800,128.600,18.000,21.600,,,4.000,0.000,0.000,0.000,,,0.000
+cumilla,boro_rice,11-21,112,12-05,01-30,derived,True,none,heat_anthesis;cold_booting,24,,,,,,876.200,983.700,,,7.600,8.600,,,,,,,,,
+cumilla,boro_rice,11-28,119,12-05,01-30,derived,True,none,heat_anthesis;cold_booting,24,,,,,,870.200,1003.700,,,7.500,8.800,,,,,,,,,
+cumilla,boro_rice,12-05,126,12-05,01-30,derived,False,none,heat_anthesis;cold_booting,24,,,,,,875.700,1010.100,,,7.500,8.800,,,,,,,,,
+cumilla,boro_rice,12-12,133,12-05,01-30,derived,False,none,heat_anthesis;cold_booting,24,,,,,,862.600,987.900,,,7.400,8.600,,,,,,,,,
+cumilla,boro_rice,12-19,140,12-05,01-30,derived,False,none,heat_anthesis;cold_booting,24,,,,,,870.700,1008.600,,,7.500,8.800,,,,,,,,,
+cumilla,boro_rice,12-26,147,12-05,01-30,derived,False,none,heat_anthesis;cold_booting,24,,,,,,844.600,988.700,,,7.200,8.600,,,,,,,,,
+cumilla,boro_rice,01-02,154,12-05,01-30,derived,False,none,heat_anthesis;cold_booting,24,,,,,,813.200,948.400,,,6.900,8.200,,,,,,,,,
+cumilla,boro_rice,01-09,161,12-05,01-30,derived,False,none,heat_anthesis;cold_booting,24,,,,,,806.000,951.900,,,6.800,8.200,,,,,,,,,
+cumilla,boro_rice,01-16,168,12-05,01-30,derived,False,none,heat_anthesis;cold_booting,24,,,,,,781.100,944.300,,,6.600,8.200,,,,,,,,,
+cumilla,boro_rice,01-23,175,12-05,01-30,derived,False,none,heat_anthesis;cold_booting,24,,,,,,735.300,885.500,,,6.200,7.600,,,,,,,,,
+cumilla,boro_rice,01-30,182,12-05,01-30,derived,False,none,heat_anthesis;cold_booting,24,,,,,,714.400,867.000,,,6.000,7.400,,,,,,,,,
+cumilla,boro_rice,02-06,189,12-05,01-30,derived,True,none,heat_anthesis;cold_booting,23,,,,,,670.000,805.900,,,5.500,6.800,,,,,,,,,
+cumilla,boro_rice,02-13,196,12-05,01-30,derived,True,none,heat_anthesis;cold_booting,23,,,,,,625.100,783.200,,,5.100,6.600,,,,,,,,,
+cumilla,boro_rice,02-20,203,12-05,01-30,derived,True,none,heat_anthesis;cold_booting,23,,,,,,594.100,738.500,,,4.800,6.200,,,,,,,,,
+cumilla,boro_rice,02-27,210,12-05,01-30,derived,True,none,heat_anthesis;cold_booting,23,,,,,,542.900,677.700,,,4.300,5.600,,,,,,,,,
+noakhali,wheat,11-01,92,11-15,11-30,cited,True,gdd,,24,heat_anthesis;heat_grainfill,0.000,0.000,0.000,0.000,238.600,313.700,66.900,81.800,3.000,4.000,51.000,103.500,0.000,0.000,0.000,0.000,,,
+noakhali,wheat,11-08,99,11-15,11-30,cited,True,gdd,,24,heat_anthesis;heat_grainfill,0.000,0.000,0.000,0.000,264.500,314.400,70.500,86.000,3.400,4.000,54.000,105.000,0.000,0.000,0.000,0.000,,,
+noakhali,wheat,11-15,106,11-15,11-30,cited,False,gdd,,24,heat_anthesis;heat_grainfill,0.000,0.000,0.000,0.000,291.400,331.300,74.800,90.800,3.700,4.200,56.000,105.000,0.000,0.000,0.000,0.000,,,
+noakhali,wheat,11-22,113,11-15,11-30,cited,False,gdd,,24,heat_anthesis;heat_grainfill,0.000,0.000,0.000,0.000,310.600,377.400,78.400,95.600,4.000,4.800,58.000,105.000,0.000,0.000,0.000,0.000,,,
+noakhali,wheat,11-29,120,11-15,11-30,cited,False,gdd,,24,heat_anthesis;heat_grainfill,0.000,0.000,0.000,0.000,338.800,400.400,82.500,100.800,4.300,5.000,60.000,104.000,2.000,0.000,0.000,0.000,,,
+noakhali,wheat,12-06,127,11-15,11-30,cited,True,gdd,,24,heat_anthesis;heat_grainfill,1.000,0.042,0.000,1.000,349.600,407.400,87.600,106.200,4.400,5.000,61.000,102.000,6.000,0.000,1.000,1.000,,,
+noakhali,wheat,12-13,134,11-15,11-30,cited,True,gdd,,24,heat_anthesis;heat_grainfill,5.000,0.208,0.000,5.000,367.400,443.500,92.000,112.600,4.500,5.400,61.000,100.000,9.000,1.000,5.000,5.000,,,
+noakhali,wheat,12-20,141,11-15,11-30,cited,True,gdd,,24,heat_anthesis;heat_grainfill,10.000,0.417,2.000,9.000,394.100,499.000,96.500,114.600,4.800,6.000,60.000,98.000,13.000,4.000,10.000,11.000,,,
+noakhali,wheat,12-27,148,11-15,11-30,cited,True,gdd,,24,heat_anthesis;heat_grainfill,15.000,0.625,7.000,12.000,412.300,505.100,100.300,119.000,5.000,6.000,59.000,96.000,16.000,9.000,15.000,16.000,,,
+noakhali,mustard,10-01,61,10-15,11-15,cited,True,gdd,heat_flowering,24,waterlog,0.000,0.000,,,159.900,172.000,35.600,50.400,1.900,2.000,,57.000,0.000,0.000,0.000,0.000,,0.000,
+noakhali,mustard,10-08,68,10-15,11-15,cited,True,gdd,heat_flowering,24,waterlog,0.000,0.000,,,156.200,171.500,37.300,51.200,1.800,2.000,,63.000,0.000,0.000,0.000,0.000,,0.000,
+noakhali,mustard,10-15,75,10-15,11-15,cited,False,gdd,heat_flowering,24,waterlog,0.000,0.000,,,156.300,172.300,39.200,51.800,1.800,2.000,,74.500,0.000,0.000,0.000,0.000,,0.000,
+noakhali,mustard,10-22,82,10-15,11-15,cited,False,gdd,heat_flowering,24,waterlog,0.000,0.000,,,156.100,171.900,41.000,52.400,1.800,2.000,,86.000,0.000,0.000,0.000,0.000,,0.000,
+noakhali,mustard,10-29,89,10-15,11-15,cited,False,gdd,heat_flowering,24,waterlog,0.000,0.000,,,177.600,255.000,43.000,53.400,2.100,3.000,,95.500,0.000,0.000,0.000,0.000,,0.000,
+noakhali,mustard,11-05,96,10-15,11-15,cited,False,gdd,heat_flowering,24,waterlog,0.000,0.000,,,202.500,256.900,44.700,54.200,2.400,3.000,,102.000,0.000,0.000,0.000,0.000,,0.000,
+noakhali,mustard,11-12,103,10-15,11-15,cited,False,gdd,heat_flowering,24,waterlog,0.000,0.000,,,217.400,257.800,47.100,56.400,2.500,3.000,,103.500,0.000,0.000,0.000,0.000,,0.000,
+noakhali,mustard,11-19,110,10-15,11-15,cited,True,gdd,heat_flowering,24,waterlog,0.000,0.000,,,234.800,258.300,49.700,58.800,2.800,3.000,,103.000,0.000,0.000,0.000,0.000,,0.000,
+noakhali,mustard,11-26,117,10-15,11-15,cited,True,gdd,heat_flowering,24,waterlog,0.000,0.000,,,243.100,309.600,51.800,61.400,2.800,3.600,,102.000,0.000,0.000,0.000,0.000,,0.000,
+noakhali,mustard,12-03,124,10-15,11-15,cited,True,gdd,heat_flowering,24,waterlog,0.000,0.000,,,268.100,343.700,54.000,63.800,3.100,4.000,,100.000,0.000,0.000,0.000,0.000,,0.000,
+noakhali,mustard,12-10,131,10-15,11-15,cited,True,gdd,heat_flowering,24,waterlog,0.000,0.000,,,279.000,344.600,55.900,67.000,3.200,4.000,,96.500,0.000,0.000,0.000,0.000,,0.000,
+noakhali,lentil,10-10,70,10-24,11-15,cited,True,gdd,,24,heat_flowering;waterlog,5.000,0.208,,,193.300,218.100,68.500,77.200,4.500,5.000,57.000,110.000,5.000,5.000,5.000,5.000,0.000,5.000,
+noakhali,lentil,10-17,77,10-24,11-15,cited,True,gdd,,24,heat_flowering;waterlog,2.000,0.083,,,209.500,242.900,70.800,79.600,4.800,5.600,60.500,115.000,2.000,2.000,2.000,2.000,0.000,2.000,
+noakhali,lentil,10-24,84,10-24,11-15,cited,False,gdd,,24,heat_flowering;waterlog,2.000,0.083,,,220.500,261.400,72.600,82.400,5.100,6.000,65.000,118.000,2.000,2.000,2.000,2.000,0.000,2.000,
+noakhali,lentil,10-31,91,10-24,11-15,cited,False,gdd,,24,heat_flowering;waterlog,0.000,0.000,,,234.400,262.000,75.300,85.800,5.400,6.000,69.500,119.000,0.000,0.000,0.000,0.000,0.000,0.000,
+noakhali,lentil,11-07,98,10-24,11-15,cited,False,gdd,,24,heat_flowering;waterlog,0.000,0.000,,,255.600,305.000,77.500,89.600,5.900,7.000,74.000,119.500,0.000,0.000,0.000,0.000,0.000,0.000,
+noakhali,lentil,11-14,105,10-24,11-15,cited,False,gdd,,24,heat_flowering;waterlog,0.000,0.000,,,265.800,307.800,80.000,93.800,6.100,7.000,77.500,119.500,0.000,0.000,0.000,0.000,0.000,0.000,
+noakhali,lentil,11-21,112,10-24,11-15,cited,True,gdd,,24,heat_flowering;waterlog,0.000,0.000,,,293.600,343.800,83.000,99.600,6.700,7.800,80.000,118.000,0.000,0.000,0.000,0.000,0.000,0.000,
+noakhali,lentil,11-28,119,10-24,11-15,cited,True,gdd,,24,heat_flowering;waterlog,1.000,0.042,,,306.500,354.800,86.200,105.400,7.000,8.000,80.500,116.000,1.000,0.000,1.000,1.000,1.000,0.000,
+noakhali,lentil,12-05,126,10-24,11-15,cited,True,gdd,,24,heat_flowering;waterlog,1.000,0.042,,,323.600,380.200,89.900,110.800,7.300,8.600,79.500,114.000,4.000,1.000,1.000,4.000,1.000,0.000,
+noakhali,lentil,12-12,133,10-24,11-15,cited,True,gdd,,24,heat_flowering;waterlog,6.000,0.250,,,343.800,410.000,93.200,115.800,7.800,9.200,78.000,111.500,10.000,2.000,6.000,10.000,6.000,0.000,
+noakhali,potato,10-18,78,11-01,11-30,"cited, merged",True,gdd,,24,night_heat_tuber,3.000,0.125,,,276.700,314.000,97.600,108.800,13.200,15.000,,,8.000,0.000,0.000,3.000,,,3.000
+noakhali,potato,10-25,85,11-01,11-30,"cited, merged",True,gdd,,24,night_heat_tuber,1.000,0.042,,,288.800,327.700,102.500,115.600,13.800,15.600,,,5.000,0.000,0.000,1.000,,,1.000
+noakhali,potato,11-01,92,11-01,11-30,"cited, merged",False,gdd,,24,night_heat_tuber,1.000,0.042,,,309.700,350.000,108.200,122.600,14.700,16.400,,,5.000,0.000,0.000,1.000,,,1.000
+noakhali,potato,11-08,99,11-01,11-30,"cited, merged",False,gdd,,24,night_heat_tuber,0.000,0.000,,,327.400,368.800,113.800,128.400,15.300,17.200,,,2.000,0.000,0.000,0.000,,,0.000
+noakhali,potato,11-15,106,11-01,11-30,"cited, merged",False,gdd,,24,night_heat_tuber,0.000,0.000,,,347.700,392.600,117.400,130.000,16.000,18.000,,,0.000,0.000,0.000,0.000,,,0.000
+noakhali,potato,11-22,113,11-01,11-30,"cited, merged",False,gdd,,24,night_heat_tuber,0.000,0.000,,,364.400,416.800,119.800,130.000,16.600,18.800,,,0.000,0.000,0.000,0.000,,,0.000
+noakhali,potato,11-29,120,11-01,11-30,"cited, merged",False,gdd,,24,night_heat_tuber,0.000,0.000,,,383.300,435.900,120.700,130.000,17.300,19.600,,,0.000,0.000,0.000,0.000,,,0.000
+noakhali,potato,12-06,127,11-01,11-30,"cited, merged",True,gdd,,24,night_heat_tuber,0.000,0.000,,,400.500,462.100,120.100,130.000,17.800,20.400,,,0.000,0.000,0.000,0.000,,,0.000
+noakhali,potato,12-13,134,11-01,11-30,"cited, merged",True,gdd,,24,night_heat_tuber,0.000,0.000,,,412.400,478.600,119.700,130.000,18.200,20.800,,,0.000,0.000,0.000,0.000,,,0.000
+noakhali,potato,12-20,141,11-01,11-30,"cited, merged",True,gdd,,24,night_heat_tuber,0.000,0.000,,,428.500,499.300,119.800,130.000,18.800,21.600,,,2.000,0.000,0.000,0.000,,,0.000
+noakhali,potato,12-27,148,11-01,11-30,"cited, merged",True,gdd,,24,night_heat_tuber,1.000,0.042,,,433.200,505.300,118.400,129.400,18.800,21.600,,,4.000,0.000,0.000,1.000,,,1.000
+noakhali,boro_rice,11-21,112,12-05,01-30,derived,True,none,heat_anthesis;cold_booting,24,,,,,,899.700,1004.400,,,7.800,8.800,,,,,,,,,
+noakhali,boro_rice,11-28,119,12-05,01-30,derived,True,none,heat_anthesis;cold_booting,24,,,,,,906.300,1020.900,,,7.900,9.000,,,,,,,,,
+noakhali,boro_rice,12-05,126,12-05,01-30,derived,False,none,heat_anthesis;cold_booting,24,,,,,,909.100,1025.100,,,7.900,9.000,,,,,,,,,
+noakhali,boro_rice,12-12,133,12-05,01-30,derived,False,none,heat_anthesis;cold_booting,24,,,,,,905.200,1027.400,,,7.800,9.000,,,,,,,,,
+noakhali,boro_rice,12-19,140,12-05,01-30,derived,False,none,heat_anthesis;cold_booting,24,,,,,,893.800,1028.200,,,7.700,9.000,,,,,,,,,
+noakhali,boro_rice,12-26,147,12-05,01-30,derived,False,none,heat_anthesis;cold_booting,24,,,,,,890.100,1032.300,,,7.700,9.000,,,,,,,,,
+noakhali,boro_rice,01-02,154,12-05,01-30,derived,False,none,heat_anthesis;cold_booting,24,,,,,,864.200,987.600,,,7.400,8.600,,,,,,,,,
+noakhali,boro_rice,01-09,161,12-05,01-30,derived,False,none,heat_anthesis;cold_booting,24,,,,,,839.100,970.700,,,7.200,8.400,,,,,,,,,
+noakhali,boro_rice,01-16,168,12-05,01-30,derived,False,none,heat_anthesis;cold_booting,24,,,,,,817.300,950.700,,,7.000,8.200,,,,,,,,,
+noakhali,boro_rice,01-23,175,12-05,01-30,derived,False,none,heat_anthesis;cold_booting,24,,,,,,783.900,888.400,,,6.600,7.600,,,,,,,,,
+noakhali,boro_rice,01-30,182,12-05,01-30,derived,False,none,heat_anthesis;cold_booting,24,,,,,,750.200,869.400,,,6.300,7.400,,,,,,,,,
+noakhali,boro_rice,02-06,189,12-05,01-30,derived,True,none,heat_anthesis;cold_booting,23,,,,,,724.200,863.300,,,6.000,7.400,,,,,,,,,
+noakhali,boro_rice,02-13,196,12-05,01-30,derived,True,none,heat_anthesis;cold_booting,23,,,,,,676.200,798.800,,,5.600,6.800,,,,,,,,,
+noakhali,boro_rice,02-20,203,12-05,01-30,derived,True,none,heat_anthesis;cold_booting,23,,,,,,638.500,782.400,,,5.200,6.600,,,,,,,,,
+noakhali,boro_rice,02-27,210,12-05,01-30,derived,True,none,heat_anthesis;cold_booting,23,,,,,,597.900,722.600,,,4.800,6.000,,,,,,,,,
+feni,wheat,11-01,92,11-15,11-30,cited,True,gdd,,24,heat_anthesis;heat_grainfill,0.000,0.000,0.000,0.000,228.600,282.700,65.200,81.800,2.900,3.600,51.000,103.500,0.000,0.000,0.000,0.000,,,
+feni,wheat,11-08,99,11-15,11-30,cited,True,gdd,,24,heat_anthesis;heat_grainfill,0.000,0.000,0.000,0.000,248.400,315.100,68.800,85.600,3.200,4.000,54.000,105.000,0.000,0.000,0.000,0.000,,,
+feni,wheat,11-15,106,11-15,11-30,cited,False,gdd,,24,heat_anthesis;heat_grainfill,0.000,0.000,0.000,0.000,277.700,330.800,72.700,90.400,3.500,4.200,56.000,105.000,0.000,0.000,0.000,0.000,,,
+feni,wheat,11-22,113,11-15,11-30,cited,False,gdd,,24,heat_anthesis;heat_grainfill,0.000,0.000,0.000,0.000,294.300,348.600,76.800,95.400,3.800,4.400,58.000,105.000,0.000,0.000,0.000,0.000,,,
+feni,wheat,11-29,120,11-15,11-30,cited,False,gdd,,24,heat_anthesis;heat_grainfill,0.000,0.000,0.000,0.000,319.500,398.600,80.900,100.400,4.000,5.000,60.000,104.000,2.000,0.000,0.000,0.000,,,
+feni,wheat,12-06,127,11-15,11-30,cited,True,gdd,,24,heat_anthesis;heat_grainfill,1.000,0.042,0.000,1.000,332.700,405.300,85.300,104.600,4.200,5.000,61.000,102.000,6.000,0.000,1.000,1.000,,,
+feni,wheat,12-13,134,11-15,11-30,cited,True,gdd,,24,heat_anthesis;heat_grainfill,5.000,0.208,0.000,5.000,350.100,428.900,89.600,109.800,4.300,5.200,61.000,100.000,9.000,1.000,5.000,5.000,,,
+feni,wheat,12-20,141,11-15,11-30,cited,True,gdd,,24,heat_anthesis;heat_grainfill,10.000,0.417,2.000,9.000,369.100,450.000,93.000,113.000,4.500,5.400,60.000,98.000,13.000,4.000,10.000,11.000,,,
+feni,wheat,12-27,148,11-15,11-30,cited,True,gdd,,24,heat_anthesis;heat_grainfill,15.000,0.625,7.000,12.000,383.600,480.700,96.700,117.800,4.700,5.800,59.000,96.000,16.000,9.000,15.000,16.000,,,
+feni,mustard,10-01,61,10-15,11-15,cited,True,gdd,heat_flowering,24,waterlog,3.000,0.125,,,156.100,171.600,34.200,50.000,1.800,2.000,,57.000,3.000,3.000,3.000,3.000,,3.000,
+feni,mustard,10-08,68,10-15,11-15,cited,True,gdd,heat_flowering,24,waterlog,0.000,0.000,,,156.400,172.200,35.200,50.800,1.800,2.000,,63.000,0.000,0.000,0.000,0.000,,0.000,
+feni,mustard,10-15,75,10-15,11-15,cited,False,gdd,heat_flowering,24,waterlog,0.000,0.000,,,152.700,171.900,37.000,50.800,1.800,2.000,,74.500,0.000,0.000,0.000,0.000,,0.000,
+feni,mustard,10-22,82,10-15,11-15,cited,False,gdd,heat_flowering,24,waterlog,0.000,0.000,,,156.300,171.700,39.000,51.200,1.800,2.000,,86.000,0.000,0.000,0.000,0.000,,0.000,
+feni,mustard,10-29,89,10-15,11-15,cited,False,gdd,heat_flowering,24,waterlog,0.000,0.000,,,166.800,222.300,41.100,52.400,2.000,2.600,,95.500,0.000,0.000,0.000,0.000,,0.000,
+feni,mustard,11-05,96,10-15,11-15,cited,False,gdd,heat_flowering,24,waterlog,0.000,0.000,,,188.600,256.700,43.300,54.000,2.200,3.000,,102.000,0.000,0.000,0.000,0.000,,0.000,
+feni,mustard,11-12,103,10-15,11-15,cited,False,gdd,heat_flowering,24,waterlog,0.000,0.000,,,210.300,258.000,45.400,55.600,2.500,3.000,,103.500,0.000,0.000,0.000,0.000,,0.000,
+feni,mustard,11-19,110,10-15,11-15,cited,True,gdd,heat_flowering,24,waterlog,0.000,0.000,,,228.200,258.800,47.700,58.400,2.700,3.000,,103.000,0.000,0.000,0.000,0.000,,0.000,
+feni,mustard,11-26,117,10-15,11-15,cited,True,gdd,heat_flowering,24,waterlog,0.000,0.000,,,236.000,276.800,50.200,60.600,2.800,3.200,,102.000,0.000,0.000,0.000,0.000,,0.000,
+feni,mustard,12-03,124,10-15,11-15,cited,True,gdd,heat_flowering,24,waterlog,0.000,0.000,,,257.000,343.200,52.300,63.400,3.000,4.000,,100.000,0.000,0.000,0.000,0.000,,0.000,
+feni,mustard,12-10,131,10-15,11-15,cited,True,gdd,heat_flowering,24,waterlog,0.000,0.000,,,264.700,344.700,54.600,66.800,3.100,4.000,,96.500,0.000,0.000,0.000,0.000,,0.000,
+feni,lentil,10-10,70,10-24,11-15,cited,True,gdd,,24,heat_flowering;waterlog,3.000,0.125,,,190.600,217.100,67.300,77.400,4.400,5.000,57.000,110.000,3.000,3.000,3.000,3.000,0.000,3.000,
+feni,lentil,10-17,77,10-24,11-15,cited,True,gdd,,24,heat_flowering;waterlog,3.000,0.125,,,196.300,218.000,69.800,80.200,4.500,5.000,60.500,115.000,3.000,3.000,3.000,3.000,0.000,3.000,
+feni,lentil,10-24,84,10-24,11-15,cited,False,gdd,,24,heat_flowering;waterlog,2.000,0.083,,,209.400,252.400,72.100,83.200,4.800,5.800,65.000,118.000,2.000,2.000,2.000,2.000,0.000,2.000,
+feni,lentil,10-31,91,10-24,11-15,cited,False,gdd,,24,heat_flowering;waterlog,1.000,0.042,,,220.300,260.600,74.500,86.200,5.100,6.000,69.500,119.000,1.000,1.000,1.000,1.000,0.000,1.000,
+feni,lentil,11-07,98,10-24,11-15,cited,False,gdd,,24,heat_flowering;waterlog,0.000,0.000,,,244.100,287.600,76.600,90.000,5.600,6.600,74.000,119.500,0.000,0.000,0.000,0.000,0.000,0.000,
+feni,lentil,11-14,105,10-24,11-15,cited,False,gdd,,24,heat_flowering;waterlog,0.000,0.000,,,259.700,305.800,78.800,94.400,6.000,7.000,77.500,119.500,0.000,0.000,0.000,0.000,0.000,0.000,
+feni,lentil,11-21,112,10-24,11-15,cited,True,gdd,,24,heat_flowering;waterlog,0.000,0.000,,,274.000,324.600,81.800,100.400,6.300,7.400,80.000,118.000,0.000,0.000,0.000,0.000,0.000,0.000,
+feni,lentil,11-28,119,10-24,11-15,cited,True,gdd,,24,heat_flowering;waterlog,1.000,0.042,,,299.400,358.100,85.100,106.400,6.800,8.200,80.500,116.000,1.000,0.000,1.000,1.000,1.000,0.000,
+feni,lentil,12-05,126,10-24,11-15,cited,True,gdd,,24,heat_flowering;waterlog,1.000,0.042,,,309.300,372.300,88.400,111.200,7.000,8.400,79.500,114.000,4.000,1.000,1.000,4.000,1.000,0.000,
+feni,lentil,12-12,133,10-24,11-15,cited,True,gdd,,24,heat_flowering;waterlog,6.000,0.250,,,320.900,394.500,91.600,115.400,7.200,8.800,78.000,111.500,10.000,2.000,6.000,10.000,6.000,0.000,
+feni,potato,10-18,78,11-01,11-30,"cited, merged",True,gdd,,24,night_heat_tuber,3.000,0.125,,,267.700,304.200,97.100,109.800,12.900,14.600,,,8.000,0.000,0.000,3.000,,,3.000
+feni,potato,10-25,85,11-01,11-30,"cited, merged",True,gdd,,24,night_heat_tuber,1.000,0.042,,,283.100,315.700,102.200,116.800,13.500,15.000,,,5.000,0.000,0.000,1.000,,,1.000
+feni,potato,11-01,92,11-01,11-30,"cited, merged",False,gdd,,24,night_heat_tuber,1.000,0.042,,,298.300,344.500,107.500,123.600,14.100,16.200,,,5.000,0.000,0.000,1.000,,,1.000
+feni,potato,11-08,99,11-01,11-30,"cited, merged",False,gdd,,24,night_heat_tuber,0.000,0.000,,,320.300,362.600,112.300,128.200,15.000,17.000,,,2.000,0.000,0.000,0.000,,,0.000
+feni,potato,11-15,106,11-01,11-30,"cited, merged",False,gdd,,24,night_heat_tuber,0.000,0.000,,,335.300,380.900,116.000,130.000,15.500,17.400,,,0.000,0.000,0.000,0.000,,,0.000
+feni,potato,11-22,113,11-01,11-30,"cited, merged",False,gdd,,24,night_heat_tuber,0.000,0.000,,,350.900,409.600,118.800,130.000,16.000,18.200,,,0.000,0.000,0.000,0.000,,,0.000
+feni,potato,11-29,120,11-01,11-30,"cited, merged",False,gdd,,24,night_heat_tuber,0.000,0.000,,,366.600,427.300,119.500,130.000,16.500,18.800,,,0.000,0.000,0.000,0.000,,,0.000
+feni,potato,12-06,127,11-01,11-30,"cited, merged",True,gdd,,24,night_heat_tuber,0.000,0.000,,,381.300,443.400,119.300,130.000,16.900,19.600,,,0.000,0.000,0.000,0.000,,,0.000
+feni,potato,12-13,134,11-01,11-30,"cited, merged",True,gdd,,24,night_heat_tuber,0.000,0.000,,,394.600,460.100,118.500,130.000,17.400,20.000,,,0.000,0.000,0.000,0.000,,,0.000
+feni,potato,12-20,141,11-01,11-30,"cited, merged",True,gdd,,24,night_heat_tuber,0.000,0.000,,,407.900,481.200,117.200,130.000,17.900,21.000,,,2.000,0.000,0.000,0.000,,,0.000
+feni,potato,12-27,148,11-01,11-30,"cited, merged",True,gdd,,24,night_heat_tuber,1.000,0.042,,,410.700,487.100,115.200,129.400,17.900,21.200,,,4.000,0.000,0.000,1.000,,,1.000
+feni,boro_rice,11-21,112,12-05,01-30,derived,True,none,heat_anthesis;cold_booting,24,,,,,,865.000,963.500,,,7.500,8.400,,,,,,,,,
+feni,boro_rice,11-28,119,12-05,01-30,derived,True,none,heat_anthesis;cold_booting,24,,,,,,865.000,984.700,,,7.500,8.600,,,,,,,,,
+feni,boro_rice,12-05,126,12-05,01-30,derived,False,none,heat_anthesis;cold_booting,24,,,,,,883.100,1010.600,,,7.600,8.800,,,,,,,,,
+feni,boro_rice,12-12,133,12-05,01-30,derived,False,none,heat_anthesis;cold_booting,24,,,,,,869.300,1004.100,,,7.500,8.800,,,,,,,,,
+feni,boro_rice,12-19,140,12-05,01-30,derived,False,none,heat_anthesis;cold_booting,24,,,,,,841.200,967.000,,,7.200,8.400,,,,,,,,,
+feni,boro_rice,12-26,147,12-05,01-30,derived,False,none,heat_anthesis;cold_booting,24,,,,,,826.000,970.100,,,7.000,8.400,,,,,,,,,
+feni,boro_rice,01-02,154,12-05,01-30,derived,False,none,heat_anthesis;cold_booting,24,,,,,,834.400,987.600,,,7.100,8.600,,,,,,,,,
+feni,boro_rice,01-09,161,12-05,01-30,derived,False,none,heat_anthesis;cold_booting,24,,,,,,791.800,929.600,,,6.700,8.000,,,,,,,,,
+feni,boro_rice,01-16,168,12-05,01-30,derived,False,none,heat_anthesis;cold_booting,24,,,,,,767.700,889.400,,,6.500,7.600,,,,,,,,,
+feni,boro_rice,01-23,175,12-05,01-30,derived,False,none,heat_anthesis;cold_booting,24,,,,,,743.400,886.400,,,6.200,7.600,,,,,,,,,
+feni,boro_rice,01-30,182,12-05,01-30,derived,False,none,heat_anthesis;cold_booting,24,,,,,,708.400,844.700,,,5.900,7.200,,,,,,,,,
+feni,boro_rice,02-06,189,12-05,01-30,derived,True,none,heat_anthesis;cold_booting,23,,,,,,679.000,807.400,,,5.600,6.800,,,,,,,,,
+feni,boro_rice,02-13,196,12-05,01-30,derived,True,none,heat_anthesis;cold_booting,23,,,,,,637.300,784.300,,,5.200,6.600,,,,,,,,,
+feni,boro_rice,02-20,203,12-05,01-30,derived,True,none,heat_anthesis;cold_booting,23,,,,,,592.000,738.900,,,4.800,6.200,,,,,,,,,
+feni,boro_rice,02-27,210,12-05,01-30,derived,True,none,heat_anthesis;cold_booting,23,,,,,,542.500,700.300,,,4.300,5.800,,,,,,,,,
+brahmanbaria,wheat,11-01,92,11-15,11-30,cited,True,gdd,,24,heat_anthesis;heat_grainfill,0.000,0.000,0.000,0.000,242.100,315.500,64.200,80.000,3.100,4.000,51.500,104.500,0.000,0.000,0.000,0.000,,,
+brahmanbaria,wheat,11-08,99,11-15,11-30,cited,True,gdd,,24,heat_anthesis;heat_grainfill,0.000,0.000,0.000,0.000,252.000,314.400,68.300,84.200,3.200,4.000,55.000,105.000,0.000,0.000,0.000,0.000,,,
+brahmanbaria,wheat,11-15,106,11-15,11-30,cited,False,gdd,,24,heat_anthesis;heat_grainfill,0.000,0.000,0.000,0.000,284.700,363.000,72.600,88.600,3.600,4.600,57.000,105.000,1.000,0.000,0.000,0.000,,,
+brahmanbaria,wheat,11-22,113,11-15,11-30,cited,False,gdd,,24,heat_anthesis;heat_grainfill,1.000,0.042,0.000,1.000,312.400,395.800,77.200,93.600,4.000,5.000,59.000,105.000,3.000,0.000,1.000,1.000,,,
+brahmanbaria,wheat,11-29,120,11-15,11-30,cited,False,gdd,,24,heat_anthesis;heat_grainfill,3.000,0.125,0.000,3.000,328.000,396.900,81.800,99.400,4.200,5.000,60.000,104.000,11.000,1.000,3.000,4.000,,,
+brahmanbaria,wheat,12-06,127,11-15,11-30,cited,True,gdd,,24,heat_anthesis;heat_grainfill,9.000,0.375,1.000,8.000,364.200,451.600,85.600,105.200,4.600,5.600,61.000,101.500,19.000,6.000,9.000,9.000,,,
+brahmanbaria,wheat,12-13,134,11-15,11-30,cited,True,gdd,,24,heat_anthesis;heat_grainfill,15.000,0.625,2.000,15.000,366.300,458.600,89.500,111.400,4.500,5.600,60.500,100.000,22.000,10.000,15.000,15.000,,,
+brahmanbaria,wheat,12-20,141,11-15,11-30,cited,True,gdd,,24,heat_anthesis;heat_grainfill,19.000,0.792,7.000,19.000,379.200,480.000,91.800,112.800,4.700,5.800,59.500,98.000,23.000,18.000,19.000,20.000,,,
+brahmanbaria,wheat,12-27,148,11-15,11-30,cited,True,gdd,,24,heat_anthesis;heat_grainfill,21.000,0.875,11.000,19.000,384.800,500.500,93.200,115.400,4.700,6.000,58.000,95.000,23.000,19.000,21.000,23.000,,,
+brahmanbaria,mustard,10-01,61,10-15,11-15,cited,True,gdd,heat_flowering,24,waterlog,6.000,0.250,,,156.100,171.700,34.600,49.400,1.800,2.000,,61.500,6.000,6.000,6.000,6.000,,6.000,
+brahmanbaria,mustard,10-08,68,10-15,11-15,cited,True,gdd,heat_flowering,24,waterlog,0.000,0.000,,,152.900,172.200,36.500,50.600,1.800,2.000,,67.500,0.000,0.000,0.000,0.000,,0.000,
+brahmanbaria,mustard,10-15,75,10-15,11-15,cited,False,gdd,heat_flowering,24,waterlog,0.000,0.000,,,152.700,171.900,38.000,51.200,1.800,2.000,,78.000,0.000,0.000,0.000,0.000,,0.000,
+brahmanbaria,mustard,10-22,82,10-15,11-15,cited,False,gdd,heat_flowering,24,waterlog,0.000,0.000,,,166.800,205.300,40.300,51.600,2.000,2.400,,90.500,0.000,0.000,0.000,0.000,,0.000,
+brahmanbaria,mustard,10-29,89,10-15,11-15,cited,False,gdd,heat_flowering,24,waterlog,0.000,0.000,,,181.400,255.400,42.800,53.400,2.100,3.000,,99.000,0.000,0.000,0.000,0.000,,0.000,
+brahmanbaria,mustard,11-05,96,10-15,11-15,cited,False,gdd,heat_flowering,24,waterlog,0.000,0.000,,,192.000,257.200,44.800,54.400,2.200,3.000,,102.000,0.000,0.000,0.000,0.000,,0.000,
+brahmanbaria,mustard,11-12,103,10-15,11-15,cited,False,gdd,heat_flowering,24,waterlog,0.000,0.000,,,228.100,258.100,47.200,57.200,2.700,3.000,,103.000,0.000,0.000,0.000,0.000,,0.000,
+brahmanbaria,mustard,11-19,110,10-15,11-15,cited,True,gdd,heat_flowering,24,waterlog,0.000,0.000,,,246.100,308.000,49.800,59.600,2.900,3.600,,103.000,0.000,0.000,0.000,0.000,,0.000,
+brahmanbaria,mustard,11-26,117,10-15,11-15,cited,True,gdd,heat_flowering,24,waterlog,0.000,0.000,,,253.700,326.100,52.700,62.400,3.000,3.800,,101.000,0.000,0.000,0.000,0.000,,0.000,
+brahmanbaria,mustard,12-03,124,10-15,11-15,cited,True,gdd,heat_flowering,24,waterlog,0.000,0.000,,,268.400,345.400,55.000,65.400,3.100,4.000,,98.500,0.000,0.000,0.000,0.000,,0.000,
+brahmanbaria,mustard,12-10,131,10-15,11-15,cited,True,gdd,heat_flowering,24,waterlog,0.000,0.000,,,276.000,346.000,55.800,68.200,3.200,4.000,,95.000,0.000,0.000,0.000,0.000,,0.000,
+brahmanbaria,lentil,10-10,70,10-24,11-15,cited,True,gdd,,24,heat_flowering;waterlog,6.000,0.250,,,191.100,226.400,66.800,75.800,4.400,5.200,58.000,113.000,6.000,6.000,6.000,6.000,0.000,6.000,
+brahmanbaria,lentil,10-17,77,10-24,11-15,cited,True,gdd,,24,heat_flowering;waterlog,3.000,0.125,,,209.300,251.300,69.400,78.400,4.800,5.800,62.000,116.500,3.000,3.000,3.000,3.000,0.000,3.000,
+brahmanbaria,lentil,10-24,84,10-24,11-15,cited,False,gdd,,24,heat_flowering;waterlog,0.000,0.000,,,220.600,262.000,72.100,81.000,5.100,6.000,66.000,119.000,0.000,0.000,0.000,0.000,0.000,0.000,
+brahmanbaria,lentil,10-31,91,10-24,11-15,cited,False,gdd,,24,heat_flowering;waterlog,0.000,0.000,,,237.100,280.000,75.000,84.400,5.500,6.400,70.000,119.500,0.000,0.000,0.000,0.000,0.000,0.000,
+brahmanbaria,lentil,11-07,98,10-24,11-15,cited,False,gdd,,24,heat_flowering;waterlog,0.000,0.000,,,252.100,306.200,76.900,87.400,5.800,7.000,75.000,119.500,0.000,0.000,0.000,0.000,0.000,0.000,
+brahmanbaria,lentil,11-14,105,10-24,11-15,cited,False,gdd,,24,heat_flowering;waterlog,0.000,0.000,,,273.200,334.500,79.200,91.800,6.200,7.600,78.000,119.000,1.000,0.000,0.000,0.000,0.000,0.000,
+brahmanbaria,lentil,11-21,112,10-24,11-15,cited,True,gdd,,24,heat_flowering;waterlog,0.000,0.000,,,290.600,352.000,82.500,97.000,6.600,8.000,79.500,117.500,1.000,0.000,0.000,0.000,0.000,0.000,
+brahmanbaria,lentil,11-28,119,10-24,11-15,cited,True,gdd,,24,heat_flowering;waterlog,1.000,0.042,,,316.100,378.200,85.800,103.600,7.200,8.600,79.500,116.000,3.000,0.000,1.000,4.000,1.000,0.000,
+brahmanbaria,lentil,12-05,126,10-24,11-15,cited,True,gdd,,24,heat_flowering;waterlog,5.000,0.208,,,329.200,401.100,88.700,109.800,7.500,9.000,78.500,113.500,11.000,2.000,5.000,12.000,5.000,0.000,
+brahmanbaria,lentil,12-12,133,10-24,11-15,cited,True,gdd,,24,heat_flowering;waterlog,15.000,0.625,,,334.700,419.700,90.800,115.000,7.500,9.400,77.000,111.000,17.000,11.000,15.000,17.000,15.000,0.000,
+brahmanbaria,potato,10-18,78,11-01,11-30,"cited, merged",True,gdd,,24,night_heat_tuber,2.000,0.083,,,275.100,319.600,96.000,105.000,13.100,15.200,,,5.000,0.000,0.000,2.000,,,2.000
+brahmanbaria,potato,10-25,85,11-01,11-30,"cited, merged",True,gdd,,24,night_heat_tuber,0.000,0.000,,,293.400,331.700,101.100,112.000,13.900,15.600,,,1.000,0.000,0.000,0.000,,,0.000
+brahmanbaria,potato,11-01,92,11-01,11-30,"cited, merged",False,gdd,,24,night_heat_tuber,0.000,0.000,,,315.800,366.100,106.300,119.000,15.000,17.200,,,1.000,0.000,0.000,0.000,,,0.000
+brahmanbaria,potato,11-08,99,11-01,11-30,"cited, merged",False,gdd,,24,night_heat_tuber,0.000,0.000,,,335.600,388.000,112.100,126.000,15.700,18.000,,,0.000,0.000,0.000,0.000,,,0.000
+brahmanbaria,potato,11-15,106,11-01,11-30,"cited, merged",False,gdd,,24,night_heat_tuber,0.000,0.000,,,353.800,416.700,117.300,130.000,16.200,19.000,,,0.000,0.000,0.000,0.000,,,0.000
+brahmanbaria,potato,11-22,113,11-01,11-30,"cited, merged",False,gdd,,24,night_heat_tuber,0.000,0.000,,,369.000,438.100,119.600,130.000,16.800,19.800,,,0.000,0.000,0.000,0.000,,,0.000
+brahmanbaria,potato,11-29,120,11-01,11-30,"cited, merged",False,gdd,,24,night_heat_tuber,0.000,0.000,,,384.100,454.900,119.100,130.000,17.200,20.000,,,0.000,0.000,0.000,0.000,,,0.000
+brahmanbaria,potato,12-06,127,11-01,11-30,"cited, merged",True,gdd,,24,night_heat_tuber,0.000,0.000,,,393.800,472.900,117.700,130.000,17.400,20.600,,,0.000,0.000,0.000,0.000,,,0.000
+brahmanbaria,potato,12-13,134,11-01,11-30,"cited, merged",True,gdd,,24,night_heat_tuber,0.000,0.000,,,400.800,476.500,115.300,129.200,17.600,20.600,,,0.000,0.000,0.000,0.000,,,0.000
+brahmanbaria,potato,12-20,141,11-01,11-30,"cited, merged",True,gdd,,24,night_heat_tuber,0.000,0.000,,,409.900,498.500,113.200,129.200,17.900,21.600,,,0.000,0.000,0.000,0.000,,,0.000
+brahmanbaria,potato,12-27,148,11-01,11-30,"cited, merged",True,gdd,,24,night_heat_tuber,0.000,0.000,,,414.100,496.900,110.900,127.800,17.800,21.000,,,2.000,0.000,0.000,0.000,,,0.000
+brahmanbaria,boro_rice,11-21,112,12-05,01-30,derived,True,none,heat_anthesis;cold_booting,24,,,,,,1202.300,1326.300,,,10.600,11.800,,,,,,,,,
+brahmanbaria,boro_rice,11-28,119,12-05,01-30,derived,True,none,heat_anthesis;cold_booting,24,,,,,,1188.800,1347.200,,,10.500,12.000,,,,,,,,,
+brahmanbaria,boro_rice,12-05,126,12-05,01-30,derived,False,none,heat_anthesis;cold_booting,24,,,,,,1169.800,1309.400,,,10.300,11.600,,,,,,,,,
+brahmanbaria,boro_rice,12-12,133,12-05,01-30,derived,False,none,heat_anthesis;cold_booting,24,,,,,,1159.100,1348.400,,,10.200,12.000,,,,,,,,,
+brahmanbaria,boro_rice,12-19,140,12-05,01-30,derived,False,none,heat_anthesis;cold_booting,24,,,,,,1135.100,1269.500,,,10.000,11.200,,,,,,,,,
+brahmanbaria,boro_rice,12-26,147,12-05,01-30,derived,False,none,heat_anthesis;cold_booting,24,,,,,,1096.700,1249.500,,,9.600,11.000,,,,,,,,,
+brahmanbaria,boro_rice,01-02,154,12-05,01-30,derived,False,none,heat_anthesis;cold_booting,24,,,,,,1066.400,1227.300,,,9.300,10.800,,,,,,,,,
+brahmanbaria,boro_rice,01-09,161,12-05,01-30,derived,False,none,heat_anthesis;cold_booting,24,,,,,,1018.800,1164.800,,,8.800,10.200,,,,,,,,,
+brahmanbaria,boro_rice,01-16,168,12-05,01-30,derived,False,none,heat_anthesis;cold_booting,24,,,,,,992.900,1151.400,,,8.600,10.000,,,,,,,,,
+brahmanbaria,boro_rice,01-23,175,12-05,01-30,derived,False,none,heat_anthesis;cold_booting,24,,,,,,933.700,1106.800,,,8.000,9.600,,,,,,,,,
+brahmanbaria,boro_rice,01-30,182,12-05,01-30,derived,False,none,heat_anthesis;cold_booting,24,,,,,,897.500,1083.100,,,7.700,9.400,,,,,,,,,
+brahmanbaria,boro_rice,02-06,189,12-05,01-30,derived,True,none,heat_anthesis;cold_booting,23,,,,,,840.000,1002.800,,,7.100,8.600,,,,,,,,,
+brahmanbaria,boro_rice,02-13,196,12-05,01-30,derived,True,none,heat_anthesis;cold_booting,23,,,,,,788.600,979.600,,,6.600,8.400,,,,,,,,,
+brahmanbaria,boro_rice,02-20,203,12-05,01-30,derived,True,none,heat_anthesis;cold_booting,23,,,,,,710.800,875.300,,,5.900,7.400,,,,,,,,,
+brahmanbaria,boro_rice,02-27,210,12-05,01-30,derived,True,none,heat_anthesis;cold_booting,23,,,,,,682.200,868.900,,,5.600,7.400,,,,,,,,,
+sylhet,wheat,11-01,92,11-15,11-30,cited,True,gdd,,24,heat_anthesis;heat_grainfill,0.000,0.000,0.000,0.000,227.000,290.400,71.000,91.000,3.100,4.000,52.000,103.000,0.000,0.000,0.000,0.000,,,
+sylhet,wheat,11-08,99,11-15,11-30,cited,True,gdd,,24,heat_anthesis;heat_grainfill,0.000,0.000,0.000,0.000,239.500,292.000,74.600,96.400,3.300,4.000,55.000,104.000,0.000,0.000,0.000,0.000,,,
+sylhet,wheat,11-15,106,11-15,11-30,cited,False,gdd,,24,heat_anthesis;heat_grainfill,0.000,0.000,0.000,0.000,255.800,311.600,78.700,102.200,3.500,4.200,57.000,104.000,0.000,0.000,0.000,0.000,,,
+sylhet,wheat,11-22,113,11-15,11-30,cited,False,gdd,,24,heat_anthesis;heat_grainfill,0.000,0.000,0.000,0.000,276.000,344.500,82.600,108.200,3.800,4.600,59.000,105.000,0.000,0.000,0.000,0.000,,,
+sylhet,wheat,11-29,120,11-15,11-30,cited,False,gdd,,24,heat_anthesis;heat_grainfill,0.000,0.000,0.000,0.000,284.400,361.200,85.400,113.400,3.800,4.800,60.000,104.000,0.000,0.000,0.000,0.000,,,
+sylhet,wheat,12-06,127,11-15,11-30,cited,True,gdd,,24,heat_anthesis;heat_grainfill,0.000,0.000,0.000,0.000,291.500,382.800,87.100,114.800,3.900,5.000,61.000,103.000,1.000,0.000,0.000,0.000,,,
+sylhet,wheat,12-13,134,11-15,11-30,cited,True,gdd,,24,heat_anthesis;heat_grainfill,1.000,0.042,0.000,1.000,308.700,393.800,87.500,111.600,4.000,5.000,61.000,101.000,1.000,0.000,1.000,1.000,,,
+sylhet,wheat,12-20,141,11-15,11-30,cited,True,gdd,,24,heat_anthesis;heat_grainfill,1.000,0.042,0.000,1.000,310.500,410.100,87.100,111.400,4.000,5.200,61.000,99.000,5.000,0.000,1.000,1.000,,,
+sylhet,wheat,12-27,148,11-15,11-30,cited,True,gdd,,24,heat_anthesis;heat_grainfill,3.000,0.125,0.000,3.000,312.100,417.400,85.300,113.600,4.000,5.200,60.000,97.000,8.000,1.000,3.000,3.000,,,
+sylhet,mustard,10-01,61,10-15,11-15,cited,True,gdd,heat_flowering,24,waterlog,4.000,0.167,,,151.800,159.100,40.200,53.800,1.900,2.000,,59.000,4.000,4.000,4.000,4.000,,4.000,
+sylhet,mustard,10-08,68,10-15,11-15,cited,True,gdd,heat_flowering,24,waterlog,0.000,0.000,,,148.600,160.000,41.800,54.400,1.900,2.000,,66.000,0.000,0.000,0.000,0.000,,0.000,
+sylhet,mustard,10-15,75,10-15,11-15,cited,False,gdd,heat_flowering,24,waterlog,0.000,0.000,,,148.400,159.700,42.300,55.000,1.900,2.000,,76.000,0.000,0.000,0.000,0.000,,0.000,
+sylhet,mustard,10-22,82,10-15,11-15,cited,False,gdd,heat_flowering,24,waterlog,0.000,0.000,,,158.500,206.200,43.700,55.800,2.000,2.600,,88.500,0.000,0.000,0.000,0.000,,0.000,
+sylhet,mustard,10-29,89,10-15,11-15,cited,False,gdd,heat_flowering,24,waterlog,0.000,0.000,,,171.000,237.000,45.200,57.000,2.200,3.000,,98.500,0.000,0.000,0.000,0.000,,0.000,
+sylhet,mustard,11-05,96,10-15,11-15,cited,False,gdd,heat_flowering,24,waterlog,0.000,0.000,,,171.600,237.300,46.500,58.000,2.200,3.000,,103.500,0.000,0.000,0.000,0.000,,0.000,
+sylhet,mustard,11-12,103,10-15,11-15,cited,False,gdd,heat_flowering,24,waterlog,0.000,0.000,,,182.000,238.900,48.400,59.800,2.300,3.000,,105.000,0.000,0.000,0.000,0.000,,0.000,
+sylhet,mustard,11-19,110,10-15,11-15,cited,True,gdd,heat_flowering,24,waterlog,0.000,0.000,,,198.600,239.500,49.900,61.800,2.500,3.000,,106.000,0.000,0.000,0.000,0.000,,0.000,
+sylhet,mustard,11-26,117,10-15,11-15,cited,True,gdd,heat_flowering,24,waterlog,0.000,0.000,,,215.400,287.000,50.300,62.800,2.700,3.600,,105.000,0.000,0.000,0.000,0.000,,0.000,
+sylhet,mustard,12-03,124,10-15,11-15,cited,True,gdd,heat_flowering,24,waterlog,0.000,0.000,,,222.200,302.600,50.000,64.400,2.800,3.800,,103.500,0.000,0.000,0.000,0.000,,0.000,
+sylhet,mustard,12-10,131,10-15,11-15,cited,True,gdd,heat_flowering,24,waterlog,0.000,0.000,,,225.800,318.400,48.800,64.600,2.800,4.000,,101.000,0.000,0.000,0.000,0.000,,0.000,
+sylhet,lentil,10-10,70,10-24,11-15,cited,True,gdd,,24,heat_flowering;waterlog,2.000,0.083,,,193.800,210.500,71.000,80.600,4.800,5.200,58.000,110.000,2.000,2.000,2.000,2.000,0.000,2.000,
+sylhet,lentil,10-17,77,10-24,11-15,cited,True,gdd,,24,heat_flowering;waterlog,1.000,0.042,,,199.000,240.500,73.200,83.200,5.000,6.000,62.500,114.500,1.000,1.000,1.000,1.000,0.000,1.000,
+sylhet,lentil,10-24,84,10-24,11-15,cited,False,gdd,,24,heat_flowering;waterlog,0.000,0.000,,,206.500,242.300,75.200,86.000,5.100,6.000,66.500,117.000,0.000,0.000,0.000,0.000,0.000,0.000,
+sylhet,lentil,10-31,91,10-24,11-15,cited,False,gdd,,24,heat_flowering;waterlog,0.000,0.000,,,211.200,243.300,77.800,90.600,5.200,6.000,71.000,119.000,0.000,0.000,0.000,0.000,0.000,0.000,
+sylhet,lentil,11-07,98,10-24,11-15,cited,False,gdd,,24,heat_flowering;waterlog,0.000,0.000,,,223.100,274.100,80.500,95.200,5.500,6.800,75.000,120.000,0.000,0.000,0.000,0.000,0.000,0.000,
+sylhet,lentil,11-14,105,10-24,11-15,cited,False,gdd,,24,heat_flowering;waterlog,0.000,0.000,,,237.900,284.800,83.200,101.000,5.900,7.000,77.500,120.000,0.000,0.000,0.000,0.000,0.000,0.000,
+sylhet,lentil,11-21,112,10-24,11-15,cited,True,gdd,,24,heat_flowering;waterlog,0.000,0.000,,,257.000,308.600,85.800,107.400,6.300,7.600,80.000,119.000,0.000,0.000,0.000,0.000,0.000,0.000,
+sylhet,lentil,11-28,119,10-24,11-15,cited,True,gdd,,24,heat_flowering;waterlog,0.000,0.000,,,271.600,328.500,88.200,112.600,6.700,8.000,81.000,117.500,0.000,0.000,0.000,0.000,0.000,0.000,
+sylhet,lentil,12-05,126,10-24,11-15,cited,True,gdd,,24,heat_flowering;waterlog,0.000,0.000,,,276.200,342.800,88.600,115.200,6.700,8.200,80.500,116.000,0.000,0.000,0.000,0.000,0.000,0.000,
+sylhet,lentil,12-12,133,10-24,11-15,cited,True,gdd,,24,heat_flowering;waterlog,0.000,0.000,,,273.100,357.800,87.600,113.600,6.500,8.400,79.500,113.500,1.000,0.000,0.000,0.000,0.000,0.000,
+sylhet,potato,10-18,78,11-01,11-30,"cited, merged",True,gdd,,24,night_heat_tuber,2.000,0.083,,,259.500,293.900,102.000,119.400,13.300,15.000,,,2.000,0.000,0.000,2.000,,,2.000
+sylhet,potato,10-25,85,11-01,11-30,"cited, merged",True,gdd,,24,night_heat_tuber,0.000,0.000,,,270.600,304.900,106.900,124.800,13.900,15.600,,,2.000,0.000,0.000,0.000,,,0.000
+sylhet,potato,11-01,92,11-01,11-30,"cited, merged",False,gdd,,24,night_heat_tuber,0.000,0.000,,,281.800,321.100,111.800,129.000,14.200,16.000,,,2.000,0.000,0.000,0.000,,,0.000
+sylhet,potato,11-08,99,11-01,11-30,"cited, merged",False,gdd,,24,night_heat_tuber,0.000,0.000,,,298.000,340.300,115.700,129.800,15.000,16.800,,,1.000,0.000,0.000,0.000,,,0.000
+sylhet,potato,11-15,106,11-01,11-30,"cited, merged",False,gdd,,24,night_heat_tuber,0.000,0.000,,,311.400,361.800,117.800,130.000,15.400,17.600,,,0.000,0.000,0.000,0.000,,,0.000
+sylhet,potato,11-22,113,11-01,11-30,"cited, merged",False,gdd,,24,night_heat_tuber,0.000,0.000,,,318.100,373.700,117.700,130.000,15.500,18.000,,,0.000,0.000,0.000,0.000,,,0.000
+sylhet,potato,11-29,120,11-01,11-30,"cited, merged",False,gdd,,24,night_heat_tuber,0.000,0.000,,,321.100,389.600,114.800,129.000,15.400,18.600,,,0.000,0.000,0.000,0.000,,,0.000
+sylhet,potato,12-06,127,11-01,11-30,"cited, merged",True,gdd,,24,night_heat_tuber,0.000,0.000,,,323.800,391.600,110.900,127.400,15.400,18.600,,,0.000,0.000,0.000,0.000,,,0.000
+sylhet,potato,12-13,134,11-01,11-30,"cited, merged",True,gdd,,24,night_heat_tuber,0.000,0.000,,,320.600,391.300,106.600,124.400,15.100,18.200,,,0.000,0.000,0.000,0.000,,,0.000
+sylhet,potato,12-20,141,11-01,11-30,"cited, merged",True,gdd,,24,night_heat_tuber,0.000,0.000,,,314.300,395.900,102.900,122.000,14.800,18.200,,,0.000,0.000,0.000,0.000,,,0.000
+sylhet,potato,12-27,148,11-01,11-30,"cited, merged",True,gdd,,24,night_heat_tuber,0.000,0.000,,,311.800,391.800,98.900,118.400,14.500,18.000,,,0.000,0.000,0.000,0.000,,,0.000
+sylhet,boro_rice,11-21,112,12-05,01-30,derived,True,none,heat_anthesis;cold_booting,24,,,,,,1074.400,1164.000,,,9.400,10.200,,,,,,,,,
+sylhet,boro_rice,11-28,119,12-05,01-30,derived,True,none,heat_anthesis;cold_booting,24,,,,,,1046.900,1196.200,,,9.200,10.600,,,,,,,,,
+sylhet,boro_rice,12-05,126,12-05,01-30,derived,False,none,heat_anthesis;cold_booting,24,,,,,,1014.200,1159.400,,,8.800,10.200,,,,,,,,,
+sylhet,boro_rice,12-12,133,12-05,01-30,derived,False,none,heat_anthesis;cold_booting,24,,,,,,981.700,1120.000,,,8.500,9.800,,,,,,,,,
+sylhet,boro_rice,12-19,140,12-05,01-30,derived,False,none,heat_anthesis;cold_booting,24,,,,,,951.700,1100.700,,,8.200,9.600,,,,,,,,,
+sylhet,boro_rice,12-26,147,12-05,01-30,derived,False,none,heat_anthesis;cold_booting,24,,,,,,917.600,1062.500,,,7.900,9.200,,,,,,,,,
+sylhet,boro_rice,01-02,154,12-05,01-30,derived,False,none,heat_anthesis;cold_booting,24,,,,,,874.400,1022.500,,,7.500,8.800,,,,,,,,,
+sylhet,boro_rice,01-09,161,12-05,01-30,derived,False,none,heat_anthesis;cold_booting,24,,,,,,838.600,994.700,,,7.100,8.600,,,,,,,,,
+sylhet,boro_rice,01-16,168,12-05,01-30,derived,False,none,heat_anthesis;cold_booting,24,,,,,,778.700,936.600,,,6.500,8.000,,,,,,,,,
+sylhet,boro_rice,01-23,175,12-05,01-30,derived,False,none,heat_anthesis;cold_booting,24,,,,,,747.000,914.100,,,6.200,7.800,,,,,,,,,
+sylhet,boro_rice,01-30,182,12-05,01-30,derived,False,none,heat_anthesis;cold_booting,24,,,,,,686.900,851.600,,,5.700,7.200,,,,,,,,,
+sylhet,boro_rice,02-06,189,12-05,01-30,derived,True,none,heat_anthesis;cold_booting,23,,,,,,643.200,830.200,,,5.200,7.000,,,,,,,,,
+sylhet,boro_rice,02-13,196,12-05,01-30,derived,True,none,heat_anthesis;cold_booting,23,,,,,,582.200,749.200,,,4.700,6.200,,,,,,,,,
+sylhet,boro_rice,02-20,203,12-05,01-30,derived,True,none,heat_anthesis;cold_booting,23,,,,,,546.500,727.500,,,4.300,6.000,,,,,,,,,
+sylhet,boro_rice,02-27,210,12-05,01-30,derived,True,none,heat_anthesis;cold_booting,23,,,,,,487.000,641.900,,,3.700,5.200,,,,,,,,,
