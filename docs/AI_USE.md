@@ -509,3 +509,8 @@ to the phone voice. Added tests that no API response contains "CropShift"
 and that the error text and API title use the new name. Checked with
 `python -m pytest src -q` and in a browser (Bangla tab bar at 375 px).
 The Bangla wording needs a review by a Bangla speaker.
+
+**Claude Code (task 17, mock team name)** — changed one string in
+`web/mock/advisory.json` ("Team Regolith analysis of NASA POWER" -> "Survey
+Crops analysis of NASA POWER") to match the registered team name. Checked
+with `python -m pytest src -q`.
