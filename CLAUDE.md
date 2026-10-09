@@ -1,6 +1,6 @@
 # CLAUDE.md: CropShift rules for Claude Code (keep this file short; it loads every session)
 
-CropShift is Team Regolith's entry for NASA Space Apps 2026, Challenge 7, "Field Shift". It helps agriculture officers (SAAOs) and farmers in Cumilla, Feni, Brahmanbaria, Noakhali and Sylhet choose **which crop to plant and when**, with NASA data as the evidence. Event: 13–14 Nov 2026.
+CropShift is Survey Crops' entry for NASA Space Apps 2026, Challenge 7, "Field Shift". It helps agriculture officers (SAAOs) and farmers in Cumilla, Feni, Brahmanbaria, Noakhali and Sylhet choose **which crop to plant and when**, with NASA data as the evidence. Event: 13–14 Nov 2026.
 
 ## Online-first
 - The app is online-first: live → cache → fixture fallback, in that order. Only the **backend** ever fetches live data (NASA POWER near-real-time, SMAP latest, OPERA DSWx-S1 latest scenes, Open-Meteo, NOAA ENSO, FIRMS) — `web/` never calls out.

@@ -87,26 +87,38 @@ API_ASSUMPTIONS = {
     "dswx_scene_lead_days": {
         "value": 7, "unit": "days",
         "text": "DSWx-S1 scenes up to this many days before the flood date are used "
-                "(a pass rarely falls on the exact flood day)."},
+                "(a pass rarely falls on the exact flood day).",
+        "why": "Radar passes come every few days, so a scene a week before the "
+                "flood still shows the water that was already there."},
     "dswx_peak_max_lag_days": {
         "value": 30, "unit": "days",
         "text": "If the largest DSWx-S1 flood-water reading comes more than this many days "
                 "after the flood date, it is not this flood (e.g. Noakhali's December "
-                "peak), so the water signal is reported as inconclusive and only SMAP is used."},
+                "peak), so the water signal is reported as inconclusive and only SMAP is used.",
+        "why": "A peak a month or more after the flood is more likely a "
+                "different event, and calling it 'inconclusive' is safer than "
+                "guessing."},
     "dswx_dry_floor": {
         "value": "median flood_fraction, 2025-01-01 to 2025-03-31", "unit": "",
         "text": "Water the method sees with no flood (wet paddies, ponds, radar speckle). "
                 "'Water mostly gone' = 90% of the water above this floor has drained "
-                "(docs/results/post_flood.md)."},
+                "(docs/results/post_flood.md).",
+        "why": "Using the dry-season median (Jan-Mar 2025) as the floor means "
+                "permanent water and speckle are not counted as flood."},
     "district_max_distance_km": {
         "value": 60, "unit": "km",
         "text": "A GPS point (lat, lon) is served by the nearest of the 5 district points "
                 "(data/processed/district_metadata.csv) only if it lies within this distance; "
-                "farther points get DISTRICT_NOT_COVERED."},
+                "farther points get DISTRICT_NOT_COVERED.",
+        "why": "The data are for the area around a district point, so a point "
+                "far from every district would get numbers that do not describe "
+                "it."},
     "twin_rain_week_mm": {
         "value": 20, "unit": "mm/week",
         "text": "In the field-twin replay a week is flagged 'rain' when IMERG rain that week "
-                "is at least this much (for the animation only; not a risk rule)."},
+                "is at least this much (for the animation only; not a risk rule).",
+        "why": "It only picks which weeks of the animation show a rain icon; "
+                "it feeds no risk number or ranking."},
 }
 IMAGE_DIR = os.path.join(ROOT, "docs", "results", "img")
 IMAGE_RE = re.compile(r"^dswx_flood_([a-z]+)_(\d{4}-\d{2}-\d{2})\.png$")
@@ -266,18 +278,19 @@ def fixed_provenance():
                   "period": "", "resolution": "", "note": "Method reference; Kc in data/processed/kc_table.csv."},
         "calendar": {"dataset": "Survey Crops sowing-date risk calendar (data/processed/risk_calendar.csv)",
                      "url": f"{REPO_URL}/blob/main/docs/results/risk_calendar.md",
-                     "agency": "Team Regolith analysis of NASA IMERG + POWER",
+                     "agency": "Survey Crops analysis of NASA IMERG + POWER",
                      "period": f"seasons {rc.SEASONS[0]}-{rc.SEASONS[-1]}", "resolution": "",
                      "note": "Built by scripts/build_risk_calendar.py from the cited rows listed here."},
         "post_flood": {"dataset": "Survey Crops post-flood recovery method (docs/results/post_flood.md)",
                        "url": f"{REPO_URL}/blob/main/docs/results/post_flood.md",
-                       "agency": "Team Regolith analysis of NASA SMAP + OPERA DSWx-S1",
+                       "agency": "Survey Crops analysis of NASA SMAP + OPERA DSWx-S1",
                        "period": "", "resolution": "", "note": ""},
-        "assumptions": {"dataset": "Survey Crops modelling assumptions (not from a source; listed so "
+        "assumptions": {"dataset": "Survey Crops modelling choices (not from a source; listed so "
                                    "they can be checked)",
-                        "url": f"{REPO_URL}/blob/main/src/compute/risk_calendar.py",
-                        "agency": "Team Regolith", "period": "", "resolution": "",
-                        "note": "ASSUMPTIONS in risk_calendar.py and API_ASSUMPTIONS in app.py."},
+                        "url": f"{REPO_URL}/blob/main/docs/assumptions.md",
+                        "agency": "Survey Crops", "period": "", "resolution": "",
+                        "note": "Where no source gave a number, the team chose one. Main choices are "
+                                "re-run with other values (sensitivity runs)."},
     }
 
 

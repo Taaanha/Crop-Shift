@@ -1,6 +1,6 @@
 # How we work together on CropShift
 
-This guide is for everyone on Team Regolith. It keeps our work from clashing, so everything fits together at the end.
+This guide is for everyone on Survey Crops. It keeps our work from clashing, so everything fits together at the end.
 
 ## 1. One-time setup (about 15 minutes)
 1. Make a GitHub account (use your own; your commits count for our Teamwork score).

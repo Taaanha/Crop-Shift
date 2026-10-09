@@ -509,3 +509,17 @@ to the phone voice. Added tests that no API response contains "CropShift"
 and that the error text and API title use the new name. Checked with
 `python -m pytest src -q` and in a browser (Bangla tab bar at 375 px).
 The Bangla wording needs a review by a Bangla speaker.
+
+**Claude Code (task 16, Survey Crops name + assumptions doc)** — the
+registered team name is now "Survey Crops" (it was "Team Regolith"). Replaced
+the team name in `app.py` (agency fields), `CLAUDE.md`, `CONTRIBUTING.md` and
+`scripts/deploy_hf_space.py`; member names, URLs, the repo name, git history
+and the shared `web/mock/*.json` were not touched (the mock needs its own
+PR). Past entries in this file are history and keep the old name. Added a
+`why` line to every entry of `ASSUMPTIONS` (`src/compute/risk_calendar.py`)
+and `API_ASSUMPTIONS` (`app.py`), wrote `scripts/build_assumptions_doc.py`
+which generates `docs/assumptions.md` from them, and added
+`src/api/test_assumptions_doc.py`, which fails if the doc is stale. The
+"assumptions" provenance entry in `app.py` now links to that doc. Checked
+with `python -m pytest src -q`. The `why` sentences are the AI's wording of
+the reasons; the team should check them.

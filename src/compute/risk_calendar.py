@@ -70,62 +70,95 @@ ASSUMPTIONS = {
     "flowering_window_days": {
         "value": 7, "sensitivity": [15],
         "text": "Heat at flowering/anthesis is counted over a window of this many days "
-                "centred on the flowering date."},
+                "centred on the flowering date.",
+        "why": "Flowering is not one day; a week around the flowering date is "
+                "a plain, short window. A longer 15-day window is run as a "
+                "check."},
     "hot_days": {
         "value": 3, "sensitivity": [1, 5],
         "text": "A season is a 'problem year' for a heat/cold hazard when at least this many "
-                "days in the sensitive stage cross the cited threshold."},
+                "days in the sensitive stage cross the cited threshold.",
+        "why": "One hot day rarely ruins a crop, so a few days are required. "
+                "Fewer (1) and more (5) days are run as a check."},
     "threshold_end": {
         "value": "onset", "sensitivity": ["severe"],
         "text": "When a threshold is cited as a range (e.g. mustard 25-29 C, potato night "
-                "20-25 C) the onset end is used; the severe end is a sensitivity run."},
+                "20-25 C) the onset end is used; the severe end is a sensitivity run.",
+        "why": "The onset end of a cited range is the earlier, more careful "
+                "warning point. The severe end is run as a check."},
     "waterlog_window_days": {
         "value": 30, "sensitivity": [],
         "text": "Waterlogging is checked in the first this-many days after sowing "
-                "(from the task spec, not a source)."},
+                "(from the task spec, not a source).",
+        "why": "Young seedlings are the most exposed to standing water, so "
+                "only the first month after sowing is checked. No sensitivity "
+                "run exists."},
     "saturated_day": {
         "value": "Dr = 0 and deep percolation > 0", "sensitivity": [],
         "text": "A 'saturated' day in the FAO-56 balance: the root zone is at field capacity "
                 "and surplus water is draining that day (the balance has no runoff term, so "
-                "this includes water that would pond or run off)."},
+                "this includes water that would pond or run off).",
+        "why": "It is the simplest daily test that follows from the water "
+                "balance already used, and it needs no extra data."},
     "turnaround_days": {
         "value": 7, "sensitivity": [],
-        "text": "Days between harvesting the previous crop and sowing the next one."},
+        "text": "Days between harvesting the previous crop and sowing the next one.",
+        "why": "A short gap for harvesting, threshing and preparing land. No "
+                "sensitivity run exists."},
     "combine_sources": {
         "value": "mean of per-source midpoints", "sensitivity": [],
         "text": "When several kept rows cite a stage duration or threshold, each source's "
-                "midpoint is taken and the mean of those is used; the full range is shown."},
+                "midpoint is taken and the mean of those is used; the full range is shown.",
+        "why": "Taking one midpoint per source stops a source with many rows "
+                "from outweighing the others; the full range stays visible."},
     "gdd_no_upper_cap": {
         "value": "none", "sensitivity": [],
-        "text": "GDD uses no upper temperature cap (none is cited)."},
+        "text": "GDD uses no upper temperature cap (none is cited).",
+        "why": "Adding a cap would need a number that no kept source gives, so "
+                "none is used."},
     "potato_main_season_window": {
         "value": "11-01 to 11-30", "sensitivity": [],
         "text": "Potato has three cited BARC windows. The North (Nov 1-7) and South "
                 "(Nov 17-30) main-season windows are merged; the early-variety window "
-                "(Sep 24-Oct 7) is excluded because its notes say it is a separate sub-type."},
+                "(Sep 24-Oct 7) is excluded because its notes say it is a separate sub-type.",
+        "why": "The two cited main-season windows are kept; the early-variety "
+                "window is a different sub-type, so it is not mixed in."},
     "boro_transplant_window_start": {
         "value": "earliest seedbed_start + shortest seedling_age", "sensitivity": [],
         "text": "No kept row gives a boro transplanting window start, so it is derived from "
                 "two cited values: the earliest seedbed sowing date plus the shortest "
-                "seedling age. Boro 'sowing date' in this calendar means TRANSPLANTING date."},
+                "seedling age. Boro 'sowing date' in this calendar means TRANSPLANTING date.",
+        "why": "It uses only two cited numbers and invents none; it is a "
+                "derived start, not a measured one."},
     "night_temperature": {
         "value": "POWER T2M_MIN", "sensitivity": [],
-        "text": "The daily minimum 2 m temperature stands in for night temperature."},
+        "text": "The daily minimum 2 m temperature stands in for night temperature.",
+        "why": "The daily minimum is the coolest reading of the day, which is "
+                "the closest NASA POWER variable to night temperature."},
     "water_season_length": {
         "value": "kc_table stage lengths", "sensitivity": [],
         "text": "The water balance runs over the FAO-56 stage lengths in kc_table.csv "
-                "(e.g. wheat 120 d), which differ from the cited maturity days."},
+                "(e.g. wheat 120 d), which differ from the cited maturity days.",
+        "why": "The FAO-56 stage lengths are the ones the crop coefficients "
+                "(Kc) were published for, so they stay consistent with each "
+                "other."},
     "paddy_refill": {
         "value": "refill to ponding depth when the water layer is used up", "sensitivity": [],
         "text": "Boro paddy: after land preparation the field holds the cited ponding depth; "
                 "each day rain adds and ETc + percolation remove water; water above the "
                 "ponding depth spills; when the layer would go below zero it is refilled to "
                 "the ponding depth (counted as irrigation). Season = kc_table rice stage "
-                "lengths (150 d), from transplanting."},
+                "lengths (150 d), from transplanting.",
+        "why": "It keeps the paddy water layer at the cited ponding depth and "
+                "counts every top-up as irrigation, which is how a farmer "
+                "manages a boro field."},
     "paddy_percolation_class": {
         "value": "clay if clay_pct >= 40", "sensitivity": [],
         "text": "Percolation uses the cited clay rate when SoilGrids clay >= 40% (USDA clay "
-                "class lower bound), otherwise the cited loam rate."},
+                "class lower bound), otherwise the cited loam rate.",
+        "why": "The 40% clay line is the lower bound of the USDA clay class, "
+                "so the cited clay and loam rates are applied by a published "
+                "rule."},
 }
 DEFAULT_PARAMS = {"flowering_window_days": ASSUMPTIONS["flowering_window_days"]["value"],
                   "hot_days": ASSUMPTIONS["hot_days"]["value"],
