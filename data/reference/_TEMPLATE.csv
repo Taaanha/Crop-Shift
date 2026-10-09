@@ -1,1 +1,2 @@
 item,value,unit,source_title,source_url,page,year,notes
+"<crop>.soil.legume","yes or no","class","PLACEHOLDER: example row, delete it; title of the source that says whether the crop is a legume / fixes nitrogen","https://example.org","","","Used by /advisory priority=soil: crops with value yes are ranked first. Without a kept row, the soil priority does nothing."
