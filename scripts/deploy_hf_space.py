@@ -49,7 +49,7 @@ license: apache-2.0
 # CropShift API
 
 Which crop to plant and when, with NASA data as the evidence. FastAPI
-service for Team Regolith's NASA Space Apps 2026 (Challenge 7, "Field
+service for Survey Crops' NASA Space Apps 2026 (Challenge 7, "Field
 Shift") entry, covering Cumilla, Feni, Brahmanbaria, Noakhali and Sylhet.
 
 Source: https://github.com/Taaanha/Crop-Shift

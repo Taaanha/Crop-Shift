@@ -510,7 +510,26 @@ and that the error text and API title use the new name. Checked with
 `python -m pytest src -q` and in a browser (Bangla tab bar at 375 px).
 The Bangla wording needs a review by a Bangla speaker.
 
+**Claude Code (task 16, Survey Crops name + assumptions doc)** — the
+registered team name is now "Survey Crops" (it was "Team Regolith"). Replaced
+the team name in `app.py` (agency fields), `CLAUDE.md`, `CONTRIBUTING.md` and
+`scripts/deploy_hf_space.py`; member names, URLs, the repo name, git history
+and the shared `web/mock/*.json` were not touched (the mock needs its own
+PR). Past entries in this file are history and keep the old name. Added a
+`why` line to every entry of `ASSUMPTIONS` (`src/compute/risk_calendar.py`)
+and `API_ASSUMPTIONS` (`app.py`), wrote `scripts/build_assumptions_doc.py`
+which generates `docs/assumptions.md` from them, and added
+`src/api/test_assumptions_doc.py`, which fails if the doc is stale. The
+"assumptions" provenance entry in `app.py` now links to that doc. Checked
+with `python -m pytest src -q`. The `why` sentences are the AI's wording of
+the reasons; the team should check them.
+
 **Claude Code (task 17, mock team name)** — changed one string in
 `web/mock/advisory.json` ("Team Regolith analysis of NASA POWER" -> "Survey
 Crops analysis of NASA POWER") to match the registered team name. Checked
 with `python -m pytest src -q`.
+
+**Claude Code (task 17 follow-up)** — resolved the `docs/AI_USE.md` merge
+conflict with main (kept both entries). Made
+`src/api/test_assumptions_doc.py` read `docs/assumptions.md` with universal
+newlines, so the stale-doc check does not fail on Windows CRLF checkouts.
