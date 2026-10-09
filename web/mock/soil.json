@@ -1,0 +1,112 @@
+{
+  "api_version": "1.0",
+  "endpoint": "/api/v1/soil",
+  "request": {
+    "lat": "23.45",
+    "lon": "91.2"
+  },
+  "generated_at": "2026-11-13T09:00:00+06:00",
+  "source_mode": "live",
+  "is_mock": true,
+  "mock_note": "Example shape only. Do not present as results.",
+  "data": {
+    "district": "cumilla",
+    "location": {
+      "lat": 23.45,
+      "lon": 91.2,
+      "district": "cumilla",
+      "district_name": {
+        "en": "Cumilla",
+        "bn": "কুমিল্লা"
+      },
+      "distance_km": {
+        "value": 2.3,
+        "unit": "km to the district point",
+        "src": [
+          "assumptions"
+        ]
+      },
+      "method": {
+        "en": "Nearest of the 5 Survey Crops district points (within 60 km).",
+        "bn": "সার্ভে ক্রপস-এর ৫টি জেলা-বিন্দুর মধ্যে সবচেয়ে কাছেরটি (৬০ কিমির মধ্যে)।"
+      }
+    },
+    "soil": {
+      "estimate": "field",
+      "depth": "0-30 cm",
+      "texture": {
+        "value": "clay",
+        "en": "Clay",
+        "bn": "এঁটেল"
+      },
+      "sand_pct": {
+        "value": 21.1,
+        "unit": "%",
+        "src": [
+          "soilgrids"
+        ]
+      },
+      "silt_pct": {
+        "value": 33.4,
+        "unit": "%",
+        "src": [
+          "soilgrids"
+        ]
+      },
+      "clay_pct": {
+        "value": 45.5,
+        "unit": "%",
+        "src": [
+          "soilgrids"
+        ]
+      },
+      "ph": {
+        "value": 5.1,
+        "unit": "pH (H2O)",
+        "src": [
+          "soilgrids"
+        ]
+      },
+      "organic_carbon_g_kg": {
+        "value": 15.4,
+        "unit": "g/kg",
+        "src": [
+          "soilgrids"
+        ]
+      }
+    },
+    "test_advice": {
+      "en": "Test your soil at the Upazila Agriculture Office.",
+      "bn": "উপজেলা কৃষি অফিসে মাটি পরীক্ষা করান।"
+    }
+  },
+  "narration": null,
+  "provenance": [
+    {
+      "id": "assumptions",
+      "dataset": "Survey Crops modelling choices (not from a source; listed so they can be checked)",
+      "url": "https://github.com/Taaanha/Crop-Shift/blob/main/docs/assumptions.md",
+      "agency": "Survey Crops",
+      "period": "",
+      "resolution": "",
+      "note": "Where no source gave a number, the team chose one. Main choices are re-run with other values (sensitivity runs)."
+    },
+    {
+      "id": "soilgrids",
+      "dataset": "ISRIC SoilGrids 2.0 (Poggio et al. 2021, SOIL 7:217-240): topsoil sand, silt, clay, pH (H2O), organic carbon",
+      "url": "https://soilgrids.org",
+      "agency": "ISRIC - World Soil Information",
+      "period": "",
+      "resolution": "250 m",
+      "note": "Model estimate from soil surveys + satellite data; not a lab test. Test your soil at the Upazila Agriculture Office."
+    }
+  ],
+  "notices": [
+    {
+      "level": "info",
+      "en": "The crop ranking still uses the district's soil, not this field estimate.",
+      "bn": "ফসলের তালিকা এখনও জেলার মাটির তথ্য ব্যবহার করে, এই জমির অনুমান নয়।"
+    }
+  ],
+  "errors": []
+}

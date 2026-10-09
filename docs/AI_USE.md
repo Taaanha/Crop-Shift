@@ -566,3 +566,18 @@ were invented. There are no `soil.legume` rows yet, so the soil priority does
 nothing until the team adds a cited row. Checked with `python -m pytest src -q`
 and by driving the page against a local API.
 
+
+## Task: "Your soil" made real (`/api/v1/soil`, ISRIC SoilGrids)
+
+Claude (Sonnet 5.5) wrote `src/acquire/soilgrids_point.py` (one SoilGrids call,
+0-30 cm depth-weighting, USDA texture via the existing `usda_texture`, disk
+cache), the `/api/v1/soil` endpoint, the `soilgrids` provenance entry and the
+district fallback in `app.py`, `web/mock/soil.json`, the `docs/api_contract.md`
+section, the Farm screen soil box in `web/app/index.html` (texture, pH, organic
+carbon with Source buttons, field record shown next to the estimate, "coming
+soon" removed from that question only), and `src/api/test_soil.py` (SoilGrids
+mocked; no test uses the network). The ranking is unchanged: field soil is
+shown only. The SoilGrids layer names, units (g/kg, pH x10, dg/kg) and the 5
+requests/minute limit were checked against the live API, which answered on
+2026-10-10. Checked with `python -m pytest src -q` and by driving the page
+against a local API.

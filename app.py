@@ -9,7 +9,7 @@ dataset and URL, and every narration is a plain template sentence built from
 the data and checked by guard() (src/agents/guard.py).
 
 Real endpoints: /districts, /advisory, /risk-calendar, /post-flood,
-/field-twin. Not built yet (they serve the web/mock file with is_mock: true):
+/field-twin, /soil. Not built yet (they serve the web/mock file with is_mock: true):
 /enso-lens, /warnings, /ask.
 
 Run locally (repo root): python -m uvicorn app:app --reload
@@ -36,12 +36,14 @@ from fastapi.responses import FileResponse, JSONResponse, RedirectResponse
 from starlette.exceptions import HTTPException as StarletteHTTPException
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
-for _sub in (("src", "compute"), ("src", "agents")):
+for _sub in (("src", "compute"), ("src", "agents"), ("src", "acquire")):
     _path = os.path.join(ROOT, *_sub)
     if _path not in sys.path:
         sys.path.insert(0, _path)
 
 import post_flood as pf  # noqa: E402
+import soilgrids_point  # noqa: E402
+from fetch_soilgrids import usda_texture  # noqa: E402
 import risk_calendar as rc  # noqa: E402
 from reference import load_reference  # noqa: E402
 from guard import guard  # noqa: E402
@@ -286,6 +288,12 @@ def fixed_provenance():
                        "url": f"{REPO_URL}/blob/main/docs/results/post_flood.md",
                        "agency": "Survey Crops analysis of NASA SMAP + OPERA DSWx-S1",
                        "period": "", "resolution": "", "note": ""},
+        "soilgrids": {"dataset": "ISRIC SoilGrids 2.0 (Poggio et al. 2021, SOIL 7:217-240): "
+                                 "topsoil sand, silt, clay, pH (H2O), organic carbon",
+                      "url": "https://soilgrids.org", "agency": "ISRIC - World Soil Information",
+                      "period": "", "resolution": "250 m",
+                      "note": "Model estimate from soil surveys + satellite data; not a lab test. "
+                              "Test your soil at the Upazila Agriculture Office."},
         "assumptions": {"dataset": "Survey Crops modelling choices (not from a source; listed so "
                                    "they can be checked)",
                         "url": f"{REPO_URL}/blob/main/docs/assumptions.md",
@@ -817,6 +825,60 @@ def district_notices(district):
     return notices
 
 
+# ---------------- soil (field point, SoilGrids) ----------------
+
+TEXTURE_BN = {"sand": "বেলে", "loamy sand": "বেলে-দোআঁশ", "sandy loam": "বেলে দোআঁশ",
+              "loam": "দোআঁশ", "silt loam": "পলি দোআঁশ", "silt": "পলি",
+              "sandy clay loam": "বেলে এঁটেল দোআঁশ", "clay loam": "এঁটেল দোআঁশ",
+              "silty clay loam": "পলি এঁটেল দোআঁশ", "sandy clay": "বেলে এঁটেল",
+              "silty clay": "পলি এঁটেল", "clay": "এঁটেল"}
+SOIL_TEST_ADVICE = {"en": "Test your soil at the Upazila Agriculture Office.",
+                    "bn": "উপজেলা কৃষি অফিসে মাটি পরীক্ষা করান।"}
+SOIL_RANKING_NOTICE = {"level": "info",
+                       "en": "The crop ranking still uses the district's soil, not this field estimate.",
+                       "bn": "ফসলের তালিকা এখনও জেলার মাটির তথ্য ব্যবহার করে, এই জমির অনুমান নয়।"}
+
+
+def texture_block(name):
+    if name is None:
+        return None
+    return {"value": name, "en": name.capitalize(), "bn": TEXTURE_BN[name]}
+
+
+def district_soil_fallback(did):
+    """Sand/silt/clay of the district from data/reference/soil_params.csv
+    (SoilGrids, 0-100 cm, a few points around the district). No pH or carbon."""
+    params = load_soil_params()[did]
+    src = ref_ids_for_items([f"{did}.{k}" for k in ("clay_pct", "silt_pct", "sand_pct")])
+    sand, silt, clay = (float(params[k]) for k in ("sand_pct", "silt_pct", "clay_pct"))
+    return {"estimate": "district", "depth": "0-100 cm",
+            "texture": texture_block(usda_texture(sand, silt, clay)),
+            "sand_pct": measure(sand, "%", src, 1), "silt_pct": measure(silt, "%", src, 1),
+            "clay_pct": measure(clay, "%", src, 1),
+            "ph": measure(None, "pH (H2O)", src), "organic_carbon_g_kg": measure(None, "g/kg", src)}
+
+
+def field_soil_block(soil):
+    src = ["soilgrids"]
+    return {"estimate": "field", "depth": "0-30 cm",
+            "texture": texture_block(soil["texture"]),
+            "sand_pct": measure(soil["sand"], "%", src, 1), "silt_pct": measure(soil["silt"], "%", src, 1),
+            "clay_pct": measure(soil["clay"], "%", src, 1),
+            "ph": measure(soil["ph"], "pH (H2O)", src, 1),
+            "organic_carbon_g_kg": measure(soil["organic_carbon_g_kg"], "g/kg", src, 1)}
+
+
+def soil_fallback_notice(why):
+    reasons = {"no_value": ("SoilGrids has no value for this exact point (for example a river, "
+                            "pond or built-up cell).",
+                            "এই বিন্দুর জন্য SoilGrids-এ কোনো মান নেই (যেমন নদী, পুকুর বা বসতি)।"),
+               "unreachable": ("SoilGrids did not answer in time.",
+                               "SoilGrids সময়মতো উত্তর দেয়নি।")}[why]
+    return {"level": "caution",
+            "en": f"{reasons[0]} Showing the district soil instead (0-100 cm, texture only).",
+            "bn": f"{reasons[1]} তাই জেলার মাটির তথ্য দেখানো হচ্ছে (০-১০০ সেমি, শুধু ধরন)।"}
+
+
 # ---------------- crop option (advisory, post-flood) ----------------
 
 def hazard_label(hazard):
@@ -1200,6 +1262,46 @@ def advisory(district: str = None, prev_harvest: str = None, flood_ready: str = 
 
 
 # ---------------- /risk-calendar ----------------
+
+@app.get("/api/v1/soil")
+def soil(district: str = None, lat: str = None, lon: str = None):
+    endpoint = "/api/v1/soil"
+    request = {"district": district, "lat": lat, "lon": lon}
+    mode = {"value": SOURCE_MODE}
+
+    def build():
+        did, location = resolve_location(district, lat, lon)
+        notices = []
+        block = None
+        if location is not None:
+            try:
+                found, mode["value"] = soilgrids_point.soil_at(location["lat"], location["lon"])
+            except soilgrids_point.SoilGridsError:
+                found, why = None, "unreachable"
+            else:
+                why = "no_value"
+            if found is not None:
+                block = field_soil_block(found)
+            else:
+                notices.append(soil_fallback_notice(why))
+        if block is None:
+            block = district_soil_fallback(did)
+            mode["value"] = "fixture"
+        notices.append(SOIL_RANKING_NOTICE)
+        data = {"district": did, "location": location, "soil": block,
+                "test_advice": SOIL_TEST_ADVICE}
+        return data, None, notices
+
+    try:
+        data, narration, notices = build()
+        return JSONResponse(envelope(endpoint, request, data, narration, notices,
+                                     source_mode=mode["value"]))
+    except ApiError as err:
+        return error_response(endpoint, request, err)
+    except Exception as exc:  # noqa: BLE001 - the contract forbids an empty body
+        return error_response(endpoint, request, ApiError(
+            "INTERNAL", f"Internal error: {type(exc).__name__}"))
+
 
 @app.get("/api/v1/risk-calendar")
 def risk_calendar(district: str = None, crop: str = None):

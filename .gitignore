@@ -5,3 +5,4 @@ __pycache__/
 .ipynb_checkpoints/
 venv/
 cache/
+data/processed/soilgrids_cache/
