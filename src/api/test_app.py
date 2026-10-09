@@ -573,3 +573,151 @@ def test_advisory_water_contract_shape(responses):
 def test_advisory_rejects_unknown_water_level():
     r = client.get(ADVISORY + "&water=lots")
     assert r.status_code == 400 and r.json()["errors"][0]["code"] == "BAD_PARAMETER"
+
+
+# ---------------- advisory: "What matters most to you?" (priority) ----------------
+
+EARLY = "/api/v1/advisory?district=cumilla&prev_harvest=2024-10-20"
+
+
+def pri_opt(crop, problem_years, irrigation, maturity, late=False):
+    def m(v):
+        return None if v is None else {"value": v, "unit": "x", "src": []}
+    return {"crop": crop, "crop_name": {"en": crop.title(), "bn": crop}, "rank": 1,
+            "problem_years": m(problem_years), "irrigation_need_worst20": m(irrigation),
+            "maturity_date": None if maturity is None else {"date": maturity, "src": []},
+            "window_status": {"code": "late" if late else "open"}, "why": None}
+
+
+def order(ranked):
+    return [o["crop"] for o in ranked]
+
+
+@pytest.fixture
+def four():
+    # A: safest but thirsty and slow; B: thrifty but riskier; C: fastest; D: late window, best numbers
+    return [pri_opt("a", 0, 400, "2025-03-30"), pri_opt("b", 2, 100, "2025-03-20"),
+            pri_opt("c", 1, 300, "2025-03-01"), pri_opt("d", 0, 50, "2025-02-01", late=True)]
+
+
+@pytest.fixture
+def legume_a(monkeypatch):
+    monkeypatch.setattr(api, "legume_crops", lambda: {"a": ["a.soil.legume"]})
+
+
+def test_priority_default_and_risk_leave_the_order_alone(four):
+    for keys in ([], ["risk"]):
+        ranked, by, notices = api.apply_priority(list(four), keys)
+        assert order(ranked) == ["a", "b", "c", "d"] and by["keys"] == ["risk"] and notices == []
+
+
+def test_priority_water_sorts_by_irrigation_then_problem_years(four):
+    ranked, by, _ = api.apply_priority(list(four), ["water"])
+    assert order(ranked) == ["b", "c", "a", "d"]
+    assert [o["rank"] for o in ranked] == [1, 2, 3, 4]
+    assert by["text"]["en"] == "Ranked by: saving water"
+
+
+def test_priority_more_sorts_by_earliest_maturity_and_puts_no_date_last(four):
+    four.append(pri_opt("e", 0, 10, None))
+    ranked, _, _ = api.apply_priority(four, ["more"])
+    assert order(ranked) == ["c", "b", "a", "e", "d"]
+
+
+def test_priority_risk_after_another_key_breaks_ties_in_tap_order():
+    tied = [pri_opt("x", 3, 100, "2025-03-01"), pri_opt("y", 1, 100, "2025-03-01"),
+            pri_opt("z", 2, 90, "2025-03-01")]
+    ranked, by, _ = api.apply_priority(tied, ["water", "risk"])
+    assert order(ranked) == ["z", "y", "x"]     # z least water; x, y tie on water -> fewer problem years
+    assert by["text"]["en"] == "Ranked by: saving water, then lowest risk"
+    assert by["text"]["bn"].startswith("সাজানো হয়েছে: পানি বাঁচানো, তারপর")
+    ranked, _, _ = api.apply_priority(tied, ["more", "water"])    # all tie on maturity -> its own tie-break (problem years)
+    assert order(ranked) == ["y", "z", "x"]
+
+
+def test_priority_equal_keys_fall_back_to_crop_name():
+    ranked, _, _ = api.apply_priority([pri_opt("b", 1, 5, "2025-03-01"), pri_opt("a", 1, 5, "2025-03-01")],
+                                      ["water"])
+    assert order(ranked) == ["a", "b"]
+
+
+def test_priority_soil_puts_cited_legumes_first(four, legume_a):
+    ranked, by, notices = api.apply_priority([four[1], four[0], four[2]], ["soil"])
+    assert order(ranked)[0] == "a" and by["keys"] == ["soil"]
+    assert not any("legume source" in n["en"] for n in notices)
+    ranked, _, _ = api.apply_priority([four[1], four[0], four[2]], ["soil", "water"])
+    assert order(ranked) == ["a", "b", "c"]
+    ranked, _, _ = api.apply_priority(four, ["soil"])
+    assert order(ranked)[-1] == "d"         # a passed window still goes last
+
+
+def test_priority_soil_without_a_cited_row_does_nothing_and_says_so(four, monkeypatch):
+    monkeypatch.setattr(api, "legume_crops", lambda: {})
+    ranked, by, notices = api.apply_priority(list(four), ["soil"])
+    assert order(ranked) == ["a", "b", "c", "d"] and by["keys"] == ["risk"]
+    assert any("research pending: legume source" in n["en"] and n["bn"] for n in notices)
+    ranked, by, _ = api.apply_priority(list(four), ["soil", "water"])    # the other key still works
+    assert by["keys"] == ["water"] and order(ranked) == ["b", "c", "a", "d"]
+
+
+def test_no_legume_rows_exist_in_the_reference_data_yet():
+    api.reference_all.cache_clear()
+    assert api.legume_crops() == {}
+
+
+def test_priority_late_window_crops_stay_last_under_every_key(four):
+    for keys in (["water"], ["more"], ["water", "risk"]):
+        assert order(api.apply_priority(list(four), keys)[0])[-1] == "d"
+
+
+def test_priority_caution_names_both_problem_year_counts(four):
+    ranked, _, notices = api.apply_priority(list(four), ["water"])     # b (2 years) beats a (0 years)
+    [caution] = [n for n in notices if n["level"] == "caution"]
+    assert "B" in caution["en"] and "A" in caution["en"] and "2 years" in caution["en"] \
+        and "0 years" in caution["en"] and caution["bn"]
+    _, _, notices = api.apply_priority(list(four), ["risk", "water"])
+    assert not notices
+    _, _, notices = api.apply_priority([four[0], four[3], pri_opt("e", 0, 60, "2025-03-01")], ["water"])
+    assert not notices                                         # equal problem years: no caution
+
+
+def test_advisory_priority_absent_and_risk_are_identical_and_labelled():
+    base, risk = advisory_with(url=EARLY), advisory_with(url=EARLY + "&priority=risk")
+    assert base["data"]["ranked_by"]["keys"] == ["risk"]
+    assert base["data"]["ranked_by"]["text"]["en"] == "Ranked by: lowest risk"
+    assert order(base["data"]["options"]) == order(risk["data"]["options"])
+    assert "priority" not in base["request"] and risk["request"]["priority"] == "risk"
+
+
+def test_advisory_priority_response_shape_and_narration():
+    body = client.get(EARLY + "&priority=water,risk&lang=bn").json()
+    by = body["data"]["ranked_by"]
+    assert by["keys"] == ["water", "risk"] and by["text"]["en"] == "Ranked by: saving water, then lowest risk"
+    assert by["text"]["bn"] in body["narration"]["bn"]
+    assert by["text"]["en"] in body["narration"]["en"]
+    assert body["narration"]["provenance_check"] == "passed"
+    for o in body["data"]["options"]:      # risk and irrigation stay on every card
+        assert o["problem_years"]["value"] is not None and o["irrigation_need_avg"]["src"]
+
+
+def test_advisory_soil_priority_shows_the_research_pending_notice():
+    notices = client.get(EARLY + "&priority=soil").json()["notices"]
+    assert any("research pending: legume source" in n["en"] for n in notices)
+
+
+def test_advisory_priority_uses_the_legume_rows_when_they_exist(monkeypatch):
+    monkeypatch.setattr(api, "legume_crops", lambda: {"wheat": ["wheat.soil.legume"]})
+    api.reference_all.cache_clear()
+    body = client.get(EARLY + "&priority=soil").json()
+    assert body["data"]["options"][0]["crop"] == "wheat"
+    assert body["data"]["ranked_by"]["text"]["en"] == "Ranked by: healthier soil (legumes first)"
+
+
+def test_advisory_rejects_unknown_priority():
+    r = client.get(EARLY + "&priority=water,fun")
+    assert r.status_code == 400 and r.json()["errors"][0]["code"] == "BAD_PARAMETER"
+
+
+def test_advisory_priority_with_rain_only_still_applies_both():
+    body = client.get(EARLY + "&priority=more&water=rain_only").json()
+    assert body["data"]["ranked_by"]["keys"] == ["more"] and body["data"]["options"]

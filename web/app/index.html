@@ -360,7 +360,7 @@ h2.q{font:700 17px var(--display);margin:18px 0 8px}.lang-bn h2.q{font-family:va
       <div class="card early" id="earliest"></div>
       <h2 class="q" data-t="waterQ"></h2>
       <div class="water" id="water"></div>
-      <h2 class="q"><span data-t="prioQ"></span> <span class="pill sample" data-t="soon"></span></h2>
+      <h2 class="q" data-t="prioQ"></h2>
       <div class="prio" id="prio"></div>
       <h2 class="q"><span data-t="soilQ"></span> <span class="pill sample" data-t="soon"></span></h2>
       <div class="soil" id="soil"></div>
@@ -531,7 +531,7 @@ const T={
  srcH:{en:'Data sources',bn:'তথ্যের উৎস'},back:{en:'‹ Back',bn:'‹ ফিরে যান'},
  srcSub:{en:'Every number in Survey Crops links to one of these sources. This list comes from the server with each answer.',bn:'সার্ভে ক্রপস-এর প্রতিটি সংখ্যা এর কোনো একটি উৎসের সাথে যুক্ত। এই তালিকা প্রতিটি উত্তরের সাথে সার্ভার থেকে আসে।'},
  soon:{en:'COMING SOON',bn:'শীঘ্রই আসছে'},
- soonNote:{en:'Coming soon: priorities and soil do not change the results yet.',bn:'শীঘ্রই আসছে: পছন্দ ও মাটি এখনও ফলাফল বদলায় না।'},
+ soonNote:{en:'Coming soon: soil type does not change the results yet.',bn:'শীঘ্রই আসছে: মাটির ধরন এখনও ফলাফল বদলায় না।'},
  waking:{en:'Waking up the server (up to 1 minute)…',bn:'সার্ভার চালু হচ্ছে (১ মিনিট পর্যন্ত লাগতে পারে)…'},
  netDown:{en:'Cannot reach the server. Saved offline copies are shown where we have them.',bn:'সার্ভারে পৌঁছানো যাচ্ছে না। যেখানে আছে, সংরক্ষিত অফলাইন কপি দেখানো হচ্ছে।'},
  retry:{en:'Retry',bn:'আবার চেষ্টা করুন'},
@@ -604,7 +604,7 @@ function yearStrip(id){
 const CNAME={aman:['Aman rice','আমন'],aman_rice:['Aman rice','আমন ধান'],mustard:['Mustard','সরিষা'],boro:['Boro rice','বোরো'],boro_rice:['Boro rice','বোরো ধান'],lentil:['Lentil','মসুর'],aus:['Aus rice','আউশ'],wheat:['Wheat','গম'],jute:['Jute','পাট'],mung:['Mung bean','মুগ'],fallow:['Nothing / fallow','খালি জমি'],veg:['Vegetables','সবজি'],potato:['Potato','আলু'],maize:['Maize','ভুট্টা'],flood:['Flood','বন্যা']};
 const CCOL={aman:'#C9A36A',aman_rice:'#C9A36A',mustard:'#F7D23E',boro:'#9BE3A6',boro_rice:'#9BE3A6',lentil:'#C9B8F2',aus:'#E8C15A',wheat:'#E8C15A',jute:'#7BD389',mung:'#8FD8A6',fallow:'#6B5A48',veg:'#7BD389',potato:'#D9B38C',maize:'#F2C14E',flood:'#4FC3F7'};
 const CN=k=>CNAME[k]?CNAME[k][L()==='bn'?1:0]:String(k);
-/* WATER is sent to the API as `water` (k). PRIO and soil below are "coming soon": shown, never sent, never change results */
+/* WATER is sent to the API as `water` (k); PRIO as `priority` (tap order). The soil-type question below is "coming soon": shown, never sent */
 const WATER=[{en:'Rain only',bn:'শুধু বৃষ্টি',d:0,k:'rain_only'},{en:'1–2 irrigations',bn:'১–২ বার সেচ',d:1,k:'limited'},{en:'Regular (pump/canal)',bn:'নিয়মিত (পাম্প/খাল)',d:2,k:'regular'},{en:'Plenty (deep tube well)',bn:'প্রচুর (গভীর নলকূপ)',d:3,k:'plenty'}];
 const PRIO=[['water',{en:'Save water',bn:'পানি বাঁচানো'}],['soil',{en:'Healthier soil',bn:'মাটির স্বাস্থ্য'}],['risk',{en:'Lowest risk',bn:'সবচেয়ে কম ঝুঁকি'}],['more',{en:'More crops a year',bn:'বছরে বেশি ফসল'}]];
 const FLOOD_EVENT={sylhet:'2022-06-17'};const floodEventDate=k=>FLOOD_EVENT[k]||'2024-08-21';
@@ -647,12 +647,13 @@ function netBanner(){const b=document.getElementById('netbar');if(!b)return;
 const locP=()=>{if(S.rf||S.gps){const ll=S.fieldLL||{lat:S.lat,lng:S.lon};return {lat:ll.lat.toFixed(5),lon:ll.lng.toFixed(5)}}return {district:S.district}};
 /* the farmer's water answer -> `water`; only sent once they have answered (or a field record sets it), so the default request is unchanged */
 const waterP=()=>S.waterSet?{water:WATER[S.waterLvl].k}:{};
+const prioP=()=>S.prio.size?{priority:[...S.prio].join(',')}:{};
 const getPF=()=>load('/api/v1/post-flood',{...locP(),flood_date:floodISO()});
 const advOK=r=>r&&r.env&&!(r.env.errors||[]).length;
 async function getAdv(){let res,pf=null;
   if(S.flooded){pf=await getPF();const ready=advOK(pf)&&pf.env.data&&pf.env.data.earliest_sowing_date?pf.env.data.earliest_sowing_date.date:null;
-    res=await load('/api/v1/advisory',{...locP(),prev_harvest:floodISO(),flood_ready:ready,...waterP()})}
-  else res=await load('/api/v1/advisory',{...locP(),prev_harvest:harvestISO(),...waterP()});
+    res=await load('/api/v1/advisory',{...locP(),prev_harvest:floodISO(),flood_ready:ready,...waterP(),...prioP()})}
+  else res=await load('/api/v1/advisory',{...locP(),prev_harvest:harvestISO(),...waterP(),...prioP()});
   S.adv=res;return {...res,pf}}
 const advData=()=>advOK(S.adv)?S.adv.env.data:null;
 function curOpt(d){if(!d)return null;const all=[...(d.options||[]),...(d.filtered_out||[])];return all.find(o=>o.crop===S.optCrop)||all[0]||null}
@@ -698,7 +699,7 @@ const EV={
 };
 
 /* ---------- state ---------- */
-const S={flooded:false,floodAgo:'ex',waterLvl:2,waterSet:false,prio:new Set(['risk','soil']),optCrop:null,adv:null,floodEnv:null,twinYear:2024,fdist:'feni',map:null,mini:null,fieldLL:null,live:false,prev:'aman',harvW:1,narrate:false,bnVoice:'rec',lang:'en',simple:false,pics:false,screen:'start',district:'cumilla',gps:false,lat:23.4607,lon:91.1809,week:0,playing:false,field:{x:180,y:190},rf:null};
+const S={flooded:false,floodAgo:'ex',waterLvl:2,waterSet:false,prio:new Set(),optCrop:null,adv:null,floodEnv:null,twinYear:2024,fdist:'feni',map:null,mini:null,fieldLL:null,live:false,prev:'aman',harvW:1,narrate:false,bnVoice:'rec',lang:'en',simple:false,pics:false,screen:'start',district:'cumilla',gps:false,lat:23.4607,lon:91.1809,week:0,playing:false,field:{x:180,y:190},rf:null};
 let TWD=null;/* {adv, o: the chosen option, tw: the /field-twin answer} */
 try{const s=JSON.parse(localStorage.getItem('cs-proto')||'{}');if(s.lang)S.lang=s.lang;if(typeof s.simple==='boolean')S.simple=s.simple;}catch(e){}
 const save=()=>{try{localStorage.setItem('cs-proto',JSON.stringify({lang:S.lang,simple:S.simple}))}catch(e){}};
@@ -894,6 +895,7 @@ function renderPlans(showModal){paint($('plans'),getAdv,res=>{const box=$('plans
   const d=e.data||{},n=d.years_used&&d.years_used.value,opts=d.options||[],filt=d.filtered_out||[];
   if(S.flooded){const es=d.earliest_sowing_date;h+=`<div class="card" style="border-color:rgba(79,195,247,.6);background:rgba(79,195,247,.1);display:flex;gap:10px;align-items:flex-start">${I.flood}<div><strong>${bn?'বন্যার পর সবচেয়ে আগে বপন':'After the flood, earliest sowing'}: ${es?fd(es.date):'—'}</strong> ${es?srcBtn(es.src):''}<div class="sub" style="margin:2px 0 0;font-size:11px">${esc(tx(es&&es.basis))}</div>${res.pf&&!advOK(res.pf)?`<div class="sub" style="margin:4px 0 0;font-size:11px;color:#FFD28A">${bn?'বন্যার পরের তারিখ পাওয়া যায়নি, তাই বন্যার তারিখ ধরা হয়েছে।':'The post-flood ready date was not available, so the flood date is used.'}</div>`:''}</div></div>`}
   h+=narrHTML(e);
+  if(d.ranked_by)h+=`<p class="sub" id="rankedBy" style="margin:6px 0 10px;font-size:13px;font-weight:600">${esc(tx(d.ranked_by.text))} ${d.ranked_by.src&&d.ranked_by.src.length?srcBtn(d.ranked_by.src):''}</p>`;
   if(d.aman_option)h+=amanCard(d.aman_option);
   h+=opts.map((o,i)=>optCard(o,n,i===0)).join('');
   if(!opts.length&&!d.aman_option)h+=`<div class="card">${bn?'এই তারিখে কোনো ফসল র‍্যাঙ্ক করা যায়নি।':'No crop can be ranked for this date.'}</div>`;
@@ -931,7 +933,7 @@ function renderFarmExtras(){const bn=L()==='bn';
   $('water').innerHTML=WATER.map((w,i)=>`<button class="wopt" data-wl="${i}" aria-pressed="${i===S.waterLvl}"><span class="drops">${[0,1,2,3].map(k=>`<svg width="10" height="${10+k*4}" viewBox="0 0 10 14"><path d="M5 0s5 6 5 9a5 5 0 0 1-10 0c0-3 5-9 5-9Z" fill="${k<=i?'#4FC3F7':'rgba(255,255,255,.18)'}"/></svg>`).join('')}</span>${w[L()]}</button>`).join('');
   document.querySelectorAll('[data-wl]').forEach(b=>b.onclick=()=>{S.waterLvl=+b.dataset.wl;S.waterSet=true;S.adv=null;TWD=null;renderFarmExtras();if(S.screen==='crop')renderPlans(false);speak(WATER[S.waterLvl][L()])});
   $('prio').innerHTML=PRIO.map(([k,t])=>`<button class="chip" data-pr="${k}" aria-pressed="${S.prio.has(k)}">${t[L()]}</button>`).join('');
-  document.querySelectorAll('[data-pr]').forEach(b=>b.onclick=()=>{const k=b.dataset.pr;S.prio.has(k)?S.prio.delete(k):S.prio.add(k);renderFarmExtras()});
+  document.querySelectorAll('[data-pr]').forEach(b=>b.onclick=()=>{const k=b.dataset.pr;S.prio.has(k)?S.prio.delete(k):S.prio.add(k);S.adv=null;TWD=null;renderFarmExtras();if(S.screen==='crop')renderPlans(false)});
   const rf=RF();const soil=[[bn?'মাটির ধরন':'Texture',rf?rf.soil[L()]:'—'],['pH','—'],[bn?'জৈব পদার্থ':'Organic matter','—']];
   $('soil').innerHTML=soil.map(([a,b])=>`<div>${a}<b>${b}</b></div>`).join('');
   $('soilNote').innerHTML=(rf?`<span class="pill sample">${bn?'মাঠের রেকর্ড':'FIELD RECORD'}</span> ${bn?`মাটির ধরন ${rf.id}-এর রেকর্ড থেকে, NASA তথ্য নয়।`:`Texture from the ${rf.id} field record, not NASA data.`}<br>`:'')+(bn?'শীঘ্রই: আপনার জমির মাটি SoilGrids থেকে। স্যাটেলাইট মাটির pH বা পুষ্টি মাপতে পারে না; উপজেলা কৃষি অফিসে মাটি পরীক্ষা করান।':'Coming soon: soil for your field from SoilGrids. Satellites cannot measure soil pH or nutrients; get a soil test at the Upazila Agriculture Office.');

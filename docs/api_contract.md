@@ -64,7 +64,7 @@ Every response has the same **envelope**:
 | Method and path | Purpose | Mock file |
 |---|---|---|
 | `GET /api/v1/districts` | Supported districts, their coverage, and caveats | `districts.json` |
-| `GET /api/v1/advisory?district=&prev_harvest=&flood_ready=&lat=&lon=&water=rain_only\|limited\|regular\|plenty&lang=` | **Main screen:** ranked crop options with sowing windows, risks and reasons | `advisory.json` |
+| `GET /api/v1/advisory?district=&prev_harvest=&flood_ready=&lat=&lon=&water=rain_only\|limited\|regular\|plenty&priority=risk,water,more,soil&lang=` | **Main screen:** ranked crop options with sowing windows, risks and reasons | `advisory.json` |
 | `GET /api/v1/risk-calendar?district=&crop=` | Crop × sowing-date × hazard grid over all years | `risk_calendar.json` |
 | `GET /api/v1/field-twin?district=&year=&crop=&sow_date=` | Week-by-week replay of one past year (an explanation, not a forecast) | `field_twin.json` |
 | `GET /api/v1/post-flood?district=&flood_date=&sand=yes\|no` | Water persistence, days until soil is back to normal, earliest sowing date, crops still possible | `post_flood.json` |
@@ -79,6 +79,19 @@ Every response has the same **envelope**:
 | `rain_only` | Options are ranked by problem years, then by `water_stress_days_worst20` (rainfed dry-soil days) instead of irrigation need. An option with dry-soil days in the worst 20% of years gets `water_note: { code: "NEEDS_IRRIGATION", en, bn }` (otherwise `null`). |
 | `limited` (1–2 irrigations) | A crop stays ranked only if `irrigation_events_worst20 <= 2`. The others move to `filtered_out` with `reason_code: "NEEDS_MORE_WATER"` and a `reason` `{en, bn}` saying how many waterings it needed. Ranks of the rest are renumbered. All crops can end up filtered. |
 | `regular`, `plenty` | Same ranking as today. A `notices` entry says the two are treated the same because there is no sourced pump-capacity number. |
+
+**The priority question (`priority` on `/advisory`, optional).** The farmer's answer to "What matters most to you?": a comma list of `risk`, `water`, `more`, `soil`, in the order the user tapped them. Absent, empty, or `risk` alone = today's ranking (nothing changes). Any other word is `BAD_PARAMETER`. The request echo carries `priority` when it was sent. It is applied after `water` (so `limited` still filters first).
+
+| Key | Sort key (only numbers already in each option) |
+|---|---|
+| `risk` | `problem_years` (fewest first), then `irrigation_need_worst20` (least first) |
+| `water` | `irrigation_need_worst20` (least first), then `problem_years` |
+| `more` | `maturity_date` (earliest median maturity; none = last), then `problem_years` |
+| `soil` | crops with a kept, cited `data/reference` row `<crop>.soil.legume` = `yes` first. With no such row the key is dropped and a `notices` entry says "research pending: legume source" |
+
+The first tapped key is the main sort key, the others break ties in tap order, then crop name. Crops whose sowing window has passed (`window_status.code = "late"`) still go last. Every card keeps `problem_years` and the irrigation numbers. If the new top crop has more `problem_years` than the best crop under `risk`, a `caution` notice names both numbers.
+
+`data.ranked_by` is always present: `{ keys: [...], text: { en, bn }, src: [...] }`, e.g. `"Ranked by: saving water, then lowest risk"`. `keys` lists the keys that took effect (a `soil` with no cited row is not listed); `src` holds the reference ids behind any legume rows used. The narration ends with the same sentence.
 
 Every option now also carries `irrigation_events_avg` and `irrigation_events_worst20` (measures, unit `waterings`, `src` FAO-56 + IMERG + POWER + the cited soil and crop rows) and `water_note` (`null` unless `rain_only` sets it). A watering is one day the FAO-56 balance refills the root zone; for boro rice, land preparation plus each pond top-up.
 

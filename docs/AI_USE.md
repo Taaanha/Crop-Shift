@@ -550,3 +550,19 @@ so that refresh is left for its own PR. The `limited` cut-off (at most 2
 waterings in the worst 20% of years) is the user's rule, not a sourced value.
 Checked with `python -m pytest src -q` and by driving the page against a
 local API.
+
+## Task: "What matters most to you?" made real (`priority` on /advisory)
+
+Claude (Sonnet 5.5) wrote `check_priority`, `legume_crops`, `apply_priority` and
+`ranked_by_block` in `app.py`, the `data.ranked_by` block, the caution and
+"research pending: legume source" notices, the narration sentence, the
+`priority` section of `docs/api_contract.md`, the website change in
+`web/app/index.html` (sends `priority` in tap order, shows the "Ranked by"
+line, removes "coming soon" from that question only, and starts with no
+priority selected instead of a pre-ticked placeholder), the `_TEMPLATE.csv`
+example row for `<crop>.soil.legume`, and the tests in `src/api/test_app.py`.
+The ranking keys are the user's rules; no new numbers or reference values
+were invented. There are no `soil.legume` rows yet, so the soil priority does
+nothing until the team adds a cited row. Checked with `python -m pytest src -q`
+and by driving the page against a local API.
+

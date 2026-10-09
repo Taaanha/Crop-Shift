@@ -43,6 +43,7 @@ for _sub in (("src", "compute"), ("src", "agents")):
 
 import post_flood as pf  # noqa: E402
 import risk_calendar as rc  # noqa: E402
+from reference import load_reference  # noqa: E402
 from guard import guard  # noqa: E402
 from water_balance import crop_season, load_crop_params, load_soil_params  # noqa: E402
 from weather import RAIN_CITATIONS  # noqa: E402
@@ -699,6 +700,116 @@ def apply_water(ranked, filtered, water):
     return ranked, filtered, notices
 
 
+PRIORITIES = ("risk", "water", "more", "soil")
+PRIORITY_LABELS = {
+    "risk": {"en": "lowest risk", "bn": "সবচেয়ে কম ঝুঁকি"},
+    "water": {"en": "saving water", "bn": "পানি বাঁচানো"},
+    "more": {"en": "more crops a year (earliest harvest)", "bn": "বছরে বেশি ফসল (আগে ফসল তোলা)"},
+    "soil": {"en": "healthier soil (legumes first)", "bn": "মাটির স্বাস্থ্য (ডাল জাতীয় ফসল আগে)"},
+}
+SOIL_PENDING_NOTICE = {"level": "info",
+                       "en": "Healthier soil: research pending: legume source. No cited reference "
+                             "row says which crops are legumes, so this priority changes nothing yet.",
+                       "bn": "মাটির স্বাস্থ্য: গবেষণা চলছে: ডাল জাতীয় ফসলের উৎস। কোন ফসল ডাল জাতীয় "
+                             "তা বলে এমন কোনো উৎসসহ সারি এখনও নেই, তাই এই পছন্দ এখনও কিছু বদলায় না।"}
+
+
+def check_priority(priority):
+    """'water,risk' -> ['water', 'risk'] (tap order, duplicates dropped). None or '' -> []."""
+    if priority is None or not priority.strip():
+        return []
+    keys = [k.strip() for k in priority.split(",") if k.strip()]
+    if any(k not in PRIORITIES for k in keys):
+        raise ApiError("BAD_PARAMETER",
+                       "priority must be a comma list of: " + ", ".join(PRIORITIES) + ".", "priority")
+    return list(dict.fromkeys(keys))
+
+
+@functools.lru_cache(maxsize=1)
+def reference_all():
+    return load_reference()
+
+
+def legume_crops():
+    """{crop: [reference items]} for crops with a kept data/reference row
+    '<crop>.soil.legume' whose value is 'yes'. Empty until the team adds rows."""
+    ref = reference_all()
+    out = {}
+    for crop in CROP_NAMES:
+        item = f"{crop}.soil.legume"
+        if any(str(v).strip().lower() == "yes" for v in ref.rows(item)["text"]):
+            out[crop] = [item]
+    return out
+
+
+def ranked_by_block(keys, src=()):
+    parts = [PRIORITY_LABELS[k] for k in keys]
+    return {"keys": list(keys),
+            "text": {"en": "Ranked by: " + ", then ".join(p["en"] for p in parts),
+                     "bn": "সাজানো হয়েছে: " + ", তারপর ".join(p["bn"] for p in parts)},
+            "src": list(src)}
+
+
+def apply_priority(ranked, priority):
+    """Re-sorts the ranked options by the farmer's priorities.
+    Returns (ranked, ranked_by, notices). Nothing changes for no priority or
+    'risk' alone. Each key is a tuple of numbers we already compute; the
+    tapped keys' tuples are joined in tap order, then crop name. Crops whose
+    sowing window has passed stay last. Risk is never hidden: if the new top
+    crop has more problem years than the best crop under 'risk', a caution
+    names both numbers."""
+    keys = list(priority)
+    notices = []
+    legumes = {}
+    if "soil" in keys:
+        legumes = legume_crops()
+        if not legumes:
+            keys.remove("soil")
+            notices.append(SOIL_PENDING_NOTICE)
+    if not keys:
+        keys = ["risk"]
+    if keys == ["risk"]:
+        return ranked, ranked_by_block(keys), notices
+    inf = float("inf")
+
+    def num(m):
+        v = _value(m)
+        return inf if v is None else v
+
+    def part(k, o):
+        if k == "risk":
+            return (num(o["problem_years"]), num(o["irrigation_need_worst20"]))
+        if k == "water":
+            return (num(o["irrigation_need_worst20"]), num(o["problem_years"]))
+        if k == "more":
+            return (o["maturity_date"]["date"] if o["maturity_date"] else "9999-12-31",
+                    num(o["problem_years"]))
+        return (0 if o["crop"] in legumes else 1,)
+
+    def key(o):
+        late = (o["window_status"] or {}).get("code") == "late"
+        return (late,) + tuple(x for k in keys for x in part(k, o)) + (o["crop"],)
+
+    baseline = ranked[0] if ranked else None
+    ranked = sorted(ranked, key=key)
+    block = ranked_by_block(keys)
+    for i, o in enumerate(ranked, 1):
+        o["rank"] = i
+        o["why"] = {"en": block["text"]["en"] + ".", "bn": block["text"]["bn"] + "।"}
+    if baseline and ranked and num(ranked[0]["problem_years"]) > num(baseline["problem_years"]):
+        top, safe = ranked[0], baseline
+        t, b = _fmt(top["problem_years"]["value"]), _fmt(safe["problem_years"]["value"])
+        notices.append({"level": "caution",
+                        "en": f"Your top pick, {top['crop_name']['en']}, had problems in {t} years; "
+                              f"the lowest-risk crop, {safe['crop_name']['en']}, had problems in "
+                              f"{b} years.",
+                        "bn": f"আপনার প্রথম পছন্দ {top['crop_name']['bn']}-এ {bn_digits(t)} বছর সমস্যা "
+                              f"হয়েছে; সবচেয়ে কম ঝুঁকির ফসল {safe['crop_name']['bn']}-এ "
+                              f"{bn_digits(b)} বছর।"})
+    src = ref_ids_for_items([i for c in legumes.values() for i in c]) if "soil" in keys else []
+    return ranked, ranked_by_block(keys, src), notices
+
+
 def district_notices(district):
     notices = [AREA_NOTICE]
     if district in POWER_CELL_SHARED:
@@ -988,10 +1099,11 @@ def districts():
 
 @app.get("/api/v1/advisory")
 def advisory(district: str = None, prev_harvest: str = None, flood_ready: str = None,
-             lang: str = "en", lat: str = None, lon: str = None, water: str = None):
+             lang: str = "en", lat: str = None, lon: str = None, water: str = None,
+             priority: str = None):
     endpoint = "/api/v1/advisory"
     request = {"district": district, "prev_harvest": prev_harvest, "flood_ready": flood_ready,
-               "lang": lang, "lat": lat, "lon": lon, "water": water}
+               "lang": lang, "lat": lat, "lon": lon, "water": water, "priority": priority}
 
     def build():
         did, location = resolve_location(district, lat, lon)
@@ -999,9 +1111,11 @@ def advisory(district: str = None, prev_harvest: str = None, flood_ready: str = 
         ready = check_date("flood_ready", flood_ready, required=False)
         check_lang(lang)
         check_water(water)
+        keys = check_priority(priority)
         result = rc.rotation_options(did, harvest, ready, calendar=calendar_table())
         ranked, filtered = split_options(did, result)
         ranked, filtered, water_notices = apply_water(ranked, filtered, water)
+        ranked, ranked_by, priority_notices = apply_priority(ranked, keys)
         n = next((o["n_years"] for o in result["options"] if o["n_years"]), len(rc.SEASONS))
         data = {
             "district": did,
@@ -1017,6 +1131,7 @@ def advisory(district: str = None, prev_harvest: str = None, flood_ready: str = 
                              f"মৌসুমের NASA তথ্যে (IMERG বৃষ্টি, POWER তাপমাত্রা) প্রতিটি ফসল তার "
                              f"বপনের তারিখে যাচাই করা হয়েছে। সমস্যার বছর, তারপর সবচেয়ে খারাপ ২০% "
                              f"বছরের সেচ দিয়ে সাজানো।"},
+            "ranked_by": ranked_by,
             "options": ranked,
             "filtered_out": filtered,
             "aman_option": aman_block(result),
@@ -1054,6 +1169,12 @@ def advisory(district: str = None, prev_harvest: str = None, flood_ready: str = 
                            f"ফসল র‍্যাঙ্ক করা যায়নি।",
                      "sms_en": f"{name['en']}: no crop can be ranked for {earliest}.",
                      "sms_bn": f"{name['bn']}: {bn_digits(earliest)} তারিখে কোনো ফসল র‍্যাঙ্ক করা যায়নি।"}
+        if ranked_by["keys"] != ["risk"]:
+            for lk, tail, end in (("en", "Ranked by problem years, then by irrigation need in the worst 20% of years.", "."),
+                                  ("bn", "সমস্যার বছর, তারপর সবচেয়ে খারাপ ২০% বছরের সেচ দিয়ে সাজানো।", "।")):
+                data["method"][lk] = data["method"][lk].replace(tail, ranked_by["text"][lk] + end)
+        texts["en"] += " " + ranked_by["text"]["en"] + "."
+        texts["bn"] += " " + ranked_by["text"]["bn"] + "।"
         water_text = WATER_NARRATION.get(water)
         if water == "limited" and not ranked and any(
                 o.get("reason_code") == "NEEDS_MORE_WATER" for o in filtered):
@@ -1070,7 +1191,7 @@ def advisory(district: str = None, prev_harvest: str = None, flood_ready: str = 
                     "sms_en": "Survey Crops: see crop options (NASA data).",
                     "sms_bn": "সার্ভে ক্রপস: ফসলের তালিকা দেখুন (NASA তথ্য)।"}
         notices = (district_notices(did) + [PAST_NOT_FORECAST, WEATHER_RISKS_ONLY]
-                   + water_notices + coverage_notices(ranked + filtered))
+                   + water_notices + priority_notices + coverage_notices(ranked + filtered))
         if not ranked and filtered and all(o["sowing_date"] is None for o in filtered):
             notices.append(ALL_WINDOWS_PASSED)
         return data, narrate(texts, fallback, data), notices
