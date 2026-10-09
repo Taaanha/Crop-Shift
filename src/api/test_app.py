@@ -11,6 +11,7 @@ import json
 import os
 import re
 import sys
+from urllib.parse import urlsplit
 
 import pytest
 
@@ -152,8 +153,53 @@ def test_every_src_id_is_in_provenance_with_dataset_and_url(responses, name):
     for pid in src_ids(body["data"]):
         assert pid in provenance, f"{name}: src {pid} missing from provenance"
     for p in body["provenance"]:
-        assert p["dataset"] and p["url"].startswith("http"), p
-        assert set(p) == {"id", "dataset", "url", "agency", "period", "resolution", "note"}
+        assert p["dataset"] and "url" in p, p
+        assert is_web_url(p["url"]) or (p["url"] == "" and "Link pending" in p["note"]), p
+        assert is_web_url(p.get("view_url", "https://x.org")), p
+        assert {"id", "dataset", "url", "agency", "period", "resolution", "note"} <= set(p)
+        assert set(p) <= {"id", "dataset", "url", "view_url", "agency", "period", "resolution", "note"}
+
+
+def is_web_url(url):
+    parts = urlsplit(url)
+    host = parts.hostname or ""
+    return parts.scheme in ("http", "https") and "." in host and " " not in url \
+        and host.rsplit(".", 1)[-1].isalpha() and host.rsplit(".", 1)[-1] != "pdf"
+
+
+def test_nasa_sources_have_a_dataset_page_and_a_satellite_view():
+    fixed = api.fixed_provenance()
+    for pid in ("imerg", "power", "smap", "opera"):
+        assert is_web_url(fixed[pid]["url"]) and is_web_url(fixed[pid]["view_url"]), pid
+    for pid in ("imerg", "smap", "opera"):
+        assert fixed[pid]["view_url"].startswith("https://worldview.earthdata.nasa.gov/?v=")
+    assert "nsidc.org/data/spl4smgp" in fixed["smap"]["url"]
+    assert "AppEEARS" in fixed["smap"]["note"]
+
+
+@pytest.mark.parametrize("raw, expected", [
+    ("https://www.fao.org/4/x0490e/x0490e00.htm", "https://www.fao.org/4/x0490e/x0490e00.htm"),
+    ("czis.cropzoning.gov.bd", "https://czis.cropzoning.gov.bd"),
+    ('https://example.org/a.pdf"', "https://example.org/a.pdf"),
+    ("https://n/a - fabricated for prototype", ""),
+    ("n/a - fabricated for prototype/backend development only", ""),
+    ("https://adhunikDhanerChash.pdf (BRRI official handbook)", ""),
+    ("adhunikDhanerChash.pdf", ""),
+    ("brridhan28.pdf / brridhan29.pdf (BRRI official fact sheets)", ""),
+    ("The variety required 37 to 44 days", ""),
+    ("", ""),
+    (float("nan"), ""),
+])
+def test_public_url_keeps_only_real_web_addresses(raw, expected):
+    assert api.public_url(raw) == expected
+
+
+def test_every_reference_source_is_a_real_link_or_says_link_pending():
+    for ref_id in sorted(set(api.reference_rows()["ref_id"])):
+        p = api.ref_provenance(ref_id)
+        assert is_web_url(p["url"]) or (p["url"] == "" and "Link pending" in p["note"]), p
+    pending = [r for r in set(api.reference_rows()["ref_id"]) if not api.ref_provenance(r)["url"]]
+    assert pending, "the BRRI handbook rows should still be pending until the team adds URLs"
 
 
 @pytest.mark.parametrize("name", [n for n in list(REAL) + list(EXTRA) if n != "districts"])
