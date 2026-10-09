@@ -523,3 +523,13 @@ which generates `docs/assumptions.md` from them, and added
 "assumptions" provenance entry in `app.py` now links to that doc. Checked
 with `python -m pytest src -q`. The `why` sentences are the AI's wording of
 the reasons; the team should check them.
+
+**Claude Code (task 17, mock team name)** — changed one string in
+`web/mock/advisory.json` ("Team Regolith analysis of NASA POWER" -> "Survey
+Crops analysis of NASA POWER") to match the registered team name. Checked
+with `python -m pytest src -q`.
+
+**Claude Code (task 17 follow-up)** — resolved the `docs/AI_USE.md` merge
+conflict with main (kept both entries). Made
+`src/api/test_assumptions_doc.py` read `docs/assumptions.md` with universal
+newlines, so the stale-doc check does not fail on Windows CRLF checkouts.

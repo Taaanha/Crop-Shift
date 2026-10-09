@@ -26,7 +26,7 @@ spec.loader.exec_module(builder)
 
 
 def test_doc_is_up_to_date():
-    with open(DOC, encoding="utf-8", newline="") as f:
+    with open(DOC, encoding="utf-8") as f:
         assert f.read() == builder.build(), \
             "docs/assumptions.md is stale: run python scripts/build_assumptions_doc.py"
 
